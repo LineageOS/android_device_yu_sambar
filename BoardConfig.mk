@@ -208,19 +208,6 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += \
     device/yu/sambar/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-    bluetooth_loader.te \
-    file.te \
-    healthd.te \
-    perfd.te \
-    qseecomd.te \
-    silead.te \
-    surfaceflinger.te \
-    system_app.te \
-    system_server.te \
-    file_contexts \
-    property_contexts
-
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 
