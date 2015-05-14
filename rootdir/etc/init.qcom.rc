@@ -303,12 +303,30 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # Touchscreen
-    chown root system /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0040/gesture
-    chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0040/gesture
-
     # camera sockets
     mkdir /data/misc/camera 0770 camera camera
+
+    chown system system /sys/als/link/driver/enable
+    chown system system /sys/als/link/driver/delay
+    chown system system /sys/ps/link/driver/cali
+    chown system system /sys/ps/link/driver/enable
+    chown system system /sys/accel/link/accel/enable
+    chown system system /sys/accel/link/accel/polling_rate
+    chown system system /sys/accel/link/accel/sampling_freq
+    chown system system /sys/accel/link/accel/scale
+    chown system system /sys/gyro/link/gyro/enable
+    chown system system /sys/gyro/link/gyro/polling_rate
+    chown system system /sys/gyro/link/gyro/sampling_freq
+    chown system system /sys/gyro/link/gyro/scale
+    chown system system /sys/sign_m/link/sign_m/enable
+    chown system system /sys/step_c/link/step_c/enable
+    chown system system /sys/step_c/link/step_c/max_delivery_rate
+    chown system system /sys/step_c/link/step_c/reset_steps
+    chown system system /sys/step_d/link/step_d/enable
+    chown system system /sys/tilt/link/tilt/enable
+    chown system system /sys/mag/link/enable_device
+    chown system system /sys/mag/link/pollrate_ms
+    chown system system /sys/mag/link/full_scale
 
 on property:service.bootanim.exit=1
     write /sys/module/lpm_levels/system/cpu0/wfi/idle_enabled Y

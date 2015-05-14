@@ -225,7 +225,8 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    pl_sensor_cal
+    pl_sensor_cal \
+    sensors.msm8994
 
 # Thermal
 PRODUCT_COPY_FILES += \
