@@ -712,3 +712,9 @@ service pl_load_cal /system/bin/pl_sensor_cal
     user system
     group system
     oneshot
+
+service energy-awareness /system/bin/energy-awareness
+    class main
+    user root
+    group system
+    oneshot
