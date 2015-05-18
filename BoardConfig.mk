@@ -160,7 +160,6 @@ BOARD_SEPOLICY_UNION += \
     qseecomd.te \
     surfaceflinger.te \
     system_server.te \
-    wcnss_service.te \
     file_contexts \
     property_contexts
 
