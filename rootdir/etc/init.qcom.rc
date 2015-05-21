@@ -666,6 +666,23 @@ service audiod /system/bin/audiod
    user system
    group system
 
+service per_mgr /system/bin/pm-service
+    class core
+    user system
+    group system net_raw
+
+service per_proxy /system/bin/pm-proxy
+    class core
+    user system
+    group system net_raw
+    disabled
+
+on property:init.svc.per_mgr=running
+    start per_proxy
+
+on property:sys.shutdown.requested=*
+    stop per_proxy
+
 on charger
    write /sys/module/lpm_levels/system/cpu0/wfi/idle_enabled Y
    write /sys/module/lpm_levels/system/cpu1/wfi/idle_enabled Y
