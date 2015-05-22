@@ -82,7 +82,8 @@ QCameraPostProcessor::QCameraPostProcessor(QCamera2HardwareInterface *cam_ctrl)
       mJpegMemOpt(true),
       m_JpegOutputMemCount(0),
       mNewJpegSessionNeeded(true),
-      m_bufCountPPQ(0)
+      m_bufCountPPQ(0),
+      m_PPindex(0)
 {
     memset(&mJpegHandle, 0, sizeof(mJpegHandle));
     memset(&m_pJpegOutputMem, 0, sizeof(m_pJpegOutputMem));
@@ -272,6 +273,8 @@ int32_t QCameraPostProcessor::start(QCameraChannel *pSrcChannel)
     property_get("persist.camera.longshot.save", prop, "0");
     mUseSaveProc = atoi(prop) > 0 ? true : false;
 
+    m_PPindex = 0;
+    m_InputMetadata.clear();
     m_dataProcTh.sendCmd(CAMERA_CMD_TYPE_START_DATA_PROC, TRUE, FALSE);
     m_parent->m_cbNotifier.startSnapshots();
 
@@ -332,7 +335,11 @@ int32_t QCameraPostProcessor::start(QCameraChannel *pSrcChannel)
         if ( NULL != pSnapshotStream ) {
             mm_jpeg_encode_params_t encodeParam;
             memset(&encodeParam, 0, sizeof(mm_jpeg_encode_params_t));
-            getJpegEncodingConfig(encodeParam, pSnapshotStream, pThumbStream);
+            rc = getJpegEncodingConfig(encodeParam, pSnapshotStream, pThumbStream);
+            if (rc != NO_ERROR) {
+                ALOGE("%s: error getting encoding config", __func__);
+                return rc;
+            }
             CDBG_HIGH("[KPI Perf] %s : call jpeg create_session", __func__);
 
             rc = mJpegHandle.create_session(mJpegClientHandle,
@@ -388,6 +395,8 @@ int32_t QCameraPostProcessor::stop()
     }
     mTotalNumReproc = 0;
     m_parent->mParameters.setCurPPCount(0);
+    m_PPindex = 0;
+    m_InputMetadata.clear();
 
     return NO_ERROR;
 }
@@ -787,6 +796,21 @@ int32_t QCameraPostProcessor::processData(mm_camera_super_buf_t *frame)
             pp_request_job = NULL;
             return NO_ERROR;
         }
+        if (m_parent->mParameters.isAdvCamFeaturesEnabled()) {
+            // find meta data frame
+            mm_camera_buf_def_t *meta_frame = NULL;
+            for (uint32_t i = 0; i < frame->num_bufs; i++) {
+                // look through input superbuf
+                if (frame->bufs[i]->stream_type == CAM_STREAM_TYPE_METADATA) {
+                    meta_frame = frame->bufs[i];
+                    break;
+                }
+            }
+
+            if (meta_frame != NULL) {
+               m_InputMetadata.add(meta_frame);
+            }
+        }
     } else if (m_parent->mParameters.isNV16PictureFormat() ||
         m_parent->mParameters.isNV21PictureFormat()) {
         //check if raw frame information is needed.
@@ -1133,21 +1157,32 @@ int32_t QCameraPostProcessor::processPPData(mm_camera_super_buf_t *frame)
 
         // find meta data frame
         mm_camera_buf_def_t *meta_frame = NULL;
-        for (uint32_t i = 0; job && job->src_reproc_frame &&
-                (i < job->src_reproc_frame->num_bufs); i++) {
-            // look through input superbuf
-            if (job->src_reproc_frame->bufs[i]->stream_type == CAM_STREAM_TYPE_METADATA) {
-                meta_frame = job->src_reproc_frame->bufs[i];
-                break;
+        if (m_parent->mParameters.isAdvCamFeaturesEnabled()) {
+            size_t meta_idx = m_parent->mParameters.getExifBufIndex(m_PPindex);
+            if (m_InputMetadata.size() >= (meta_idx + 1)) {
+                meta_frame = m_InputMetadata.itemAt(meta_idx);
+            } else {
+                ALOGE("%s: Input metadata vector contains %d entries, index required %d",
+                        __func__, m_InputMetadata.size(), meta_idx);
             }
-        }
-
-        if (meta_frame == NULL) {
-            // look through reprocess superbuf
-            for (uint32_t i = 0; i < frame->num_bufs; i++) {
-                if (frame->bufs[i]->stream_type == CAM_STREAM_TYPE_METADATA) {
-                    meta_frame = frame->bufs[i];
+            m_PPindex++;
+        } else {
+            for (uint32_t i = 0; job && job->src_reproc_frame &&
+                    (i < job->src_reproc_frame->num_bufs); i++) {
+                // look through input superbuf
+                if (job->src_reproc_frame->bufs[i]->stream_type == CAM_STREAM_TYPE_METADATA) {
+                    meta_frame = job->src_reproc_frame->bufs[i];
                     break;
+                }
+            }
+
+            if (meta_frame == NULL) {
+                // look through reprocess superbuf
+                for (uint32_t i = 0; i < frame->num_bufs; i++) {
+                    if (frame->bufs[i]->stream_type == CAM_STREAM_TYPE_METADATA) {
+                        meta_frame = frame->bufs[i];
+                        break;
+                    }
                 }
             }
         }
@@ -1846,7 +1881,11 @@ int32_t QCameraPostProcessor::encodeData(qcamera_jpeg_data_t *jpeg_job_data,
         // create jpeg encoding session
         mm_jpeg_encode_params_t encodeParam;
         memset(&encodeParam, 0, sizeof(mm_jpeg_encode_params_t));
-        getJpegEncodingConfig(encodeParam, main_stream, thumb_stream);
+        ret = getJpegEncodingConfig(encodeParam, main_stream, thumb_stream);
+        if (ret != NO_ERROR) {
+            ALOGE("%s: error getting encoding config", __func__);
+            return ret;
+        }
         CDBG_HIGH("[KPI Perf] %s : call jpeg create_session", __func__);
         ret = mJpegHandle.create_session(mJpegClientHandle, &encodeParam, &mJpegSessionId);
         if (ret != NO_ERROR) {
@@ -2668,8 +2707,7 @@ int32_t QCameraPostProcessor::doReprocess()
                 pp_job->reproc_frame_release = true;
                 if (m_ongoingPPQ.enqueue((void *)pp_job)) {
                     ret = mPPChannels[mCurReprocCount]->doReprocessOffline(pp_job->src_frame,
-                            m_parent->mParameters, meta_buf,
-                            m_parent->getJpegRotation(), m_parent->getDeviceRotation());
+                            meta_buf);
                 } else {
                     CDBG_HIGH("%s : m_ongoingJpegQ is not active!!!", __func__);
                     releaseOngoingPPData(pp_job, this);
@@ -2715,8 +2753,7 @@ int32_t QCameraPostProcessor::doReprocess()
                 }
 
                 ret = mPPChannels[mCurReprocCount]->doReprocess(pp_job->src_frame,
-                        m_parent->mParameters, pMetaStream, meta_buf_index,
-                        m_parent->getJpegRotation(), m_parent->getDeviceRotation());
+                        m_parent->mParameters, pMetaStream, meta_buf_index);
             }
         } else {
             ALOGE("%s: Reprocess channel is NULL", __func__);

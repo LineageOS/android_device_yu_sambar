@@ -1435,11 +1435,12 @@ int32_t mm_channel_stop(mm_channel_t *my_obj)
             s_obj = mm_channel_util_get_stream_by_handler(my_obj,
                                                           my_obj->streams[i].my_hdl);
             if (NULL != s_obj) {
-                stream_type = s_obj->stream_info->stream_type;
-                /* remember meta data stream index */
-                if ((stream_type == CAM_STREAM_TYPE_METADATA) &&
-                        (s_obj->ch_obj == my_obj)) {
-                    meta_stream_idx = num_streams_to_stop;
+                if (s_obj->ch_obj == my_obj) {
+                    stream_type = s_obj->stream_info->stream_type;
+                    /* remember meta data stream index */
+                    if (stream_type == CAM_STREAM_TYPE_METADATA) {
+                        meta_stream_idx = num_streams_to_stop;
+                    }
                 }
                 s_objs[num_streams_to_stop++] = s_obj;
             }
@@ -2405,7 +2406,10 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
         if(super_buf->super_buf[buf_s_idx].frame_idx != 0) {
             //This can cause frame drop. We are overwriting same memory.
             pthread_mutex_unlock(&queue->que.lock);
-            CDBG_FATAL("FATAL: frame is already in camera ZSL queue");
+            //CDBG_FATAL("FATAL: frame is already in camera ZSL queue");
+            CDBG_ERROR("***FATAL: frame is already in camera ZSL queue***");
+            mm_channel_qbuf(ch_obj, buf_info->buf);
+            return 0;
         }
 
         /*Insert incoming buffer to super buffer*/
