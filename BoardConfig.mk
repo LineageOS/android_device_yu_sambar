@@ -179,6 +179,7 @@ BOARD_SEPOLICY_UNION += \
     file.te \
     healthd.te \
     qseecomd.te \
+    silead.te \
     surfaceflinger.te \
     system_app.te \
     file_contexts \

@@ -1,0 +1,27 @@
+# fpsvcd daemon
+type fpsvcd, domain;
+type fpsvcd_exec, exec_type, file_type;
+
+init_daemon_domain(fpsvcd)
+
+allow fpsvcd        init_tmpfs:file           r_file_perms;
+allow fpsvcd        fpsvcd_tmpfs:file         create_file_perms;
+allow fpsvcd        data_silead_file:dir      create_dir_perms;
+allow fpsvcd        data_silead_file:file     create_file_perms;
+allow fpsvcd        data_silead_file_tmp:dir  { r_dir_perms mounton };
+allow fpsvcd        data_silead_file_tmp:file rw_file_perms;
+allow fpsvcd        silead_fp_device:chr_file rw_file_perms;
+allow fpsvcd        system_server:dir         r_dir_perms;
+allow fpsvcd        tmpfs:dir                 rw_dir_perms;
+allow fpsvcd        tmpfs:file                create_file_perms;
+
+# Fingerprint Service (HAL)
+allow system_server data_silead_file:dir      create_dir_perms;
+allow system_server data_silead_file:file     create_file_perms;
+allow system_server data_silead_file_tmp:dir  { r_dir_perms mounton };
+allow system_server data_silead_file_tmp:file rw_file_perms;
+allow system_server fpsvcd_tmpfs:file         create_file_perms;
+allow system_server init_tmpfs:file           r_file_perms;
+allow system_server silead_fp_device:chr_file rw_file_perms;
+allow system_server tmpfs:dir                 rw_dir_perms;
+
