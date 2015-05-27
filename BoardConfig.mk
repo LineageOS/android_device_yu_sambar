@@ -158,9 +158,11 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
     bluetooth_loader.te \
+    file.te \
     healthd.te \
     qseecomd.te \
     surfaceflinger.te \
+    system_app.te \
     file_contexts \
     property_contexts
 

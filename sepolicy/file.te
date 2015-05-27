@@ -1,0 +1,2 @@
+type data_silead_file, file_type;
+type silead_fp_device, dev_type;

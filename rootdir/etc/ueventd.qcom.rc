@@ -228,3 +228,6 @@
 /dev/snd/pcmC0D5p 0667 system audio
 /dev/snd/pcmC0D5c 0667 system audio  
 /dev/snd/pcmC0D44p 0667 system audio 
+
+# Silead fingerprint sensor
+/dev/silead_fp_dev        0664    system    system
