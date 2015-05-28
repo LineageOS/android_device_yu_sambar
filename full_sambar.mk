@@ -14,7 +14,10 @@
 # limitations under the License.
 #
 
+# Inherit from those products. Most specific first.
+ifneq ($(SAMBAR_32_BIT),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+endif
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/yu/sambar/device.mk)
 
