@@ -1891,14 +1891,21 @@ void LocApiV02 :: reportPosition (
             }
 
             // Uncertainty (circular)
-            if( (location_report_ptr->horUncCircular_valid ) )
-            {
-                location.gpsLocation.flags  |= GPS_LOCATION_HAS_ACCURACY;
+            if (location_report_ptr->horUncCircular_valid) {
+                location.gpsLocation.flags |= GPS_LOCATION_HAS_ACCURACY;
                 location.gpsLocation.accuracy = location_report_ptr->horUncCircular;
+            } else if (location_report_ptr->horUncEllipseSemiMinor_valid &&
+                       location_report_ptr->horUncEllipseSemiMajor_valid) {
+                location.gpsLocation.flags |= GPS_LOCATION_HAS_ACCURACY;
+                location.gpsLocation.accuracy =
+                    sqrt((location_report_ptr->horUncEllipseSemiMinor *
+                          location_report_ptr->horUncEllipseSemiMinor) +
+                         (location_report_ptr->horUncEllipseSemiMajor *
+                          location_report_ptr->horUncEllipseSemiMajor));
             }
 
             // Technology Mask
-            tech_Mask  |= location_report_ptr->technologyMask;
+            tech_Mask |= location_report_ptr->technologyMask;
 
             //Mark the location source as from GNSS
             location.gpsLocation.flags |= LOCATION_HAS_SOURCE_INFO;
@@ -2634,10 +2641,9 @@ void LocApiV02 :: convertGpsClock (GpsClock& gpsClock,
         float sysClkBias = gnss_measurement_info.systemTime.systemClkTimeBias;
         float sysClkUncMs = gnss_measurement_info.systemTime.systemClkTimeUncMs;
         int sourceOfTime = gnss_measurement_info.systemTimeExt.sourceOfTime;
-        bool sourceOfTimeValid = (sourceOfTime == eQMI_LOC_TIME_SRC_NAV_SOLUTION_V02)||
-                                 (sourceOfTime == eQMI_LOC_TIME_SRC_SOLVE_FOR_TIME_V02);
+        bool isTimeValid = (sysClkUncMs <= 15.0f); // 15ms
 
-        if(systemWeek != C_GPS_WEEK_UNKNOWN && sourceOfTimeValid) {
+        if(systemWeek != C_GPS_WEEK_UNKNOWN && isTimeValid) {
             gpsClock.type = GPS_CLOCK_TYPE_GPS_TIME;
             double temp =  (double)(systemWeek) * (double)WEEK_MSECS + (double)systemMsec;
             gpsClock.time_ns = (double)temp*1e6 -
@@ -2645,7 +2651,6 @@ void LocApiV02 :: convertGpsClock (GpsClock& gpsClock,
         } else {
             gpsClock.type = GPS_CLOCK_TYPE_UNKNOWN;
         }
-
     } else {
         gpsClock.type = GPS_CLOCK_TYPE_UNKNOWN;
     }
