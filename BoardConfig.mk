@@ -130,9 +130,6 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
-# malloc implementation
-MALLOC_IMPL := dlmalloc
-
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
