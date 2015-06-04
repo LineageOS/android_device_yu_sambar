@@ -126,6 +126,9 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs
 
+PRODUCT_PACKAGES += \
+    fingerprint.msm8994
+
 # FM
 PRODUCT_PACKAGES += \
     FM2 \
