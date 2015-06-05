@@ -74,6 +74,7 @@ BOARD_ANT_WIRELESS_DEVICE := "qualcomm-uart"
 
 # Audio
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
+BOARD_AUDIO_AMPLIFIER := $(LOCAL_PATH)/libaudioamp
 BOARD_USES_ALSA_AUDIO := true
 
 # Bluetooth
