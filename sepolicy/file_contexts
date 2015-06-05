@@ -8,3 +8,5 @@
 
 /dev/silead_fp_dev                              u:object_r:silead_fp_device:s0
 /data/silead(/.*)?                              u:object_r:data_silead_file:s0
+
+/dev/i2c-6                                     u:object_r:audio_device:s0
