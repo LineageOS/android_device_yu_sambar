@@ -64,6 +64,8 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     libaudioamp \
+    libtfa9887 \
+    tfa9887.cnt \
     libqcompostprocbundle \
     libqcomvisualizer \
     tinymix
