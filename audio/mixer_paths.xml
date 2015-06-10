@@ -1348,6 +1348,14 @@
         <ctl name="IIR1 INP1 MUX" value="DEC5" />
     </path>
 
+    <path name="adc3">
+	<ctl name="AIF1_CAP Mixer SLIM TX7" value="1"/>
+	<ctl name="SLIM_0_TX Channels" value="One" />
+	<ctl name="SLIM TX7 MUX" value="DEC4" />
+	<ctl name="DEC4 MUX" value="ADC3" />
+	<ctl name="IIR1 INP1 MUX" value="DEC4" />
+    </path>
+
     <path name="adc5">
         <ctl name="AIF1_CAP Mixer SLIM TX7" value="1"/>
         <ctl name="SLIM_0_TX Channels" value="One" />
@@ -1413,6 +1421,14 @@
     </path>
 
     <path name="speaker">
+        <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
+        <ctl name="SLIM RX2 MUX" value="AIF1_PB" />
+        <ctl name="SLIM_0_RX Channels" value="Two" />
+        <ctl name="RX7 MIX1 INP1" value="RX1" />
+        <ctl name="RX8 MIX1 INP1" value="RX2" />
+        <ctl name="RX7 Digital Volume" value="84" />
+        <ctl name="RX8 Digital Volume" value="84" />
+        <ctl name="COMP0 Switch" value="1" />
     </path>
 
     <path name="speaker-fluid">
@@ -1485,7 +1501,7 @@
     </path>
 
     <path name="speaker-mic">
-        <path name="adc1" />
+        <path name="adc3" />
     </path>
 
     <path name="speaker-mic-liquid">
