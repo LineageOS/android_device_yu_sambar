@@ -35,7 +35,7 @@
     <ctl name="RX7 Digital Volume" value="84" />
     <ctl name="RX8 Digital Volume" value="84" />
     <ctl name="ADC1 Volume" value="6" />
-    <ctl name="ADC2 Volume" value="19" />
+    <ctl name="ADC2 Volume" value="6" />
     <ctl name="ADC3 Volume" value="0" />
     <ctl name="ADC4 Volume" value="0" />
     <ctl name="ADC5 Volume" value="19" />
@@ -1386,19 +1386,19 @@
 
     <path name="sidetone-headphones">
         <path name="sidetone-iir" />
-        <ctl name="IIR1 INP1 Volume" value="54" />
+        <ctl name="IIR1 INP1 Volume" value="70" />
         <ctl name="RX1 MIX2 INP1" value="IIR1" />
         <ctl name="RX2 MIX2 INP1" value="IIR1" />
     </path>
 
     <path name="sidetone-handset">
         <path name="sidetone-iir" />
-        <ctl name="IIR1 INP1 Volume" value="54" />
+        <ctl name="IIR1 INP1 Volume" value="48" />
         <ctl name="RX1 MIX2 INP1" value="IIR1" />
     </path>
 
     <path name="speaker-mic">
-        <path name="dmic3" />
+        <path name="adc1" />
     </path>
 
     <path name="speaker-mic-liquid">
@@ -1463,6 +1463,7 @@
 
     <path name="handset-mic">
         <path name="adc1" />
+        <ctl name="ADC1 Volume" value="6" />
     </path>
 
     <path name="handset-mic-db">
@@ -1690,7 +1691,7 @@
         <ctl name="IIR1 Enable Band3" value="1" />
         <ctl name="IIR1 Enable Band4" value="1" />
         <ctl name="IIR1 Enable Band5" value="1" />
-        <ctl name="IIR1 INP1 Volume" value="54" />
+        <ctl name="IIR1 INP1 Volume" value="48" />
         <ctl name="RX1 MIX2 INP1" value="IIR1" />
         <ctl name="RX2 MIX2 INP1" value="IIR1" />
         <ctl name="CLASS_H_DSM MUX" value="DSM_HPHL_RX1" />
