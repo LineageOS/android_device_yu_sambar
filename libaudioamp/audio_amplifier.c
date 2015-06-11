@@ -92,19 +92,20 @@ void *write_dummy_data(void *param __attribute__ ((unused)))
 
     config.channels = 2;
     config.rate = 48000;
-    config.period_size = 1024;
-    config.period_count = 4;
+    config.period_size = 256;
+    config.period_count = 2;
     config.format = PCM_FORMAT_S16_LE;
-    config.start_threshold = 0;
-    config.stop_threshold = 0;
+    config.start_threshold = config.period_size * config.period_count - 1;
+    config.stop_threshold = config.period_size * config.period_count;
     config.silence_threshold = 0;
+    config.avail_min = 1;
 
     if (quat_mi2s_interface_en(true)) {
         ALOGE("Failed to enable QUAT_MI2S_RX Audio Mixer MultiMedia1");
         return NULL;
     }
 
-    pcm = pcm_open(0, 0, PCM_OUT, &config);
+    pcm = pcm_open(0, 0, PCM_OUT | PCM_MONOTONIC, &config);
     if (!pcm || !pcm_is_ready(pcm)) {
         ALOGE("pcm_open failed: %s", pcm_get_error(pcm));
         if (pcm) {
@@ -113,7 +114,7 @@ void *write_dummy_data(void *param __attribute__ ((unused)))
         goto err_disable_quat;
     }
 
-    size = pcm_frames_to_bytes(pcm, pcm_get_buffer_size(pcm));
+    size = DEEP_BUFFER_OUTPUT_PERIOD_SIZE * 8;
     buffer = calloc(size, 1);
     if (!buffer) {
         ALOGE("failed to allocate buffer");
