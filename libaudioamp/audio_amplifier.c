@@ -41,7 +41,7 @@ enum tfa9887_Audio_Mode
 
 extern void tfa9887_init();
 extern int tfa9887_speakeron(int mode, int first);
-extern int tfa9887_speakeroff(int force);
+extern int tfa9887_speakeroff();
 extern int tfa9887_calibration();
 
 static int open_count = 0;
@@ -217,7 +217,7 @@ void amplifier_stream_standby(struct audio_stream_out *stream __attribute__((unu
 
     num_streams--;
     if (num_streams == 0) {
-        tfa9887_speakeroff(true);
+        tfa9887_speakeroff();
     }
 }
 
