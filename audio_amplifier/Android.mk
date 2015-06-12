@@ -32,8 +32,10 @@ LOCAL_ADDITIONAL_DEPENDENCIES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 LOCAL_SRC_FILES := \
 	audio_amplifier.c
 
-LOCAL_MODULE := libaudioamp
+LOCAL_CFLAGS := -Wno-unused-parameter
 
+LOCAL_MODULE := audio_amplifier.msm8994
+LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)

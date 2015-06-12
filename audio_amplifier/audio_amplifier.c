@@ -1,5 +1,7 @@
+
+
 /*
- * Copyright (C) 2015, The CyanogenMod Project
+ * Copyright (C) 2015 The CyanogenMod Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +16,33 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "libaudioamp"
+#define LOG_TAG "audio_amplifier"
+//#define LOG_NDEBUG 0
+
+#include <stdint.h>
+#include <sys/types.h>
+
 #include <cutils/log.h>
+
+#include <hardware/audio_amplifier.h>
+#include <hardware/hardware.h>
+
 #include <system/audio.h>
 #include <tinyalsa/asoundlib.h>
 #include <tinycompress/tinycompress.h>
 #include <msm8974/platform.h>
 #include <audio_hw.h>
-#include "audio_amplifier.h"
 
+typedef struct tfa9887_amplifier {
+    amplifier_device_t amp;
+    int num_streams;
+    bool speaker_on;
+    bool calibrating;
+    bool writing;
+    int devices;
+    pthread_mutex_t mutex;
+    pthread_cond_t cond;
+} tfa9887_amplifier_t;
 
 enum tfa9887_Audio_Mode
 {
@@ -43,15 +63,6 @@ extern void tfa9887_init();
 extern int tfa9887_speakeron(int mode, int first);
 extern int tfa9887_speakeroff();
 extern int tfa9887_calibration();
-
-static int open_count = 0;
-static int num_streams = 0;
-static bool speaker_on = false;
-static bool calibrating = true;
-static bool writing = false;
-static int devices = SND_DEVICE_NONE;
-static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-static pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 static int quat_mi2s_interface_en(bool enable)
 {
@@ -83,12 +94,13 @@ static int quat_mi2s_interface_en(bool enable)
     return 0;
 }
 
-void *write_dummy_data(void *param __attribute__ ((unused)))
+void *write_dummy_data(void *param)
 {
     char *buffer;
     int size;
     struct pcm *pcm;
     struct pcm_config config;
+    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) param;
 
     config.channels = 2;
     config.rate = 48000;
@@ -125,11 +137,11 @@ void *write_dummy_data(void *param __attribute__ ((unused)))
         if (pcm_write(pcm, buffer, size)) {
             ALOGE("pcm_write failed");
         }
-        pthread_mutex_lock(&mutex);
-        writing = true;
-        pthread_cond_signal(&cond);
-        pthread_mutex_unlock(&mutex);
-    } while (calibrating);
+        pthread_mutex_lock(&tfa9887->mutex);
+        tfa9887->writing = true;
+        pthread_cond_signal(&tfa9887->cond);
+        pthread_mutex_unlock(&tfa9887->mutex);
+    } while (tfa9887->calibrating);
 
 err_free:
     free(buffer);
@@ -140,28 +152,7 @@ err_disable_quat:
     return NULL;
 }
 
-int amplifier_open(void)
-{
-    ALOGV("%s:%d", __func__, __LINE__);
-    if (!open_count) {
-        pthread_t write_thread;
-        calibrating = true;
-        pthread_create(&write_thread, NULL, write_dummy_data, NULL);
-        pthread_mutex_lock(&mutex);
-        while(!writing) {
-            pthread_cond_wait(&cond, &mutex);
-        }
-        pthread_mutex_unlock(&mutex);
-        tfa9887_calibration();
-        calibrating = false;
-        pthread_join(write_thread, NULL);
-    }
-    open_count++;
-    ALOGI("%s:%d use count: %d", __func__, __LINE__, open_count);
-    return 0;
-}
-
-bool is_amplifier_device()
+bool is_amplifier_device(uint32_t devices)
 {
     switch(devices) {
     case SND_DEVICE_OUT_SPEAKER:
@@ -179,19 +170,28 @@ bool is_amplifier_device()
     }
 }
 
-void amplifier_stream_start(struct audio_stream_out *stream, bool offload)
+static int amp_set_output_devices(amplifier_device_t *device, uint32_t devices)
 {
+    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
+    tfa9887->devices = devices;
+    return 0;
+}
+
+static int amp_output_stream_start(amplifier_device_t *device,
+        struct audio_stream_out *stream, bool offload)
+{
+    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
+    struct stream_out *out = (struct stream_out *)stream;
     char *buffer;
     int size;
-    struct stream_out *out = (struct stream_out *)stream;
-    if (!is_amplifier_device())
-        return;
+    if (!is_amplifier_device(tfa9887->devices))
+        return 0;
 
-    if (num_streams == 0) {
+    if (tfa9887->num_streams == 0) {
         size = pcm_frames_to_bytes(out->pcm, pcm_get_buffer_size(out->pcm));
         buffer = calloc(size, 1);
         if (!buffer) {
-            return;
+            return -ENOMEM;
         }
 
         if (offload) {
@@ -207,48 +207,101 @@ void amplifier_stream_start(struct audio_stream_out *stream, bool offload)
         free(buffer);
     }
 
-    num_streams++;
+    tfa9887->num_streams++;
+    return 0;
 }
 
-void amplifier_stream_standby(struct audio_stream_out *stream __attribute__((unused)))
+static int amp_output_stream_standby(amplifier_device_t *device,
+        struct audio_stream_out *stream __attribute__ ((unused)))
 {
-    if (!is_amplifier_device())
-        return;
+    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
+    if (!is_amplifier_device(tfa9887->devices))
+        return 0;
 
-    num_streams--;
-    if (num_streams == 0) {
+    tfa9887->num_streams--;
+    if (tfa9887->num_streams == 0) {
         tfa9887_speakeroff();
     }
-}
-
-void amplifier_set_devices(int devs)
-{
-    ALOGI("%s:%d device: %d", __func__, __LINE__, devices);
-
-    if (devices >= SND_DEVICE_IN_BEGIN && devices < SND_DEVICE_IN_END)
-        return;
-
-    devices = devs;
-}
-
-int amplifier_set_mode(audio_mode_t mode __attribute__((unused)))
-{
-    ALOGI("%s:%d", __func__, __LINE__);
     return 0;
 }
 
-int amplifier_close(void)
+static int amp_dev_close(hw_device_t *device)
 {
-    ALOGI("%s:%d", __func__, __LINE__);
-    if (open_count == 0) {
-        ALOGE("amplifier is not open");
-        return 0;
+    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
+    if (tfa9887) {
+        if (tfa9887->speaker_on) {
+            tfa9887_speakeroff();
+        }
+        pthread_cond_destroy(&tfa9887->cond);
+        pthread_mutex_destroy(&tfa9887->mutex);
+        free(tfa9887);
     }
 
-    open_count--;
-    if (open_count == 0) {
-        //TODO: ?
-    }
-    ALOGI("%s:%d use count: %d", __func__, __LINE__, open_count);
     return 0;
 }
+
+static int amp_calibrate(tfa9887_amplifier_t *tfa9887)
+{
+    pthread_t write_thread;
+    tfa9887->calibrating = true;
+    pthread_create(&write_thread, NULL, write_dummy_data, tfa9887);
+    pthread_mutex_lock(&tfa9887->mutex);
+    while(!tfa9887->writing) {
+        pthread_cond_wait(&tfa9887->cond, &tfa9887->mutex);
+    }
+    pthread_mutex_unlock(&tfa9887->mutex);
+    tfa9887_calibration();
+    tfa9887->calibrating = false;
+    pthread_join(write_thread, NULL);
+    return 0;
+}
+
+static int amp_module_open(const hw_module_t *module, const char *name,
+        hw_device_t **device)
+{
+    if (strcmp(name, AMPLIFIER_HARDWARE_INTERFACE)) {
+        ALOGE("%s:%d: %s does not match amplifier hardware interface name\n",
+                __func__, __LINE__, name);
+        return -ENODEV;
+    }
+
+    tfa9887_amplifier_t *tfa9887 = calloc(1, sizeof(tfa9887_amplifier_t));
+    if (!tfa9887) {
+        ALOGE("%s:%d: Unable to allocate memory for amplifier device\n",
+                __func__, __LINE__);
+        return -ENOMEM;
+    }
+
+    tfa9887->amp.common.tag = HARDWARE_DEVICE_TAG;
+    tfa9887->amp.common.module = (hw_module_t *) module;
+    tfa9887->amp.common.version = AMPLIFIER_DEVICE_API_VERSION_2_0;
+    tfa9887->amp.common.close = amp_dev_close;
+
+    tfa9887->amp.set_output_devices = amp_set_output_devices;
+    tfa9887->amp.output_stream_start = amp_output_stream_start;
+    tfa9887->amp.output_stream_standby = amp_output_stream_standby;
+    pthread_mutex_init(&tfa9887->mutex, NULL);
+    pthread_cond_init(&tfa9887->cond, NULL);
+
+    amp_calibrate(tfa9887);
+
+    *device = (hw_device_t *) tfa9887;
+
+    return 0;
+}
+
+static struct hw_module_methods_t hal_module_methods = {
+    .open = amp_module_open,
+};
+
+amplifier_module_t HAL_MODULE_INFO_SYM = {
+    .common = {
+        .tag = HARDWARE_MODULE_TAG,
+        .module_api_version = AMPLIFIER_MODULE_API_VERSION_0_1,
+        .hal_api_version = HARDWARE_HAL_API_VERSION,
+        .id = AMPLIFIER_HARDWARE_MODULE_ID,
+        .name = "Sambar audio amplifier HAL",
+        .author = "The CyanogenMod Open Source Project",
+        .methods = &hal_module_methods,
+    },
+};
