@@ -63,7 +63,7 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8994 \
     audio.r_submix.default \
     audio.usb.default \
-    libaudioamp \
+    audio_amplifier.msm8994 \
     libtfa9887 \
     tfa9887.cnt \
     libqcompostprocbundle \
