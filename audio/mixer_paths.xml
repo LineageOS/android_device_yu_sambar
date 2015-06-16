@@ -359,19 +359,9 @@
     <ctl name="SLIMBUS_DL_HL Switch" value="0" />
     <!-- ADSP testfwk end-->
 
-    <!-- MI2S QUAT-->
-    <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="0" />
-    <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="0" />
-    <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia4" value="0" />
-    <ctl name="QUAT_MI2S_RX_Voice Mixer CSVoice" value="0" />
-    <ctl name="Voice_Tx Mixer SLIM_0_TX_Voice" value="0" />
-    <ctl name="VOC_EXT_EC MUX QUAT_MI2S_TX" value="0" />
-    <!-- MI2S QUAT end-->
-
     <!-- These are audio route (FE to BE) specific mixer settings -->
-
     <path name="deep-buffer-playback">
-        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="1" />
+        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia1" value="1" />
     </path>
 
     <path name="deep-buffer-playback speaker-protected">
@@ -414,7 +404,7 @@
     </path>
 
     <path name="low-latency-playback">
-        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="1" />
+        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
     <path name="low-latency-playback speaker-protected">
@@ -461,7 +451,7 @@
     </path>
 
     <path name="compress-offload-playback">
-        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia4" value="1" />
+        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia4" value="1" />
     </path>
 
     <path name="compress-offload-playback speaker-protected">
@@ -845,9 +835,8 @@
     </path>
 
     <path name="voice-call">
-        <ctl name="QUAT_MI2S_RX_Voice Mixer CSVoice" value="1" />
+        <ctl name="SLIM_0_RX_Voice Mixer CSVoice" value="1" />
         <ctl name="Voice_Tx Mixer SLIM_0_TX_Voice" value="1" />
-        <ctl name="VOC_EXT_EC MUX QUAT_MI2S_TX" value="1" />
     </path>
 
     <path name="voice-call hdmi">
@@ -910,8 +899,8 @@
 
     <path name="play-fm">
         <ctl name="PRI MI2S LOOPBACK Volume" value="1" />
-        <ctl name="QUAT_MI2S_RX Port Mixer PRI_MI2S_TX" value="1" />
-        <ctl name="QUAT_MI2S_RX_DL_HL Switch" value="1" />
+        <ctl name="SLIMBUS_0_RX Port Mixer PRI_MI2S_TX" value="1" />
+        <ctl name="SLIMBUS_DL_HL Switch" value="1" />
     </path>
 
     <path name="incall-rec-uplink">
@@ -1325,7 +1314,14 @@
     </path>
 
     <path name="speaker">
-        <!-- libaudioamp will take care of the tfa9887 -->
+        <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
+        <ctl name="SLIM RX2 MUX" value="AIF1_PB" />
+        <ctl name="SLIM_0_RX Channels" value="Two" />
+        <ctl name="RX7 MIX1 INP1" value="RX1" />
+        <ctl name="RX8 MIX1 INP1" value="RX2" />
+        <ctl name="RX7 Digital Volume" value="84" />
+        <ctl name="RX8 Digital Volume" value="84" />
+        <ctl name="COMP0 Switch" value="1" />
     </path>
 
     <path name="speaker-fluid">
