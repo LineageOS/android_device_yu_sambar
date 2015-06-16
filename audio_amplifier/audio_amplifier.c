@@ -36,10 +36,8 @@
 typedef struct tfa9887_amplifier {
     amplifier_device_t amp;
     int num_streams;
-    bool speaker_on;
     bool calibrating;
     bool writing;
-    int devices;
     pthread_mutex_t mutex;
     pthread_cond_t cond;
 } tfa9887_amplifier_t;
@@ -149,32 +147,13 @@ err_close_pcm:
     pcm_close(pcm);
 err_disable_quat:
     quat_mi2s_interface_en(false);
+    ALOGV("--%s:%d", __func__, __LINE__);
     return NULL;
 }
 
 bool is_amplifier_device(uint32_t devices)
 {
-    switch(devices) {
-    case SND_DEVICE_OUT_SPEAKER:
-    case SND_DEVICE_OUT_SPEAKER_REVERSE:
-    case SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES:
-    case SND_DEVICE_OUT_SPEAKER_AND_HDMI:
-    case SND_DEVICE_OUT_SPEAKER_AND_USB_HEADSET:
-    case SND_DEVICE_OUT_SPEAKER_AND_ANC_HEADSET:
-    case SND_DEVICE_OUT_SPEAKER_PROTECTED:
-    case SND_DEVICE_OUT_VOICE_SPEAKER:
-    case SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED:
-        return true;
-    default:
-        return false;
-    }
-}
-
-static int amp_set_output_devices(amplifier_device_t *device, uint32_t devices)
-{
-    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
-    tfa9887->devices = devices;
-    return 0;
+    return devices & AUDIO_DEVICE_OUT_SPEAKER;
 }
 
 static int amp_output_stream_start(amplifier_device_t *device,
@@ -184,13 +163,16 @@ static int amp_output_stream_start(amplifier_device_t *device,
     struct stream_out *out = (struct stream_out *)stream;
     char *buffer;
     int size;
-    if (!is_amplifier_device(tfa9887->devices))
+
+    if (!is_amplifier_device(out->devices))
         return 0;
 
+    pthread_mutex_lock(&tfa9887->mutex);
     if (tfa9887->num_streams == 0) {
         size = pcm_frames_to_bytes(out->pcm, pcm_get_buffer_size(out->pcm));
         buffer = calloc(size, 1);
         if (!buffer) {
+            pthread_mutex_unlock(&tfa9887->mutex);
             return -ENOMEM;
         }
 
@@ -208,20 +190,25 @@ static int amp_output_stream_start(amplifier_device_t *device,
     }
 
     tfa9887->num_streams++;
+    pthread_mutex_unlock(&tfa9887->mutex);
     return 0;
 }
 
 static int amp_output_stream_standby(amplifier_device_t *device,
-        struct audio_stream_out *stream __attribute__ ((unused)))
+        struct audio_stream_out *stream)
 {
     tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
-    if (!is_amplifier_device(tfa9887->devices))
+    struct stream_out *out = (struct stream_out *)stream;
+
+    if (!is_amplifier_device(out->devices))
         return 0;
 
+    pthread_mutex_lock(&tfa9887->mutex);
     tfa9887->num_streams--;
     if (tfa9887->num_streams == 0) {
         tfa9887_speakeroff();
     }
+    pthread_mutex_unlock(&tfa9887->mutex);
     return 0;
 }
 
@@ -229,9 +216,12 @@ static int amp_dev_close(hw_device_t *device)
 {
     tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
     if (tfa9887) {
-        if (tfa9887->speaker_on) {
+        pthread_mutex_lock(&tfa9887->mutex);
+        if (tfa9887->num_streams) {
             tfa9887_speakeroff();
+            tfa9887->num_streams = 0;
         }
+        pthread_mutex_unlock(&tfa9887->mutex);
         pthread_cond_destroy(&tfa9887->cond);
         pthread_mutex_destroy(&tfa9887->mutex);
         free(tfa9887);
@@ -277,7 +267,6 @@ static int amp_module_open(const hw_module_t *module, const char *name,
     tfa9887->amp.common.version = AMPLIFIER_DEVICE_API_VERSION_2_0;
     tfa9887->amp.common.close = amp_dev_close;
 
-    tfa9887->amp.set_output_devices = amp_set_output_devices;
     tfa9887->amp.output_stream_start = amp_output_stream_start;
     tfa9887->amp.output_stream_standby = amp_output_stream_standby;
     pthread_mutex_init(&tfa9887->mutex, NULL);
