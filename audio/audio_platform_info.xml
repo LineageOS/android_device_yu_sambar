@@ -25,6 +25,11 @@
 <!-- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN -->
 <!-- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                          -->
 <audio_platform_info>
+	<backend_names>
+        <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" />
+        <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" backend="speaker-and-headphones" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="speaker" />
+	</backend_names>
     <acdb_ids>
         <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="124"/>
         <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="130"/>
