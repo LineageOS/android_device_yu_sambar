@@ -1970,7 +1970,7 @@ void LocApiV02 :: reportPosition (
 void  LocApiV02 :: reportSv (
   const qmiLocEventGnssSvInfoIndMsgT_v02 *gnss_report_ptr)
 {
-  GpsSvStatus      SvStatus;
+  GnssSvStatus      SvStatus;
   GpsLocationExtended locationExtended;
   int              num_svs_max, i;
   const qmiLocSvInfoStructT_v02 *sv_info_ptr;
@@ -1981,7 +1981,7 @@ void  LocApiV02 :: reportSv (
             gnss_report_ptr->altitudeAssumed);
 
   num_svs_max = 0;
-  memset (&SvStatus, 0, sizeof (GpsSvStatus));
+  memset (&SvStatus, 0, sizeof (GnssSvStatus));
   memset(&locationExtended, 0, sizeof (GpsLocationExtended));
   locationExtended.size = sizeof(locationExtended);
   if(gnss_report_ptr->svList_valid == 1)
@@ -2001,7 +2001,7 @@ void  LocApiV02 :: reportSv (
       {
         if(sv_info_ptr->system == eQMI_LOC_SV_SYSTEM_GPS_V02)
         {
-          SvStatus.sv_list[SvStatus.num_svs].size = sizeof(GpsSvStatus);
+          SvStatus.sv_list[SvStatus.num_svs].size = sizeof(GpsSvInfo);
           SvStatus.sv_list[SvStatus.num_svs].prn = (int)sv_info_ptr->gnssSvId;
 
           // We only have the data field to report gps eph and alm mask
@@ -2025,7 +2025,7 @@ void  LocApiV02 :: reportSv (
              &&
              (sv_info_ptr->svStatus == eQMI_LOC_SV_STATUS_TRACK_V02))
           {
-            SvStatus.used_in_fix_mask |= (1 << (sv_info_ptr->gnssSvId-1));
+            SvStatus.gps_used_in_fix_mask |= (1 << (sv_info_ptr->gnssSvId-1));
           }
         }
         // SBAS: GPS PRN: 120-151,
@@ -2041,6 +2041,14 @@ void  LocApiV02 :: reportSv (
         // which is 65-96
         else if(sv_info_ptr->system == eQMI_LOC_SV_SYSTEM_GLONASS_V02)
         {
+          if((sv_info_ptr->validMask &
+              QMI_LOC_SV_INFO_MASK_VALID_PROCESS_STATUS_V02)
+             &&
+             (sv_info_ptr->svStatus == eQMI_LOC_SV_STATUS_TRACK_V02))
+          {
+            SvStatus.glo_used_in_fix_mask |= (1 << (sv_info_ptr->gnssSvId-1));
+          }
+
           SvStatus.sv_list[SvStatus.num_svs].prn =
             sv_info_ptr->gnssSvId + (65-1);
         }
@@ -2049,6 +2057,13 @@ void  LocApiV02 :: reportSv (
         //which is 201-237
         else if(sv_info_ptr->system == eQMI_LOC_SV_SYSTEM_BDS_V02)
         {
+          if((sv_info_ptr->validMask &
+              QMI_LOC_SV_INFO_MASK_VALID_PROCESS_STATUS_V02)
+             &&
+             (sv_info_ptr->svStatus == eQMI_LOC_SV_STATUS_TRACK_V02))
+          {
+            SvStatus.bds_used_in_fix_mask |= (1 << (sv_info_ptr->gnssSvId-1-200));
+          }
             SvStatus.sv_list[SvStatus.num_svs].prn =
                 sv_info_ptr->gnssSvId;
         }
