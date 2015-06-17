@@ -332,6 +332,11 @@ on boot
     chown system system /sys/mag/link/pollrate_ms
     chown system system /sys/mag/link/full_scale
 
+    write /sys/bus/i2c/devices/2-004a/update_fw "A4_15_2.2_AA.fw"
+    write /sys/bus/i2c/devices/2-004a/update_cfg "A4_15_2.2_AA.raw"
+    write /sys/bus/i2c/devices/2-004a/plugin "pl enable 4"
+    write /sys/bus/i2c/devices/2-004a/en_gesture 1
+
 on property:sys.boot_completed=1
     start qcom-post-boot
     start perfd
