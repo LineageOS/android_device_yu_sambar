@@ -13,4 +13,5 @@ etc/firmware/venus.mbn
 etc/firmware/venus.mdt
 
 # Touchscreen firmware
-etc/firmware/atmel_cfg.raw
+etc/firmware/A4_15_2.2_AA.fw
+etc/firmware/A4_15_2.2_AA.raw
