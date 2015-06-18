@@ -350,6 +350,14 @@ vendor/lib64/libxml.so
 lib64/hw/sensors.msm8994.so
 lib64/libyasalgo.so
 
+# Smart camera
+vendor/lib/libchromaflash.so
+vendor/lib/libmmcamera_chromaflash_lib.so
+vendor/lib/libmmcamera_optizoom_lib.so
+vendor/lib/libmmcamera_ubifocus_lib.so
+vendor/lib/liboptizoom.so
+vendor/lib/libubifocus.so
+
 # Thermal
 bin/thermal-engine
 vendor/lib64/libthermalclient.so
