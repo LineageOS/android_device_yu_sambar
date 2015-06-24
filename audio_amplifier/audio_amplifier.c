@@ -33,13 +33,30 @@
 #include <msm8974/platform.h>
 #include <audio_hw.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <ctype.h>
+#include <sys/ioctl.h>
+
+#include <linux/ioctl.h>
+#define __force
+#define __bitwise
+#define __user
+#include <sound/asound.h>
+
 typedef struct tfa9887_amplifier {
     amplifier_device_t amp;
-    int num_streams;
+    int mixer_fd;
+    unsigned int quat_mi2s_clk_id;
     bool calibrating;
     bool writing;
     pthread_mutex_t mutex;
     pthread_cond_t cond;
+    pthread_t watch_thread;
 } tfa9887_amplifier_t;
 
 enum tfa9887_Audio_Mode
@@ -61,6 +78,8 @@ extern void tfa9887_init();
 extern int tfa9887_speakeron(int mode, int first);
 extern int tfa9887_speakeroff();
 extern int tfa9887_calibration();
+
+#define QUAT_MI2S_CLK_CTL "QUAT_MI2S Clock"
 
 static int quat_mi2s_interface_en(bool enable)
 {
@@ -151,77 +170,13 @@ err_disable_quat:
     return NULL;
 }
 
-bool is_amplifier_device(uint32_t devices)
-{
-    return devices & AUDIO_DEVICE_OUT_SPEAKER;
-}
-
-static int amp_output_stream_start(amplifier_device_t *device,
-        struct audio_stream_out *stream, bool offload)
-{
-    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
-    struct stream_out *out = (struct stream_out *)stream;
-    char *buffer;
-    int size;
-
-    if (!is_amplifier_device(out->devices))
-        return 0;
-
-    pthread_mutex_lock(&tfa9887->mutex);
-    if (tfa9887->num_streams == 0) {
-        size = pcm_frames_to_bytes(out->pcm, pcm_get_buffer_size(out->pcm));
-        buffer = calloc(size, 1);
-        if (!buffer) {
-            pthread_mutex_unlock(&tfa9887->mutex);
-            return -ENOMEM;
-        }
-
-        if (offload) {
-            compress_write(out->compr, buffer, size);
-        } else {
-            if (out->usecase == USECASE_AUDIO_PLAYBACK_AFE_PROXY)
-                pcm_mmap_write(out->pcm, buffer, size);
-            else
-                pcm_write(out->pcm, buffer, size);
-        }
-
-        tfa9887_speakeron(Audio_Mode_Music_Normal, 0);
-        free(buffer);
-    }
-
-    tfa9887->num_streams++;
-    pthread_mutex_unlock(&tfa9887->mutex);
-    return 0;
-}
-
-static int amp_output_stream_standby(amplifier_device_t *device,
-        struct audio_stream_out *stream)
-{
-    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
-    struct stream_out *out = (struct stream_out *)stream;
-
-    if (!is_amplifier_device(out->devices))
-        return 0;
-
-    pthread_mutex_lock(&tfa9887->mutex);
-    tfa9887->num_streams--;
-    if (tfa9887->num_streams == 0) {
-        tfa9887_speakeroff();
-    }
-    pthread_mutex_unlock(&tfa9887->mutex);
-    return 0;
-}
-
 static int amp_dev_close(hw_device_t *device)
 {
     tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
     if (tfa9887) {
-        pthread_mutex_lock(&tfa9887->mutex);
-        if (tfa9887->num_streams) {
-            tfa9887_speakeroff();
-            tfa9887->num_streams = 0;
-        }
-        pthread_mutex_unlock(&tfa9887->mutex);
+        if (tfa9887->mixer_fd >= 0)
+            close(tfa9887->mixer_fd);
+        pthread_join(tfa9887->watch_thread, NULL);
         pthread_cond_destroy(&tfa9887->cond);
         pthread_mutex_destroy(&tfa9887->mutex);
         free(tfa9887);
@@ -246,6 +201,96 @@ static int amp_calibrate(tfa9887_amplifier_t *tfa9887)
     return 0;
 }
 
+static void *amp_watch(void *param)
+{
+    struct snd_ctl_event event;
+    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) param;
+
+    while(read(tfa9887->mixer_fd, &event, sizeof(struct snd_ctl_event)) > 0) {
+        if (event.data.elem.id.numid == tfa9887->quat_mi2s_clk_id) {
+            struct snd_ctl_elem_value ev;
+            ev.id.numid = tfa9887->quat_mi2s_clk_id;
+            if (ioctl(tfa9887->mixer_fd, SNDRV_CTL_IOCTL_ELEM_READ, &ev) < 0)
+                continue;
+            ALOGI("Got %s event = %d!", QUAT_MI2S_CLK_CTL, ev.value.enumerated.item[0]);
+            if (ev.value.enumerated.item[0]) {
+                tfa9887_speakeron(Audio_Mode_Music_Normal, 0);
+            } else {
+                tfa9887_speakeroff();
+            }
+        }
+    }
+    return NULL;
+}
+
+static int amp_init(tfa9887_amplifier_t *tfa9887)
+{
+    size_t i;
+    int subscribe = 1;
+    struct snd_ctl_elem_list elist;
+    struct snd_ctl_elem_id *eid = NULL;
+    tfa9887->mixer_fd = open("/dev/snd/controlC0", O_RDWR);
+    if (tfa9887->mixer_fd < 0) {
+        ALOGE("failed to open");
+        goto fail;
+    }
+
+    memset(&elist, 0, sizeof(elist));
+    if (ioctl(tfa9887->mixer_fd, SNDRV_CTL_IOCTL_ELEM_LIST, &elist) < 0) {
+        ALOGE("failed to get alsa control list");
+        goto fail;
+    }
+
+    eid = calloc(elist.count, sizeof(struct snd_ctl_elem_id));
+    if (!eid) {
+        ALOGE("failed to allocate snd_ctl_elem_id");
+        goto fail;
+    }
+
+    elist.space = elist.count;
+    elist.pids = eid;
+
+    if (ioctl(tfa9887->mixer_fd, SNDRV_CTL_IOCTL_ELEM_LIST, &elist) < 0) {
+        ALOGE("failed to get alsa control list");
+        goto fail;
+    }
+
+    for (i = 0; i < elist.count; i++) {
+        struct snd_ctl_elem_info ei;
+        ei.id.numid = eid[i].numid;
+        if (ioctl(tfa9887->mixer_fd, SNDRV_CTL_IOCTL_ELEM_INFO, &ei) < 0) {
+            ALOGE("failed to get alsa control %d info", eid[i].numid);
+            goto fail;
+        }
+
+        if (!strcmp(QUAT_MI2S_CLK_CTL, (const char *)ei.id.name)) {
+            ALOGI("Found %s! %d", QUAT_MI2S_CLK_CTL, ei.id.numid);
+            tfa9887->quat_mi2s_clk_id = ei.id.numid;
+            break;
+        }
+    }
+
+    if (i == elist.count) {
+        ALOGE("could not find %s", QUAT_MI2S_CLK_CTL);
+        goto fail;
+    }
+
+    if (ioctl(tfa9887->mixer_fd, SNDRV_CTL_IOCTL_SUBSCRIBE_EVENTS, &subscribe) < 0) {
+        ALOGE("failed to subscribe to %s events", QUAT_MI2S_CLK_CTL);
+        goto fail;
+    }
+
+    pthread_create(&tfa9887->watch_thread, NULL, amp_watch, tfa9887);
+
+    return 0;
+fail:
+    if (eid)
+        free(eid);
+    if (tfa9887->mixer_fd >= 0)
+        close(tfa9887->mixer_fd);
+    return -ENODEV;
+}
+
 static int amp_module_open(const hw_module_t *module, const char *name,
         hw_device_t **device)
 {
@@ -267,12 +312,11 @@ static int amp_module_open(const hw_module_t *module, const char *name,
     tfa9887->amp.common.version = AMPLIFIER_DEVICE_API_VERSION_2_0;
     tfa9887->amp.common.close = amp_dev_close;
 
-    tfa9887->amp.output_stream_start = amp_output_stream_start;
-    tfa9887->amp.output_stream_standby = amp_output_stream_standby;
     pthread_mutex_init(&tfa9887->mutex, NULL);
     pthread_cond_init(&tfa9887->cond, NULL);
 
     amp_calibrate(tfa9887);
+    amp_init(tfa9887);
 
     *device = (hw_device_t *) tfa9887;
 
