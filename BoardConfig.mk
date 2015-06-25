@@ -62,11 +62,7 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 endif
-ifeq ($(TARGET_BUILD_VARIANT),user)
 TARGET_KERNEL_CONFIG := cyanogenmod_sambar_defconfig
-else
-TARGET_KERNEL_CONFIG := cyanogenmod_sambar-debug_defconfig
-endif
 TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8994
 
 # ANT+
