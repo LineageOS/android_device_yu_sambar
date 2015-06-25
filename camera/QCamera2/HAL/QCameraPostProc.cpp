@@ -449,7 +449,7 @@ int32_t QCameraPostProcessor::getJpegEncodingConfig(mm_jpeg_encode_params_t& enc
 
     // set rotation only when no online rotation or offline pp rotation is done before
     if (!m_parent->needRotationReprocess()) {
-        encode_parm.rotation = m_parent->getJpegRotation();
+        encode_parm.rotation = m_parent->mParameters.getJpegRotation();
     }
 
     encode_parm.main_dim.src_dim = src_dim;
@@ -509,7 +509,7 @@ int32_t QCameraPostProcessor::getJpegEncodingConfig(mm_jpeg_encode_params_t& enc
 
     if (m_bThumbnailNeeded == TRUE) {
         bool need_thumb_rotate = true;
-        uint32_t jpeg_rotation = m_parent->getJpegRotation();
+        uint32_t jpeg_rotation = m_parent->mParameters.getJpegRotation();
         m_parent->getThumbnailSize(encode_parm.thumb_dim.dst_dim);
 
         if (thumb_stream == NULL) {
@@ -596,7 +596,7 @@ int32_t QCameraPostProcessor::getJpegEncodingConfig(mm_jpeg_encode_params_t& enc
         encode_parm.dest_buf[i].index = i;
         encode_parm.dest_buf[i].buf_size = main_offset.frame_len;
         encode_parm.dest_buf[i].buf_vaddr = (uint8_t *)m_pJpegOutputMem[i];
-        encode_parm.dest_buf[i].fd = 0;
+        encode_parm.dest_buf[i].fd = -1;
         encode_parm.dest_buf[i].format = MM_JPEG_FMT_YUV;
         encode_parm.dest_buf[i].offset = main_offset;
     }
@@ -1818,7 +1818,7 @@ int32_t QCameraPostProcessor::encodeData(qcamera_jpeg_data_t *jpeg_job_data,
         return BAD_VALUE;
     }
 
-    const uint32_t jpeg_rotation = m_parent->getJpegRotation();
+    const uint32_t jpeg_rotation = m_parent->mParameters.getJpegRotation();
 
     ret = queryStreams(&main_stream,
             &thumb_stream,
@@ -2355,7 +2355,7 @@ void *QCameraPostProcessor::dataSaveRoutine(void *data)
                              pme->mSaveFrmCnt);
 
                     int file_fd = open(saveName, O_RDWR | O_CREAT, 0655);
-                    if (file_fd > 0) {
+                    if (file_fd >= 0) {
                         ssize_t written_len = write(file_fd, job_data->out_data.buf_vaddr,
                                 job_data->out_data.buf_filled_len);
                         if ((ssize_t)job_data->out_data.buf_filled_len != written_len) {
