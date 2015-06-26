@@ -84,3 +84,6 @@ persist.timed.enable=true
 ro.min_freq_0=384000
 ro.min_freq_4=384000
 ro.vendor.extension_library=libqti-perfd-client.so
+
+# USB OTG
+persist.sys.isUsbOtgEnabled=1
