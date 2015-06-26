@@ -268,3 +268,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/dsi_config.xml:system/etc/data/dsi_config.xml \
     $(LOCAL_PATH)/configs/netmgr_config.xml:system/etc/data/netmgr_config.xml \
     $(LOCAL_PATH)/configs/qmi_config.xml:system/etc/data/qmi_config.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/log_cfg.xml:system/etc/silead/log_cfg.xml \
+    $(LOCAL_PATH)/configs/silead_config.xml:system/etc/silead/silead_config.xml \
+    $(LOCAL_PATH)/configs/silead_param.xml:system/etc/silead/silead_param.xml
