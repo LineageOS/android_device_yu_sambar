@@ -279,3 +279,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/log_cfg.xml:system/etc/silead/log_cfg.xml \
     $(LOCAL_PATH)/configs/silead_config.xml:system/etc/silead/silead_config.xml \
     $(LOCAL_PATH)/configs/silead_param.xml:system/etc/silead/silead_param.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/perf-profile1.conf:system/vendor/etc/perf-profile0.conf \
+    $(LOCAL_PATH)/configs/perf-profile1.conf:system/vendor/etc/perf-profile1.conf \
+    $(LOCAL_PATH)/configs/perf-profile2.conf:system/vendor/etc/perf-profile2.conf \
+    $(LOCAL_PATH)/configs/perf-profile3.conf:system/vendor/etc/perf-profile3.conf \
+    $(LOCAL_PATH)/configs/perf-profile4.conf:system/vendor/etc/perf-profile4.conf \
+    $(LOCAL_PATH)/configs/perf-profile5.conf:system/vendor/etc/perf-profile5.conf
