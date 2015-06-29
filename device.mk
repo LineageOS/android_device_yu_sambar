@@ -120,6 +120,9 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     memtrack.msm8994
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapgrowthlimit=256m
+
 # Filesystem
 PRODUCT_PACKAGES += \
     e2fsck \
