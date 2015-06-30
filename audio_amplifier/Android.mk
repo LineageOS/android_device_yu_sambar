@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SHARED_LIBRARIES := \
-	liblog libutils libcutils libtfa9887 libtinyalsa libtinycompress
+	liblog libtinyalsa libdl
 
 LOCAL_C_FLAGS += -DPLATFORM_MSM8994
 LOCAL_C_INCLUDES += $(call project-path-for,qcom-audio)/hal

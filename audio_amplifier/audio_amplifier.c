@@ -19,6 +19,7 @@
 #define LOG_TAG "audio_amplifier"
 //#define LOG_NDEBUG 0
 
+#include <dlfcn.h>
 #include <stdint.h>
 #include <sys/types.h>
 
@@ -57,27 +58,11 @@ typedef struct tfa9887_amplifier {
     pthread_mutex_t mutex;
     pthread_cond_t cond;
     pthread_t watch_thread;
+    void *lib_ptr;
+    int (*speaker_on)(int, int);
+    int (*speaker_off)();
+    int (*calibrate)();
 } tfa9887_amplifier_t;
-
-enum tfa9887_Audio_Mode
-{
-    Audio_Mode_Music_Normal = 0,
-    Audio_Mode_Voice_NB,
-    Audio_Mode_Voice_NB_EXTRA,
-    Audio_Mode_Voice_WB,
-    Audio_Mode_Voice_WB_EXTRA,
-    Audio_Mode_VT_NB,
-    Audio_Mode_VT_WB,
-    Audio_Mode_Voice_VOIP,
-    Audio_Mode_Voice_VoLTE,
-    Audio_Mode_Voice_VoLTE_EXTRA,
-    Audio_Mode_VT_VoLTE,
-};
-
-extern void tfa9887_init();
-extern int tfa9887_speakeron(int mode, int first);
-extern int tfa9887_speakeroff();
-extern int tfa9887_calibration();
 
 #define QUAT_MI2S_CLK_CTL "QUAT_MI2S Clock"
 
@@ -179,6 +164,7 @@ static int amp_dev_close(hw_device_t *device)
         pthread_join(tfa9887->watch_thread, NULL);
         pthread_cond_destroy(&tfa9887->cond);
         pthread_mutex_destroy(&tfa9887->mutex);
+        dlclose(tfa9887->lib_ptr);
         free(tfa9887);
     }
 
@@ -195,7 +181,7 @@ static int amp_calibrate(tfa9887_amplifier_t *tfa9887)
         pthread_cond_wait(&tfa9887->cond, &tfa9887->mutex);
     }
     pthread_mutex_unlock(&tfa9887->mutex);
-    tfa9887_calibration();
+    tfa9887->calibrate();
     tfa9887->calibrating = false;
     pthread_join(write_thread, NULL);
     return 0;
@@ -214,9 +200,9 @@ static void *amp_watch(void *param)
                 continue;
             ALOGI("Got %s event = %d!", QUAT_MI2S_CLK_CTL, ev.value.enumerated.item[0]);
             if (ev.value.enumerated.item[0]) {
-                tfa9887_speakeron(Audio_Mode_Music_Normal, 0);
+                tfa9887->speaker_on(0, 0);
             } else {
-                tfa9887_speakeroff();
+                tfa9887->speaker_off();
             }
         }
     }
@@ -311,6 +297,25 @@ static int amp_module_open(const hw_module_t *module, const char *name,
     tfa9887->amp.common.module = (hw_module_t *) module;
     tfa9887->amp.common.version = AMPLIFIER_DEVICE_API_VERSION_2_0;
     tfa9887->amp.common.close = amp_dev_close;
+
+    tfa9887->lib_ptr = dlopen("libtfa9887.so", RTLD_NOW);
+    if (!tfa9887->lib_ptr) {
+        ALOGE("%s:%d: Unable to open libtfa9887: %s",
+                __func__, __LINE__, dlerror());
+        free(tfa9887);
+        return -ENODEV;
+    }
+
+    *(void **)&tfa9887->calibrate = dlsym(tfa9887->lib_ptr, "tfa9887_calibration");
+    *(void **)&tfa9887->speaker_on = dlsym(tfa9887->lib_ptr, "tfa9887_speakeron");
+    *(void **)&tfa9887->speaker_off = dlsym(tfa9887->lib_ptr, "tfa9887_speakeroff");
+
+    if (!tfa9887->calibrate || !tfa9887->speaker_off || !tfa9887->speaker_on) {
+        ALOGE("%s:%d: Unable to find required symbols", __func__, __LINE__);
+        dlclose(tfa9887->lib_ptr);
+        free(tfa9887);
+        return -ENODEV;
+    }
 
     pthread_mutex_init(&tfa9887->mutex, NULL);
     pthread_cond_init(&tfa9887->cond, NULL);
