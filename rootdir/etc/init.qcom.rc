@@ -184,6 +184,14 @@ on post-fs-data
     mkdir /data/diag_logs 0777 system system 5
     chmod 666 /dev/diag
 
+    mkdir /data/silead 0770 system system
+    mkdir /data/silead/tmp 0770 system system
+    mount tmpfs tmpfs /data/silead/tmp nosuid
+    write /data/silead/tmp/stub.txt ready
+    chmod 660 /data/silead/tmp/stub.txt
+    chown system system /data/silead/tmp/stub.txt
+    start fpsvcd
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -620,6 +628,12 @@ service per_proxy /system/bin/pm-proxy
     class core
     user system
     group system net_raw
+    disabled
+
+service fpsvcd /system/bin/fpsvcd
+    class main
+    user system
+    group system
     disabled
 
 on property:init.svc.per_mgr=running

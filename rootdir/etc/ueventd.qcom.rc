@@ -223,15 +223,15 @@
 /dev/ramdump*             0640   system     system
 
 #snd permissions for FTM
-/dev/snd/controlC0 0667 system audio
-/dev/snd/pcmC0D0p  0667 system audio
-/dev/snd/pcmC0D10p 0667 system audio
-/dev/snd/pcmC0D5p 0667 system audio
-/dev/snd/pcmC0D5c 0667 system audio  
-/dev/snd/pcmC0D44p 0667 system audio 
+/dev/snd/controlC0 0660 system audio
+/dev/snd/pcmC0D0p  0660 system audio
+/dev/snd/pcmC0D10p 0660 system audio
+/dev/snd/pcmC0D5p 0660 system audio
+/dev/snd/pcmC0D5c 0660 system audio
+/dev/snd/pcmC0D44p 0660 system audio
 
 # Silead fingerprint sensor
-/dev/silead_fp_dev        0664    system    system
+/dev/silead_fp_dev        0660    system    system
 
 # NXP Amp
-/dev/i2c-6                0667    system    audio
+/dev/i2c-6                0660    system    audio
