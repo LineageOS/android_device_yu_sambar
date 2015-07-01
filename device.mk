@@ -66,10 +66,13 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio_amplifier.msm8994 \
     libtfa9887 \
-    tfa9887.cnt \
     libqcompostprocbundle \
     libqcomvisualizer \
     tinymix
+
+# Audio amp configuration
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/tfa9887.cnt:system/etc/tfa9887.cnt
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
