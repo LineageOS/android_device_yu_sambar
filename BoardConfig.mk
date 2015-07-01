@@ -99,6 +99,9 @@ BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_USE_VENDOR_CAMERA_EXT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
+# CM Hardware
+BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/cmhw
+
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
 
@@ -182,6 +185,7 @@ BOARD_SEPOLICY_UNION += \
     silead.te \
     surfaceflinger.te \
     system_app.te \
+    system_server.te \
     file_contexts \
     property_contexts
 
