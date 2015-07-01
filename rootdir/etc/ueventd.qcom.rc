@@ -235,3 +235,6 @@
 
 # NXP Amp
 /dev/i2c-6                0660    system    audio
+
+# Touchscreen
+/sys/devices/soc.0/f9924000.i2c/i2c-2/2-004a gesture_list 0660 system system
