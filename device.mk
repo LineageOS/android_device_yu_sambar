@@ -162,9 +162,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
-# Keyhandler
+# Keyhandler/Gestures
 PRODUCT_PACKAGES += \
-    com.cyanogenmod.keyhandler
+    com.cyanogenmod.keyhandler \
+    ConfigPanel
 
 PRODUCT_SYSTEM_SERVER_JARS += com.cyanogenmod.keyhandler
 
