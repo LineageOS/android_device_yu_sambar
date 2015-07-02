@@ -344,6 +344,8 @@ on boot
     write /sys/bus/i2c/devices/2-004a/update_cfg "A4_15_2.2_AA.raw"
     write /sys/bus/i2c/devices/2-004a/plugin "pl enable 4"
     write /sys/bus/i2c/devices/2-004a/en_gesture 1
+    # Enable double-tap by default
+    write /sys/bus/i2c/devices/2-004a/gesture_list "TAP 01;"
 
 on property:sys.boot_completed=1
     start qcom-post-boot
