@@ -164,7 +164,7 @@ PRODUCT_COPY_FILES += \
 
 # Keyhandler
 PRODUCT_PACKAGES += \
-    org.cyanogenmod.keyhandler
+    com.cyanogenmod.keyhandler
 
 PRODUCT_SYSTEM_SERVER_JARS += com.cyanogenmod.keyhandler
 
