@@ -71,6 +71,7 @@ namespace qcamera {
 #define MAX_RAW_STREAMS        1
 #define MAX_STALLING_STREAMS   1
 #define MAX_PROCESSED_STREAMS  3
+#define REGIONS_TUPLE_COUNT    5
 
 #define METADATA_MAP_SIZE(MAP) (sizeof(MAP)/sizeof(MAP[0]))
 
@@ -383,6 +384,9 @@ QCamera3HardwareInterface::~QCamera3HardwareInterface()
         mAnalysisChannel->stop();
     }
 
+    /* Turn off video hint */
+    updatePowerHint(m_bIsVideo, false);
+
     for (List<stream_info_t *>::iterator it = mStreamInfo.begin();
         it != mStreamInfo.end(); it++) {
         QCamera3Channel *channel = (*it)->channel;
@@ -519,16 +523,6 @@ int QCamera3HardwareInterface::openCamera(struct hw_device_t **hw_device)
     } else
         *hw_device = NULL;
 
-#ifdef HAS_MULTIMEDIA_HINTS
-    if (rc == 0) {
-        if (m_pPowerModule) {
-            if (m_pPowerModule->powerHint) {
-                m_pPowerModule->powerHint(m_pPowerModule, POWER_HINT_VIDEO_ENCODE,
-                        (void *)"state=1");
-            }
-        }
-    }
-#endif
     return rc;
 }
 
@@ -591,17 +585,6 @@ int QCamera3HardwareInterface::closeCamera()
     rc = mCameraHandle->ops->close_camera(mCameraHandle->camera_handle);
     mCameraHandle = NULL;
     mCameraOpened = false;
-
-#ifdef HAS_MULTIMEDIA_HINTS
-    if (rc == NO_ERROR) {
-        if (m_pPowerModule) {
-            if (m_pPowerModule->powerHint) {
-                m_pPowerModule->powerHint(m_pPowerModule, POWER_HINT_VIDEO_ENCODE,
-                        (void *)"state=0");
-            }
-        }
-    }
-#endif
 
     return rc;
 }
@@ -843,6 +826,35 @@ int32_t QCamera3HardwareInterface::getSensorOutputSize(cam_dimension_t &sensor_d
     return rc;
 }
 
+/*==============================================================================
+ * FUNCTION   : updatePowerHint
+ *
+ * DESCRIPTION: update power hint based on whether it's video mode or not.
+ *
+ * PARAMETERS :
+ *   @bWasVideo : whether video mode before the switch
+ *   @bIsVideo  : whether new mode is video or not.
+ *
+ * RETURN     : NULL
+ *
+ *==========================================================================*/
+void QCamera3HardwareInterface::updatePowerHint(bool bWasVideo, bool bIsVideo)
+{
+#ifdef HAS_MULTIMEDIA_HINTS
+    if (bWasVideo == bIsVideo)
+        return;
+
+    if (m_pPowerModule && m_pPowerModule->powerHint) {
+        if (bIsVideo)
+            m_pPowerModule->powerHint(m_pPowerModule,
+                    POWER_HINT_VIDEO_ENCODE, (void *)"state=1");
+        else
+            m_pPowerModule->powerHint(m_pPowerModule,
+                    POWER_HINT_VIDEO_ENCODE, (void *)"state=0");
+     }
+#endif
+}
+
 /*===========================================================================
  * FUNCTION   : configureStreams
  *
@@ -860,6 +872,7 @@ int QCamera3HardwareInterface::configureStreams(
 {
     ATRACE_CALL();
     int rc = 0;
+    bool bWasVideo = m_bIsVideo;
 
     // Sanity check stream_list
     if (streamList == NULL) {
@@ -1453,6 +1466,9 @@ int QCamera3HardwareInterface::configureStreams(
     mFirstRequest = true;
     //Get min frame duration for this streams configuration
     deriveMinFrameDuration();
+
+    /* Turn on video hint only if video stream is configured */
+    updatePowerHint(bWasVideo, m_bIsVideo);
 
     pthread_mutex_unlock(&mMutex);
     return rc;
@@ -3617,9 +3633,10 @@ QCamera3HardwareInterface::translateFromHalMetadata(
     }
 
     IF_META_AVAILABLE(cam_area_t, hAeRegions, CAM_INTF_META_AEC_ROI, metadata) {
-        int32_t aeRegions[MAX_ROI];
+        int32_t aeRegions[REGIONS_TUPLE_COUNT];
         convertToRegions(hAeRegions->rect, aeRegions, hAeRegions->weight);
-        camMetadata.update(ANDROID_CONTROL_AE_REGIONS, aeRegions, MAX_ROI);
+        camMetadata.update(ANDROID_CONTROL_AE_REGIONS, aeRegions,
+                REGIONS_TUPLE_COUNT);
         CDBG("%s: Metadata : ANDROID_CONTROL_AE_REGIONS: FWK: [%d,%d,%d,%d] HAL: [%d,%d,%d,%d]",
                 __func__, aeRegions[0], aeRegions[1], aeRegions[2], aeRegions[3],
                 hAeRegions->rect.left, hAeRegions->rect.top, hAeRegions->rect.width,
@@ -3628,9 +3645,10 @@ QCamera3HardwareInterface::translateFromHalMetadata(
 
     IF_META_AVAILABLE(cam_area_t, hAfRegions, CAM_INTF_META_AF_ROI, metadata) {
         /*af regions*/
-        int32_t afRegions[MAX_ROI];
+        int32_t afRegions[REGIONS_TUPLE_COUNT];
         convertToRegions(hAfRegions->rect, afRegions, hAfRegions->weight);
-        camMetadata.update(ANDROID_CONTROL_AF_REGIONS, afRegions, MAX_ROI);
+        camMetadata.update(ANDROID_CONTROL_AF_REGIONS, afRegions,
+                REGIONS_TUPLE_COUNT);
         CDBG("%s: Metadata : ANDROID_CONTROL_AF_REGIONS: FWK: [%d,%d,%d,%d] HAL: [%d,%d,%d,%d]",
                 __func__, afRegions[0], afRegions[1], afRegions[2], afRegions[3],
                 hAfRegions->rect.left, hAfRegions->rect.top, hAfRegions->rect.width,
