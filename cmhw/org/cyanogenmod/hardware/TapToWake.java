@@ -37,7 +37,11 @@ public class TapToWake {
             return null;
         }
         Matcher matcher = PATTERN.matcher(currentVal);
-        return matcher.group(1);
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return null;
+        }
     }
 
     public static boolean isSupported() {
