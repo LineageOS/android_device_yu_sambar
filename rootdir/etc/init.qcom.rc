@@ -192,6 +192,8 @@ on post-fs-data
     chown system system /data/silead/tmp/stub.txt
     start fpsvcd
 
+    mkdir /data/misc/dts 0770 media audio
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
