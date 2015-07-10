@@ -349,6 +349,9 @@ on boot
     # Enable double-tap by default
     write /sys/bus/i2c/devices/2-004a/gesture_list "TAP 01;"
 
+    chown system system /sys/devices/virtual/graphics/fb0/rgb
+    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
+
 on property:sys.boot_completed=1
     start qcom-post-boot
     start perfd
