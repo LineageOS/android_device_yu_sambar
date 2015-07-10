@@ -35,6 +35,9 @@ ro.bluetooth.wipower=true
 # Camera
 persist.camera.hal.debug.mask=268435456
 
+# Dexopt
+ro.sys.fw.dex2oat_thread_count=4
+
 # Display
 debug.composition.type=c2d
 debug.sf.gpu_comp_tiling=1
