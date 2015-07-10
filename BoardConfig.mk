@@ -65,6 +65,11 @@ endif
 TARGET_KERNEL_CONFIG := cyanogenmod_sambar_defconfig
 TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8994
 
+# Enable DIAG on debug builds
+ifneq ($(TARGET_BUILD_VARIANT),user)
+TARGET_KERNEL_ADDITIONAL_CONFIG:= cyanogenmod_debug_config
+endif
+
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-uart"
 
