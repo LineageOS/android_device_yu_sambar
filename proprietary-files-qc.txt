@@ -173,7 +173,7 @@ vendor/lib/libois_lc898122_axa.so
 # DRM
 bin/qseecomd
 lib/libdrmdecrypt.so
-vendor/lib64/drm/libdrmwvmplugin.so
+vendor/lib/drm/libdrmwvmplugin.so
 vendor/lib64/libdrmfs.so
 vendor/lib64/libdrmtime.so
 vendor/lib64/libQSEEComAPI.so
