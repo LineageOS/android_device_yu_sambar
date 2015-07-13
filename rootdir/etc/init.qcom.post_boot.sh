@@ -27,6 +27,7 @@
 #
 
 # ensure at most one A57 is online when thermal hotplug is disabled
+echo 1 > /sys/devices/system/cpu/cpu4/online
 echo 0 > /sys/devices/system/cpu/cpu5/online
 echo 0 > /sys/devices/system/cpu/cpu6/online
 echo 0 > /sys/devices/system/cpu/cpu7/online
@@ -50,9 +51,21 @@ do
     bcl_soc_hotplug_mask=`cat $hotplug_soc_mask`
     echo 0 > $hotplug_soc_mask
 done
-for mode in /sys/devices/soc.0/qcom,bcl.*/mode
+for low_threshold_ua in /sys/devices/soc.0/qcom,bcl.*/low_threshold_ua
 do
-    echo -n enable > $mode
+    echo "50000" > $low_threshold_ua
+done
+for high_threshold_ua in /sys/devices/soc.0/qcom,bcl.*/high_threshold_ua
+do
+    echo "4200000" > $high_threshold_ua
+done
+for vph_low_thresh_uv in /sys/devices/soc.0/qcom,bcl.*/vph_low_thresh_uv
+do
+    echo "3300000" > $vph_low_thresh_uv
+done
+for vph_high_thresh_uv in /sys/devices/soc.0/qcom,bcl.*/vph_high_thresh_uv
+do
+    echo "4300000" > $vph_high_thresh_uv
 done
 # configure governor settings for little cluster
 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -88,10 +101,6 @@ echo 384000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
 # re-enable thermal and BCL hotplug
 echo 1 > /sys/module/msm_thermal/core_control/enabled
-for mode in /sys/devices/soc.0/qcom,bcl.*/mode
-do
-    echo -n disable > $mode
-done
 for hotplug_mask in /sys/devices/soc.0/qcom,bcl.*/hotplug_mask
 do
     echo $bcl_hotplug_mask > $hotplug_mask
