@@ -10,6 +10,7 @@ audio.offload.multiple.enabled=true
 audio.offload.pcm.16bit.enable=false
 audio.offload.pcm.24bit.enable=true
 use.voice.path.for.pcm.voip=true
+persist.audio.camcorder.stereo=true
 
 # Audio voice concurrency related flags
 voice.playback.conc.disabled=true
