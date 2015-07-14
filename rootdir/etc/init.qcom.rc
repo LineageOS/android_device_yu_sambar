@@ -354,7 +354,6 @@ on boot
 
 on property:sys.boot_completed=1
     start qcom-post-boot
-    start perfd
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
