@@ -19,6 +19,7 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 PRODUCT_NAME := cm_sambar
 BOARD_VENDOR := yu
+TARGET_VENDOR := yu
 PRODUCT_DEVICE := sambar
 
 PRODUCT_GMS_CLIENTID_BASE := android-micromax
