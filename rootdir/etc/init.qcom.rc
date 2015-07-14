@@ -182,14 +182,6 @@ on post-fs-data
     mkdir /data/diag_logs 0777 system system 5
     chmod 666 /dev/diag
 
-    mkdir /data/silead 0770 system system
-    mkdir /data/silead/tmp 0770 system system
-    mount tmpfs tmpfs /data/silead/tmp nosuid
-    write /data/silead/tmp/stub.txt ready
-    chmod 660 /data/silead/tmp/stub.txt
-    chown system system /data/silead/tmp/stub.txt
-    start fpsvcd
-
     mkdir /data/misc/dts 0770 media audio
 
     setprop vold.post_fs_data_done 1
@@ -644,11 +636,22 @@ service per_proxy /system/bin/pm-proxy
     group system net_raw
     disabled
 
+# Fingerprint service and associated oddities
 service fpsvcd /system/bin/fpsvcd
-    class main
+    class late_start
     user system
     group system
-    disabled
+
+on property:init.svc.fpsvcd=starting
+    mkdir /data/silead 0770 system system
+    mkdir /data/silead/tmp 0770 system system
+    mount tmpfs tmpfs /data/silead/tmp nosuid
+    write /data/silead/tmp/stub.txt ready
+    chmod 660 /data/silead/tmp/stub.txt
+    chown system system /data/silead/tmp/stub.txt
+
+on property:init.svc.fpsvcd=stopped
+    umount /data/silead/tmp
 
 on property:init.svc.per_mgr=running
     start per_proxy
