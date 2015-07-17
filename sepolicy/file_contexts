@@ -20,3 +20,4 @@
 
 /sys/devices/soc.0/f9924000.i2c/i2c-2/2-004a/gesture_list u:object_r:touchscreen_file:s0
 
+/dev/block/bootdevice/by-name/config            u:object_r:frp_block_device:s0
