@@ -74,8 +74,8 @@ int read_proximity_calibration(struct ps_cal* cal)
 	ret = sscanf(buffer, "%d %d %d %d",
 		&cal->high_thd,
 		&cal->low_thd,
-		&cal->cover,
-		&cal->result);
+		&cal->result,
+		&cal->cover);
 
 	if (ret != 4) {
 		printf("Unable to parse proximity calibration\n");
