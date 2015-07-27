@@ -16,15 +16,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Gesten-Einstellungen</string>
-  <string name="screen_gestures_panel_title">Gesten-Steuerung</string>
-  <string name="screen_gestures_panel_summary">Steuerung durch Gesten bei ausgeschaltetem Display</string>
+  <string name="app_name">Gebaar instellings</string>
+  <string name="screen_gestures_panel_title">Gebaar kortpaaie</string>
+  <string name="screen_gestures_panel_summary">Gebruik gebare terwyl die skerm af is</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>
-  <string name="touchscreen_camera_gesture_summary">Kreis zeichen, um die Kamera-App zu starten</string>
-  <string name="touchscreen_music_gesture_title">Musik</string>
-  <string name="touchscreen_flashlight_gesture_title">Taschenlampe</string>
-  <string name="touchscreen_flashlight_gesture_summary">\'V\' zeichen, um die Taschenlampe ein-/auszuschalten</string>
-  <string name="touchscreen_music_gesture_summary">Gesten verwenden, um die Musikwiedergabe zu steuern \n
-    • Nach links wischen für den vorherigen Titel\n
-    • Nach rechts wischen für den nächsten Titel</string>
+  <string name="touchscreen_camera_gesture_summary">Trek \'n sirkel om kamera te aktiveer</string>
+  <string name="touchscreen_music_gesture_title">Musiek</string>
+  <string name="touchscreen_flashlight_gesture_title">Flitslig</string>
+  <string name="touchscreen_flashlight_gesture_summary">Teken \'n \'V\' om flits aan/af te skakel</string>
+  <string name="touchscreen_music_gesture_summary">Gebruik gebare om musiek terugspelingto beheer\n
+    • Sleep links vir vorige snit\n
+    • Sleep regs vir volgende snit</string>
 </resources>

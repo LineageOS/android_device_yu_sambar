@@ -16,15 +16,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Gesten-Einstellungen</string>
-  <string name="screen_gestures_panel_title">Gesten-Steuerung</string>
-  <string name="screen_gestures_panel_summary">Steuerung durch Gesten bei ausgeschaltetem Display</string>
+  <string name="app_name">Bevegelsesinnstillinger</string>
+  <string name="screen_gestures_panel_title">Bevegelsessnarveier</string>
+  <string name="screen_gestures_panel_summary">Bruk bevegelser mens skjermen er av</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>
-  <string name="touchscreen_camera_gesture_summary">Kreis zeichen, um die Kamera-App zu starten</string>
-  <string name="touchscreen_music_gesture_title">Musik</string>
-  <string name="touchscreen_flashlight_gesture_title">Taschenlampe</string>
-  <string name="touchscreen_flashlight_gesture_summary">\'V\' zeichen, um die Taschenlampe ein-/auszuschalten</string>
-  <string name="touchscreen_music_gesture_summary">Gesten verwenden, um die Musikwiedergabe zu steuern \n
-    • Nach links wischen für den vorherigen Titel\n
-    • Nach rechts wischen für den nächsten Titel</string>
+  <string name="touchscreen_camera_gesture_summary">Tegn en sirkel for å aktivere kameraet</string>
+  <string name="touchscreen_music_gesture_title">Musikk</string>
+  <string name="touchscreen_flashlight_gesture_title">Lommelykt</string>
+  <string name="touchscreen_flashlight_gesture_summary">Tegn en \"V\" for å aktivere lommelykten</string>
+  <string name="touchscreen_music_gesture_summary">Bruk bevegelser til å styre musikkavspilling \n
+    • Sveip mot venstre for forrige lydspor\n
+    • Sveip mot høyre for neste lydspor</string>
 </resources>

@@ -24,4 +24,7 @@
   <string name="touchscreen_music_gesture_title">Musique</string>
   <string name="touchscreen_flashlight_gesture_title">Lampe de poche</string>
   <string name="touchscreen_flashlight_gesture_summary">Dessiner un « V » pour activer ou désactiver la lampe de poche</string>
+  <string name="touchscreen_music_gesture_summary">Utilisation de gestes pour contrôler la lecture de musique\n
+ • balayage gauche morceau précédent\n
+ • balayage droit morceau suivant</string>
 </resources>
