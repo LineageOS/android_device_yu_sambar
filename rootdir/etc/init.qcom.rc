@@ -355,9 +355,6 @@ on boot
     write /proc/sys/vm/dirty_ratio 5
     write /proc/sys/vm/dirty_background_ratio 1
 
-on property:sys.boot_completed=1
-    start qcom-post-boot
-
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
@@ -610,7 +607,6 @@ service perfd /system/bin/perfd
 service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     class late_start
     user root
-    disabled
     oneshot
 
 service thermal-engine /system/bin/thermal-engine
