@@ -176,8 +176,6 @@ on post-fs-data
 
     mkdir /data/audio/ 0770 media audio
 
-    setprop vold.post_fs_data_done 1
-
     #Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
 
@@ -193,6 +191,8 @@ on post-fs-data
     start fpsvcd
 
     mkdir /data/misc/dts 0770 media audio
+
+    setprop vold.post_fs_data_done 1
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -341,6 +341,7 @@ on boot
     chown system system /sys/mag/link/enable_device
     chown system system /sys/mag/link/pollrate_ms
     chown system system /sys/mag/link/full_scale
+    chown system system /sys/mag/link/position
 
     write /sys/bus/i2c/devices/2-004a/update_fw "A4_15_2.2_AA.fw"
     write /sys/bus/i2c/devices/2-004a/update_cfg "A4_15_2.2_AA.raw"
@@ -700,6 +701,13 @@ service pl_load_cal /system/bin/pl_sensor_cal
     class main
     user system
     group system
+    oneshot
+
+service cei_hwid_init /system/bin/sh /system/etc/init.qcom.hwid.sh
+    class late_start
+    user system
+    group system
+    seclabel u:r:cei_hwid:s0
     oneshot
 
 service energy-awareness /system/bin/energy-awareness

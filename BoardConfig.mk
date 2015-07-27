@@ -196,6 +196,7 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
     bluetooth_loader.te \
+    cei_hwid.te \
     file.te \
     healthd.te \
     qseecomd.te \
