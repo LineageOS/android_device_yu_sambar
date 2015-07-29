@@ -1249,15 +1249,16 @@ int QCamera2HardwareInterface::openCamera()
     m_max_pic_width = 0;
     m_max_pic_height = 0;
     size_t i;
+    int32_t rc = 0;
 
     if (mCameraHandle) {
         ALOGE("Failure: Camera already opened");
         return ALREADY_EXISTS;
     }
-    mCameraHandle = camera_open((uint8_t)mCameraId);
-    if (!mCameraHandle) {
-        ALOGE("camera_open failed.");
-        return UNKNOWN_ERROR;
+    rc = camera_open((uint8_t)mCameraId, &mCameraHandle);
+    if (rc) {
+        ALOGE("camera_open failed. rc = %d, mCameraHandle = %p", rc, mCameraHandle);
+        return rc;
     }
     if (NULL == gCamCaps[mCameraId])
         initCapabilities(mCameraId,mCameraHandle);
@@ -1279,7 +1280,7 @@ int QCamera2HardwareInterface::openCamera()
       }
     }
 
-    int32_t rc = m_postprocessor.init(jpegEvtHandle, this);
+    rc = m_postprocessor.init(jpegEvtHandle, this);
     if (rc != 0) {
         ALOGE("Init Postprocessor failed");
         mCameraHandle->ops->close_camera(mCameraHandle->camera_handle);
@@ -1476,6 +1477,22 @@ int QCamera2HardwareInterface::getCapabilities(uint32_t cameraId,
 }
 
 /*===========================================================================
+ * FUNCTION   : getCamHalCapabilities
+ *
+ * DESCRIPTION: get the HAL capabilities structure
+ *
+ * PARAMETERS :
+ *   @cameraId  : camera Id
+ *
+ * RETURN     : capability structure of respective camera
+ *
+ *==========================================================================*/
+cam_capability_t* QCamera2HardwareInterface::getCamHalCapabilities()
+{
+    return gCamCaps[mCameraId];
+}
+
+/*===========================================================================
  * FUNCTION   : getBufNumRequired
  *
  * DESCRIPTION: return number of stream buffers needed for given stream type
@@ -1614,15 +1631,19 @@ uint8_t QCamera2HardwareInterface::getBufNumRequired(cam_stream_type_t stream_ty
             }
 
             bufferCnt += mParameters.getNumOfExtraBuffersForVideo();
-            //if its 4K encoding usecase, then add extra buffer
+            //if its 4K encoding usecase and power save feature enabled, then add extra buffer
             cam_dimension_t dim;
             mParameters.getStreamDimension(CAM_STREAM_TYPE_VIDEO, dim);
             if (is4k2kResolution(&dim)) {
-                 //get additional buffer count
-                 property_get("vidc.enc.dcvs.extra-buff-count", value, "0");
-                 bufferCnt += atoi(value);
+                 property_get("vidc.debug.perf.mode", value, "0");
+                 bool isPwrSavEnabled = (atoi(value) == 2);
+                 if (isPwrSavEnabled) {
+                     //get additional buffer count
+                     property_get("vidc.enc.dcvs.extra-buff-count", value, "0");
+                     bufferCnt += atoi(value);
+                 }
             }
-            ALOGI("Buffer count is %d, width / height (%d/%d) ", bufferCnt, dim.width, dim.height);
+            ALOGI("Buffer count is %d width / height (%d/%d) ", bufferCnt, dim.width, dim.height);
         }
         break;
     case CAM_STREAM_TYPE_METADATA:
