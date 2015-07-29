@@ -64,7 +64,6 @@ ifneq ($(SAMBAR_32_BIT),true)
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_USES_UNCOMPRESSED_KERNEL := true
 endif
 TARGET_KERNEL_CONFIG := cyanogenmod_sambar_defconfig
 TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8994
