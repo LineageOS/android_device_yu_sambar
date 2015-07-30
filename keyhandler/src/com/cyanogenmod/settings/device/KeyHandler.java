@@ -50,7 +50,7 @@ public class KeyHandler implements DeviceKeyHandler {
     // Supported scancodes
     private static final int FLIP_CAMERA_SCANCODE = 249;
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
-    private static final int GESTURE_SWIPE_DOWN_SCANCODE = 251;
+    private static final int GESTURE_SWIPE_DOWN_SCANCODE = 199;
     private static final int GESTURE_V_SCANCODE = 252;
     private static final int GESTURE_LTR_SCANCODE = 253;
     private static final int GESTURE_GTR_SCANCODE = 254;

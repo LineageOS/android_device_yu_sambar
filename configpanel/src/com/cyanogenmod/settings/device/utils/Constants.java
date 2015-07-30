@@ -77,8 +77,7 @@ public class Constants {
         sGestureMap.put(TOUCHSCREEN_MUSIC_GESTURE_KEY,
             new GestureCategory(Arrays.asList(
                 new GestureSysfs("LEFT", "01", "0a"),
-                //TODO: Add support for swipe down in kernel
-                /*new GestureSysfs("DOWN", "01", "0a"),*/
+                new GestureSysfs("DOWN", "01", "0a"),
                 new GestureSysfs("RIGHT", "01", "0a")), true));
         sGestureMap.put(TOUCHSCREEN_FLASHLIGHT_GESTURE_KEY,
             new GestureCategory(Arrays.asList(new GestureSysfs("v", "09", "0a")), true));
