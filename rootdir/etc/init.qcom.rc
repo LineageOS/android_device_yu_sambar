@@ -674,12 +674,6 @@ on property:init.svc.surfaceflinger=stopped
 on property:init.svc.surfaceflinger=running
     start ppd
 
-service setup_fs /system/bin/setup_fs /dev/block/platform/7824900.sdhci/by-name/userdata
-    class core
-    user root
-    group root
-    oneshot
-
 service pl_load_cal /system/bin/pl_sensor_cal
     class main
     user system
