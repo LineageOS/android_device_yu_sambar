@@ -169,6 +169,7 @@ vendor/lib/libmmcamera_onsemi_cas24c64_eeprom.so
 vendor/lib/libmmcamera_ov8865.so
 vendor/lib/libmmcamera_ov8865_eeprom.so
 vendor/lib/libois_lc898122_axa.so
+vendor/lib/libSonyIMX230PdafLibrary.so
 
 # DRM
 bin/qseecomd
