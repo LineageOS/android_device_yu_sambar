@@ -26,13 +26,12 @@ import java.util.Map;
 
 import com.cyanogenmod.settings.device.utils.Constants;
 import com.cyanogenmod.settings.device.utils.Constants.GestureCategory;
-import com.cyanogenmod.settings.device.utils.FileUtils;
 
 public class Startup extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-            boolean gesturesEnabled = hasTouchscreenGestures();
+            boolean gesturesEnabled = Constants.hasTouchscreenGestures();
             enableComponent(context,
                 TouchscreenGestureSettings.class.getName(), gesturesEnabled);
             if (gesturesEnabled) {
@@ -45,10 +44,6 @@ public class Startup extends BroadcastReceiver {
                 }
             }
         }
-    }
-
-    private boolean hasTouchscreenGestures() {
-        return FileUtils.readOneLine(Constants.TOUCHSCREEN_GESTURE_LIST_NODE) != null;
     }
 
     private void enableComponent(Context context, String component, boolean enabled) {

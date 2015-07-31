@@ -238,6 +238,7 @@
 
 # Touchscreen
 /sys/devices/soc.0/f9924000.i2c/i2c-2/2-004a gesture_list 0660 system system
+/sys/devices/soc.0/f9924000.i2c/i2c-2/2-004a en_gesture 0660 system system
 
 # Factory reset protection
 /dev/block/bootdevice/by-name/config 0600 system system

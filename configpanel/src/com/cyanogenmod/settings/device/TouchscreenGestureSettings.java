@@ -26,15 +26,12 @@ import android.view.MenuItem;
 
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.android.internal.util.cm.ScreenType;
 
 import com.cyanogenmod.settings.device.utils.Constants;
 import com.cyanogenmod.settings.device.utils.Constants.GestureCategory;
 import com.cyanogenmod.settings.device.utils.Constants.GestureSysfs;
-import com.cyanogenmod.settings.device.utils.FileUtils;
 
 public class TouchscreenGestureSettings extends PreferenceActivity
         implements OnPreferenceChangeListener {
@@ -75,38 +72,27 @@ public class TouchscreenGestureSettings extends PreferenceActivity
             SwitchPreference b = (SwitchPreference) findPreference(entry.getKey());
             if (b == null) continue;
             b.setOnPreferenceChangeListener(this);
-            String currentValue = FileUtils.readOneLine(Constants.TOUCHSCREEN_GESTURE_LIST_NODE);
-            if (currentValue != null) {
-                GestureCategory category = entry.getValue();
-                List<GestureSysfs> gestures = category.gestures;
-                boolean[] isEnabled = new boolean[gestures.size()];
+            GestureCategory category = entry.getValue();
+            List<GestureSysfs> gestures = category.gestures;
+            boolean[] isEnabled = new boolean[gestures.size()];
 
-                // Get the state of each gesture within the category
-                for (int i = 0; i < gestures.size(); i++) {
-                    GestureSysfs gesture = gestures.get(i);
-                    Pattern keyValuePattern = Pattern.compile(gesture.getEnableRegex());
-                    Matcher keyValueMatcher = keyValuePattern.matcher(currentValue);
-                    if (keyValueMatcher.find()) {
-                        isEnabled[i] = keyValueMatcher.group(1).equals(gesture.valueOn);
-                    } else {
-                        isEnabled[i] = false;
-                    }
-                }
-
-                //Ensure they all match.  If one doesn't, disable all.
-                boolean first = isEnabled[0];
-                for(int i = 1; i < isEnabled.length; i++) {
-                    if (isEnabled[i] != first) {
-                        setCategoryEnable(category, false);
-                        b.setChecked(false);
-                        return;
-                    }
-                }
-
-                b.setChecked(first);
-            } else {
-                b.setChecked(false);
+            // Get the state of each gesture within the category
+            for (int i = 0; i < gestures.size(); i++) {
+                GestureSysfs gesture = gestures.get(i);
+                isEnabled[i] = gesture.isEnabled();
             }
+
+            //Ensure they all match.  If one doesn't, disable all.
+            boolean first = isEnabled[0];
+            for(int i = 1; i < isEnabled.length; i++) {
+                if (isEnabled[i] != first) {
+                    setCategoryEnable(category, false);
+                    b.setChecked(false);
+                    return;
+                }
+            }
+
+            b.setChecked(first);
         }
     }
 
@@ -121,8 +107,7 @@ public class TouchscreenGestureSettings extends PreferenceActivity
 
     public static void setCategoryEnable(GestureCategory category, boolean enable) {
         for (GestureSysfs sysfs : category.gestures) {
-            FileUtils.writeLine(Constants.TOUCHSCREEN_GESTURE_LIST_NODE,
-                    sysfs.getEnableString(enable));
+            sysfs.setEnabled(enable);
         }
     }
 }
