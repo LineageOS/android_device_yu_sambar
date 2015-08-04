@@ -358,6 +358,4 @@
          The default is false. -->
     <bool name="config_lidControlsSleep">true</bool>
 
-    <bool name="config_ledCanPulse">false</bool>
-
 </resources>
