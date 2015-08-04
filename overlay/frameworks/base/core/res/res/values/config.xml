@@ -352,8 +352,6 @@
     <string name="config_perf_profile_prop">powerhal</string>
     <string name="config_perf_profile_default_entry">1</string>
 
-    <!-- Disable colorfade (use backlight fade instead) as it looks janky currently -->
-    <bool name="config_animateScreenLights">true</bool>
 
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.
