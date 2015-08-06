@@ -399,6 +399,13 @@ on boot
     write /proc/sys/vm/dirty_ratio 5
     write /proc/sys/vm/dirty_background_ratio 1
 
+    mkdir /data/silead 0770 system system
+    mkdir /persist/silead 0770 system system
+    mount tmpfs tmpfs /persist/silead nosuid
+    write /persist/silead/stub.txt ready
+    chmod 660 /persist/silead/stub.txt
+    chown system system /persist/silead/stub.txt
+
 # Do the happy dance while booting :)
 on post-fs-data
     write /sys/class/leds/blue/brightness 255
@@ -698,20 +705,9 @@ service per_proxy /system/bin/pm-proxy
 
 # Fingerprint service and associated oddities
 service fpsvcd /system/bin/fpsvcd
-    class late_start
+    class main
     user system
     group system
-
-on property:init.svc.fpsvcd=starting
-    mkdir /data/silead 0770 system system
-    mkdir /data/silead/tmp 0770 system system
-    mount tmpfs tmpfs /data/silead/tmp nosuid
-    write /data/silead/tmp/stub.txt ready
-    chmod 660 /data/silead/tmp/stub.txt
-    chown system system /data/silead/tmp/stub.txt
-
-on property:init.svc.fpsvcd=stopped
-    umount /data/silead/tmp
 
 on property:init.svc.per_mgr=running
     start per_proxy
