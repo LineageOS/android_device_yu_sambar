@@ -96,7 +96,7 @@ public class TapToWake {
             enableGestures();
         }
         // Writing is implemented in the driver as read/modify/write
-        result = FileUtils.writeLine(CONTROL_PATH, GESTURE + " " + (state ? ON_BITMASK : OFF_BITMASK));
+        result = FileUtils.writeLine(CONTROL_PATH, GESTURE + " " + (state ? ON_BITMASK : OFF_BITMASK) + ";");
         if (!state) {
             disableGesturesIfAllOff();
         }
