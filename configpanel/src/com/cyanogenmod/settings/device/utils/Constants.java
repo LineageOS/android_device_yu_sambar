@@ -56,7 +56,7 @@ public class Constants {
         }
 
         private String getEnableString(boolean enable) {
-            return sysfsKey + " " + (enable ? ON_BITMASK : OFF_BITMASK);
+            return sysfsKey + " " + (enable ? ON_BITMASK : OFF_BITMASK) + ";";
         }
 
         private String getEnableRegex() {
