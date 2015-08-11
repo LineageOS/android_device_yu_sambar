@@ -21,6 +21,10 @@ import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.hardware.TorchManager;
 import android.media.session.MediaSessionLegacyHelper;
 import android.os.Handler;
@@ -72,13 +76,20 @@ public class KeyHandler implements DeviceKeyHandler {
     private final PowerManager mPowerManager;
     private KeyguardManager mKeyguardManager;
     private EventHandler mEventHandler;
+    private SensorManager mSensorManager;
     private TorchManager mTorchManager;
+    private Sensor mProximitySensor;
+    WakeLock mProximityWakeLock;
     WakeLock mGestureWakeLock;
 
     public KeyHandler(Context context) {
         mContext = context;
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mEventHandler = new EventHandler();
+        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        mProximityWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                "ProximityWakeLock");
         mGestureWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "GestureWakeLock");
     }
@@ -149,11 +160,45 @@ public class KeyHandler implements DeviceKeyHandler {
                 mPowerManager.wakeUpWithProximityCheck(SystemClock.uptimeMillis());
                 return true;
             }
-            Message msg = mEventHandler.obtainMessage(GESTURE_REQUEST);
-            msg.obj = event;
-            mEventHandler.sendMessage(msg);
+            Message msg = getMessageForKeyEvent(event);
+            if (mProximitySensor != null) {
+                mEventHandler.sendMessageDelayed(msg, 200);
+                processEvent(event);
+            } else {
+                mEventHandler.sendMessage(msg);
+            }
         }
         return isKeySupported;
+    }
+
+    private Message getMessageForKeyEvent(KeyEvent keyEvent) {
+        Message msg = mEventHandler.obtainMessage(GESTURE_REQUEST);
+        msg.obj = keyEvent;
+        return msg;
+    }
+
+    private void processEvent(final KeyEvent keyEvent) {
+        mProximityWakeLock.acquire();
+        mSensorManager.registerListener(new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                mProximityWakeLock.release();
+                mSensorManager.unregisterListener(this);
+                if (!mEventHandler.hasMessages(GESTURE_REQUEST)) {
+                    // The sensor took to long, ignoring.
+                    return;
+                }
+                mEventHandler.removeMessages(GESTURE_REQUEST);
+                if (event.values[0] == mProximitySensor.getMaximumRange()) {
+                    Message msg = getMessageForKeyEvent(keyEvent);
+                    mEventHandler.sendMessage(msg);
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+        }, mProximitySensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     private void dispatchMediaKeyWithWakeLockToMediaSession(int keycode) {
