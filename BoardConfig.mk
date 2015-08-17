@@ -103,6 +103,7 @@ BOARD_HAS_QCA_BT_ROME := true
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_BTNV := true
+QCOM_BT_USE_SMD_TTY := true
 WCNSS_FILTER_USES_SIBS := true
 
 # Camera
@@ -235,6 +236,10 @@ WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+CONFIG_EAP_PROXY := qmi
+CONFIG_EAP_PROXY_DUAL_SIM := true
+CONFIG_EAP_PROXY_AKA_PRIME := true
+CONFIG_EAP_PROXY_MSM8994_TARGET := true
 
 # Use the non-open-source parts, if they're present
 -include vendor/yu/sambar/BoardConfigVendor.mk
