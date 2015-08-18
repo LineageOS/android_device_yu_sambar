@@ -1491,7 +1491,7 @@
 
     <path name="sidetone-headphones">
         <path name="sidetone-iir" />
-        <ctl name="IIR1 INP1 Volume" value="70" />
+        <ctl name="IIR1 INP1 Volume" value="50" />
         <ctl name="RX1 MIX2 INP1" value="IIR1" />
         <ctl name="RX2 MIX2 INP1" value="IIR1" />
     </path>
