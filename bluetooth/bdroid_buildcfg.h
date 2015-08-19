@@ -22,8 +22,8 @@
 #define BTA_SKIP_BLE_READ_REMOTE_FEAT FALSE
 #define MAX_ACL_CONNECTIONS    7
 #define MAX_L2CAP_CHANNELS    16
-#define BLE_VND_INCLUDED   TRUE
 // skips conn update at conn completion
 #define BTA_BLE_SKIP_CONN_UPD  FALSE
+#define BLE_VND_INCLUDED   TRUE
 #define BLE_PERIPHERAL_ADV_NAME  FALSE
 #endif
