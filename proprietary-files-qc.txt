@@ -234,6 +234,7 @@ vendor/lib64/libCB.so
 vendor/lib64/libgsl.so
 vendor/lib64/libllvm-qcom.so
 vendor/lib64/libllvm-glnext.so
+-vendor/lib64/libmm-disp-apis.so
 vendor/lib64/libOpenCL.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/librs_adreno.so
@@ -253,6 +254,7 @@ vendor/lib/libCB.so
 vendor/lib/libgsl.so
 vendor/lib/libllvm-qcom.so
 vendor/lib/libllvm-glnext.so
+-vendor/lib/libmm-disp-apis.so
 vendor/lib/libOpenCL.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/librs_adreno.so

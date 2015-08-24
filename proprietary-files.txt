@@ -1,3 +1,7 @@
+# LiveDisplay
+vendor/lib/libjni_livedisplay_qdcm.so
+vendor/lib64/libjni_livedisplay_qdcm.so
+
 # NXP amp
 lib/libtfa9887.so
 lib64/libtfa9887.so
