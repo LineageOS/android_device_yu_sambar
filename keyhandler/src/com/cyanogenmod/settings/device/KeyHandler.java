@@ -178,7 +178,7 @@ public class KeyHandler implements DeviceKeyHandler {
         if (isKeySupported && !mEventHandler.hasMessages(GESTURE_REQUEST)) {
             Message msg = getMessageForKeyEvent(event);
             boolean proximityWakeCheckEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.PROXIMITY_ON_WAKE, 0) == 1;
+                    Settings.System.PROXIMITY_ON_WAKE, 1) == 1;
             if (mProximityWakeSupported && proximityWakeCheckEnabled && mProximitySensor != null) {
                 mEventHandler.sendMessageDelayed(msg, mProximityTimeOut);
                 processEvent(event);
