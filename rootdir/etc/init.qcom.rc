@@ -404,6 +404,26 @@ on boot
     chmod 660 /persist/silead/stub.txt
     chown system system /persist/silead/stub.txt
 
+    chown system system /persist/cid
+    chown system system /persist/sn
+    chown system system /persist/msn
+    chown system system /persist/P_sensor_data.bin
+    chown system system /persist/L_sensor_data.bin
+    chown root root /persist/wlan_mac.bin
+    chown system system /persist/accel_cali.conf
+    chown system system /persist/gyro_cali.conf
+    chown bluetooth bluetooth /persist/.bt_nv.bin
+
+    chmod 644 /persist/cid
+    chmod 644 /persist/sn
+    chmod 644 /persist/msn
+    chmod 644 /persist/P_sensor_data.bin
+    chmod 644 /persist/L_sensor_data.bin
+    chmod 644 /persist/wlan_mac.bin
+    chmod 644 /persist/accel_cali.conf
+    chmod 644 /persist/gyro_cali.conf
+    chmod 644 /persist/.bt_nv.bin
+
 # Do the happy dance while booting :)
 on post-fs-data
     write /sys/class/leds/green/blink 0
