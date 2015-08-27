@@ -1884,10 +1884,6 @@
     </path>
 
     <path name="camcorder-mic">
-        <path name="handset-mic" />
-    </path>
-
-    <path name="camcorder-stereo-dmic">
         <ctl name="AIF1_CAP Mixer SLIM TX7" value="1" />
         <ctl name="AIF1_CAP Mixer SLIM TX8" value="1" />
         <ctl name="SLIM TX7 MUX" value="DEC4" />
