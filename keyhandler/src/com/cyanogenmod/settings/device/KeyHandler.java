@@ -40,6 +40,7 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
@@ -175,6 +176,13 @@ public class KeyHandler implements DeviceKeyHandler {
                 mPowerManager.wakeUpWithProximityCheck(SystemClock.uptimeMillis());
                 return true;
             }
+
+            TelephonyManager tm = (TelephonyManager)mContext.getSystemService(
+                    Context.TELEPHONY_SERVICE);
+            if (tm.getCallState() != TelephonyManager.CALL_STATE_IDLE) {
+                return true;
+            }
+
             Message msg = getMessageForKeyEvent(event);
             ContentResolver resolver = mContext.getContentResolver();
             boolean defaultProximity = mContext.getResources().getBoolean(
