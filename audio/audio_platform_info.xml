@@ -38,5 +38,8 @@
     <bit_width_configs>
         <device name="SND_DEVICE_OUT_SPEAKER" bit_width="24"/>
     </bit_width_configs>
+    <device_names>
+        <device name="SND_DEVICE_IN_CAMCORDER_MIC" alias="camcorder-stereo-dmic" />
+    </device_names>
 </audio_platform_info>
 
