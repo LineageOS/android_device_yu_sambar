@@ -126,6 +126,9 @@ PRODUCT_PACKAGES += \\
 PRODUCT_PACKAGES += \\
     libwpa_qmi_eap_proxy
 
+PRODUCT_PACKAGES += \\
+    libmm-disp-apis
+
 \$(call inherit-product, vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk)
 EOF
 
