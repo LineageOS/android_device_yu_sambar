@@ -764,6 +764,7 @@ service pl_load_cal /system/bin/pl_sensor_cal
     class main
     user system
     group system
+    seclabel u:r:sensors:s0
     oneshot
 
 service energy-awareness /system/bin/energy-awareness
