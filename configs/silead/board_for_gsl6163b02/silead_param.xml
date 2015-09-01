@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device name="GSL6163B" dev_ver="6163b002">
+	<param>
+		<version>0x00010005</version>
+		<i0cFixedM>0x00000000</i0cFixedM>
+		<ib8FixedM>0x00000000</ib8FixedM>
+		<i0cMatchTuneDownM>0x00000000</i0cMatchTuneDownM>
+		<i0cMatchTuneUpM>0x00000000</i0cMatchTuneUpM>
+	</param>
+	<sizeinfo>
+		<width>10</width>
+		<height>10</height>
+		<up>1</up>
+		<down>1</down>
+		<left>1</left>
+		<right>1</right>
+	</sizeinfo>
+	<SysParam>
+		<fftMin>1</fftMin>
+		<covMin>1</covMin>
+		<bright>1</bright>
+		<dark>1</dark>
+		<mean>1</mean>
+		<var>1</var>
+	</SysParam>
+	<registers>
+		<normal_mode>
+			<register val="0x000000e4">0x00000001</register>
+			<register val="0x000000e8">0x00000003</register>
+			<register val="0xFF000000">0x00000011</register>
+			<register val="0xFF000004">0x00000304</register>
+			<register val="0xFF000010">0x00000601</register>
+			<register val="0xFF000014">0x00000030</register>
+			<register val="0xFF000020">0x00070701</register>
+			<register val="0xFF00002C">0x00000202</register>
+			<register val="0xFF000030">0x00000000</register>
+			<register val="0xFF000034">0x00000505</register>
+			<register val="0xFF000038">0x00000505</register>
+			<register val="0xFF00003C">0x00000404</register>
+			<register val="0xFF000040">0x00000000</register>
+			<register val="0xFF000044">0x00000406</register>
+			<register val="0xFF000048">0x00000003</register>
+			<register val="0xFF00004C">0x00015703</register>
+			<register val="0xFF000050">0x00030303</register>
+			<register val="0xFF000054">0x00000004</register>
+			<register val="0xFF000058">0x00000000</register>
+			<register val="0xFF00005C">0x00000810</register>
+			<register val="0xFF000060">0x00000100</register>
+			<register val="0xFF000064">0x00000100</register>
+			<register val="0xFF000068">0x00ff00f0</register>
+			<register val="0xFF00006c">0x00000311</register>
+			<register val="0xFF000070">0x23001444</register>
+			<register val="0xFF080200">0x80808080</register>
+			<register val="0xFF080204">0x80808080</register>
+			<register val="0xFF080208">0x80808080</register>
+			<register val="0xFF08020C">0x80808080</register>
+			<register val="0xFF080210">0x80808080</register>
+			<register val="0xFF080214">0x80808080</register>
+			<register val="0xFF080218">0x80808080</register>
+			<register val="0xFF08021C">0x80808080</register> 
+			<register val="0xFF080220">0x80808080</register>
+			<register val="0xFF080224">0x80808080</register>
+			<register val="0xFF080228">0x80808080</register>
+			<register val="0xFF08022C">0x80808080</register>
+			<register val="0xFF080230">0x80808080</register>
+			<register val="0xFF080234">0x80808080</register>
+			<register val="0xFF080238">0x80808080</register>
+			<register val="0xFF08023C">0x80808080</register>
+			<register val="0xFF080240">0x80808080</register>
+			<register val="0xff080280">0xfffffff8</register>
+			<register val="0xff080284">0xfffffff8</register>
+			<register val="0xff080288">0xfffffff8</register>
+			<register val="0xff08028C">0xfffffff8</register>
+			<register val="0xff080290">0xfffffff1</register>
+			<register val="0xff080294">0xfffffff1</register>
+			<register val="0xff080298">0xffffffe3</register> 
+			<register val="0xff08029C">0xffffffe3</register> 
+			<register val="0xff0802A0">0xffffffc7</register> 
+			<register val="0xff0802A4">0xffffffc7</register>
+			<register val="0xff0802A8">0xffffff8f</register>
+			<register val="0xff0802AC">0xffffff8f</register>
+			<register val="0xff0802B0">0xffffff1f</register>
+			<register val="0xff0802B4">0xffffff1f</register>
+			<register val="0xff0802B8">0xfffffe3f</register> 
+			<register val="0xff0802BC">0xfffffe3f</register>
+			<register val="0xff0802C0">0xfffffc7f</register> 
+			<register val="0xff0802C4">0xfffffc7f</register>
+			<register val="0xff0802C8">0xfffff8ff</register> 
+			<register val="0xff0802CC">0xfffff8ff</register>
+			<register val="0xff0802D0">0xfffff1ff</register> 
+			<register val="0xff0802D4">0xfffff1ff</register>
+			<register val="0xff0802D8">0xffffe3ff</register> 
+			<register val="0xff0802DC">0xffffe3ff</register>
+			<register val="0xff0802E0">0xffffe3ff</register> 
+			<register val="0xff0802E4">0xffffe3ff</register> 
+			<register val="0xff0802E8">0xffffe3ff</register> 
+			<register val="0xff0802EC">0xffffe3ff</register>
+			<register val="0xff0800b0">0x00270020</register>
+			<register val="0xff0800ac">0x001a005f</register>
+			<register val="0xff0800d0">0x0010005f</register>
+			<register val="0xff0800c8">0x003b0013</register>
+			<register val="0xff08000C">0x00030090</register>
+			<register val="0xff0800d4">0xffff0101</register>
+			<register val="0xff0800a8">0x0005018f</register>
+			<register val="0xff0800cc">0x00c70064</register>
+			<register val="0xff080110">0x08200804</register>
+			<register val="0xff080124">0x00000004</register>
+			<register val="0xff080128">0x00000004</register>
+			<register val="0xff08012c">0x00000000</register>
+			<register val="0xff080034">0x100fffff</register>
+			<register val="0xff080038">0x070003f0</register>
+			<register val="0xff080144">0x00000000</register>
+			<register val="0xff080114">0xfe010a04</register>
+			<register val="0xff080118">0x00000003</register>
+			<register val="0xff08011c">0x00001000</register>
+			<register val="0xff080120">0x10000000</register>
+			<register val="0xff0800ec">0x002831a0</register>
+			<register val="0xff080030">0x000f3113</register>
+			<register val="0xff080134">0x00020003</register>
+			<register val="0xff080024">0x2000ffff</register>
+			<register val="0xff080000">0x04226200</register>
+			<register val="0xff010004">0x00001800</register>
+			<register val="0x00000094">0x11040404</register>
+			<register val="0x00000090">0x0004804f</register>
+			<register val="0xff010008">0x00000039</register>
+		</normal_mode>
+		<interrupt_mode>
+			<register val="0x000000bf">0x00000000</register>
+			<register val="0xff0800d4">0xffff010a</register>
+			<register val="0xff080030">0x000f3111</register>
+			<register val="0x000000e8">0x00000013</register>
+			<register val="0x000000e4">0x00000005</register>
+			<register val="0xff08003c">0x10000000</register>
+		</interrupt_mode>
+        <stop_mode>
+		    <register val="0xFF080000">0x04220201</register>
+        </stop_mode>
+        <start_frm_mode>
+		    <register val="0xff080024">0x20380000</register>
+        </start_frm_mode>
+	</registers>
+    <op_registers>
+        <fine_tune_reg_dac>0xff08000c</fine_tune_reg_dac>
+        <fine_tune_reg_ag20>0xff000020</fine_tune_reg_ag20>
+        <fine_tune_reg_ag2c>0xff08002c</fine_tune_reg_ag2c>
+        <sleep_threshold_reg>0xff080034</sleep_threshold_reg>
+        <!--only in interrupt mode-->
+        <fine_tune_adc_regs_on>1</fine_tune_adc_regs_on>
+        <fine_tune_adc_regs>
+		    <register val="0xff08000c">0</register>
+        </fine_tune_adc_regs>
+		<chiptest_mode_regs_r>0xC0</chiptest_mode_regs_r>
+		<chiptest_mode_regs_w>0X80</chiptest_mode_regs_w>
+    </op_registers>
+</device>

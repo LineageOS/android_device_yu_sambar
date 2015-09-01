@@ -36,6 +36,13 @@ on early-init
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
     mkdir /bt_firmware 0771 system system
 
+    mkdir /mnt/silead 0770 system system
+    mkdir /mnt/silead/tmp 0770 system system
+    mount tmpfs tmpfs /mnt/silead/tmp nosuid
+    write /mnt/silead/tmp/stub.txt ready
+    chmod 660 /mnt/silead/tmp/stub.txt
+    chown system system /mnt/silead/tmp/stub.txt
+
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -398,11 +405,6 @@ on boot
     write /proc/sys/vm/dirty_background_ratio 1
 
     mkdir /data/silead 0770 system system
-    mkdir /persist/silead 0770 system system
-    mount tmpfs tmpfs /persist/silead nosuid
-    write /persist/silead/stub.txt ready
-    chmod 660 /persist/silead/stub.txt
-    chown system system /persist/silead/stub.txt
 
     chown system system /persist/cid
     chown system system /persist/sn

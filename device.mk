@@ -173,7 +173,8 @@ $(call add-product-dex-preopt-module-config,com.cyanogenmod.keyhandler,disable)
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl
+    $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl \
+    $(LOCAL_PATH)/keylayout/silead-vinput-keypad.kcm:system/usr/keychars/silead-vinput-keypad.kcm
 
 # Keystore
 PRODUCT_PACKAGES += \
@@ -287,9 +288,15 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qmi_config.xml:system/etc/data/qmi_config.xml
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/log_cfg.xml:system/etc/silead/log_cfg.xml \
-    $(LOCAL_PATH)/configs/silead_config.xml:system/etc/silead/silead_config.xml \
-    $(LOCAL_PATH)/configs/silead_param.xml:system/etc/silead/silead_param.xml
+    $(LOCAL_PATH)/configs/silead/log_cfg.xml:system/etc/silead/log_cfg.xml \
+    $(LOCAL_PATH)/configs/silead/board_for_gsl6163a/silead_config.xml:system/etc/silead/sysparms/board_for_gsl6163a/silead_config.xml \
+    $(LOCAL_PATH)/configs/silead/board_for_gsl6163a/silead_param.xml:system/etc/silead/sysparms/board_for_gsl6163a/silead_param.xml \
+    $(LOCAL_PATH)/configs/silead/board_for_gsl6163b00/silead_config.xml:system/etc/silead/sysparms/board_for_gsl6163b00/silead_config.xml \
+    $(LOCAL_PATH)/configs/silead/board_for_gsl6163b00/silead_param.xml:system/etc/silead/sysparms/board_for_gsl6163b00/silead_param.xml \
+    $(LOCAL_PATH)/configs/silead/board_for_gsl6163b01/silead_config.xml:system/etc/silead/sysparms/board_for_gsl6163b01/silead_config.xml \
+    $(LOCAL_PATH)/configs/silead/board_for_gsl6163b01/silead_param.xml:system/etc/silead/sysparms/board_for_gsl6163b01/silead_param.xml \
+    $(LOCAL_PATH)/configs/silead/board_for_gsl6163b02/silead_config.xml:system/etc/silead/sysparms/board_for_gsl6163b02/silead_config.xml \
+    $(LOCAL_PATH)/configs/silead/board_for_gsl6163b02/silead_param.xml:system/etc/silead/sysparms/board_for_gsl6163b02/silead_param.xml
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perf-profile1.conf:system/vendor/etc/perf-profile0.conf \

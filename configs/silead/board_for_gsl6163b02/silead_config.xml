@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device name="GSL6163B02" dev_ver="0x61">
+
+    <SysParam>
+	<finger_print_enable>1</finger_print_enable>
+	<SLFpApi>
+		<sysparm_on>1</sysparm_on>
+		<frame_h>107</frame_h>
+		<frame_w>123</frame_w>
+		<fpShreshold>40</fpShreshold>
+		<MultiProcs>0</MultiProcs>
+		<multi_user_enable>0</multi_user_enable>
+		<fpimgbad_timeout>2</fpimgbad_timeout>			
+		<fpimgbad_reporton>1</fpimgbad_reporton>
+		<fppresstoofast_reporton>1</fppresstoofast_reporton>
+	</SLFpApi>
+	<SLAlg>
+		<sysparm_on>1</sysparm_on>
+		<finger_detect_threshold>4</finger_detect_threshold>
+		<!--finger_detect_threshold>default 4 max 5 min 1</finger_detect_threshold-->
+		<finger_detect_frame>3</finger_detect_frame>
+		<!--finger_detect_frame>not used</finger_detect_frame-->
+		<finger_release_frame>2</finger_release_frame>
+		<!--finger_release_frame>not used</finger_release_frame-->
+		<iEffectiveLow>50</iEffectiveLow>
+		<iEffectiveHigh>200</iEffectiveHigh>
+		<iRecommendLow>90</iRecommendLow>
+		<iRecommendHigh>130</iRecommendHigh>
+		<iLowSectionNum>5</iLowSectionNum>
+		<iHighSectionNum>5</iHighSectionNum>
+		<iMaxStep>16</iMaxStep>
+		<iAddThreshold32>0x4000</iAddThreshold32>
+		<iAddThreshold16>0x1000</iAddThreshold16>
+		<sleep_16_for_pc>0</sleep_16_for_pc>
+		<iMaxEnrollNum>15</iMaxEnrollNum>
+		<iMaxTemplateNum>25</iMaxTemplateNum>
+	</SLAlg>		
+	<HardWare>
+		<sysparm_on>1</sysparm_on>
+		<int_mode>1</int_mode>
+		<wakeup>1</wakeup>
+		<wakeup_filtered>1</wakeup_filtered>
+		<!--for wakeup_filtered,  1==wakeup by checking fp no matter how fp_onoff set, 2==wakeup if by checking fp and if fp_onoff is on  -->
+		<wakeup_sticky>1</wakeup_sticky>
+		<wakeup_keeps_for_keepingpress_on>1</wakeup_keeps_for_keepingpress_on>
+		<spi>		        
+			<spiReset>1</spiReset>
+			<spiMode>0</spiMode>
+			<spiPages>1</spiPages>
+			<spiOffset>1</spiOffset>
+			<spiSpeed>9600000</spiSpeed>
+			<!--spiSpeed = 9MHz>9</log_lvl-->
+			<spiResetGpio>1</spiResetGpio>
+			<spiiotrllength>3</spiiotrllength>
+		</spi>
+		<frame_average>0</frame_average>
+		<!--frame_average = 1 start frame average solution -->
+        </HardWare>
+        <Test>
+		<sysparm_on>0</sysparm_on>
+		<stress>0</stress>
+        </Test>
+        <SLAsm>
+		<sysparm_on>0</sysparm_on>
+		<silead_dir>/data/silead</silead_dir>
+		<fpinfo_dir>/data/silead/fpinfo%d</fpinfo_dir>
+		<fptemplate_path>/data/silead/fpinfo%d/sileadinc_%d.bin</fptemplate_path>
+		<fpinfo_path>/data/silead/fpinfo%d/fpinfo.bin</fpinfo_path>
+        </SLAsm>
+		<SLUEvt>
+			<sysparm_on>0</sysparm_on>
+			<UEvtTimeOut>-1</UEvtTimeOut>
+		</SLUEvt>
+		<SLVKey>
+			<sysparm_on>1</sysparm_on>
+			<fpgestureSLIDESPANmin>-1</fpgestureSLIDESPANmin>
+			<fpgestureSLIDEVerdictTime>-1</fpgestureSLIDEVerdictTime>
+			<!--fpgestureSLIDESPANmin>45</fpgestureSLIDESPANmin-->
+			<!--fpgestureSLIDEVerdictTime>400</fpgestureSLIDEVerdictTime-->
+			<fpgestureTAP>
+				<vkeyCODE>172</vkeyCODE>
+				<vkeyTOUCH></vkeyTOUCH>
+				<vkeyTYPE></vkeyTYPE>
+			</fpgestureTAP>
+			<fpgestureSLIDEUP>
+				<vkeyCODE>103</vkeyCODE>
+				<vkeyTOUCH></vkeyTOUCH>
+				<vkeyTYPE></vkeyTYPE>
+				<vkeyANGLEmin>225</vkeyANGLEmin>
+				<vkeyANGLEmax>315</vkeyANGLEmax>
+			</fpgestureSLIDEUP>
+			<fpgestureSLIDEDN>
+				<vkeyCODE>108</vkeyCODE>
+				<vkeyTOUCH></vkeyTOUCH>
+				<vkeyTYPE></vkeyTYPE>
+				<vkeyANGLEmin>45</vkeyANGLEmin>
+				<vkeyANGLEmax>135</vkeyANGLEmax>
+			</fpgestureSLIDEDN>
+			<fpgestureSLIDELT>
+				<vkeyCODE>105</vkeyCODE>
+				<vkeyTOUCH></vkeyTOUCH>
+				<vkeyTYPE></vkeyTYPE>
+				<vkeyANGLEmin>135</vkeyANGLEmin>
+				<vkeyANGLEmax>225</vkeyANGLEmax>
+			</fpgestureSLIDELT>
+			<fpgestureSLIDERT>
+				<vkeyCODE>106</vkeyCODE>
+				<vkeyTOUCH></vkeyTOUCH>
+				<vkeyTYPE></vkeyTYPE>
+				<vkeyANGLEmin>315</vkeyANGLEmin>
+				<vkeyANGLEmax>45</vkeyANGLEmax>
+			</fpgestureSLIDERT>
+		</SLVKey>
+    </SysParam>
+   
+</device>
