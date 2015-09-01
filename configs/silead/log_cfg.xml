@@ -15,5 +15,4 @@
 <!--log_lvl str_dec="ERROR">6</log_lvl-->
 <!--log_lvl str_dec="FATAL">7</log_lvl-->
 <!--log_lvl str_dec="SILENT">8</log_lvl-->
-<!--log_lvl str_dec="SILENT">9</log_lvl-->
 </sl_log>

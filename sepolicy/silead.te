@@ -14,7 +14,10 @@ allow fpsvcd        silead_fp_device:chr_file rw_file_perms;
 allow fpsvcd        system_server:dir         r_dir_perms;
 allow fpsvcd        tmpfs:dir                 rw_dir_perms;
 allow fpsvcd        tmpfs:file                create_file_perms;
-allow fpsvcd        persist_file:dir          search;
+allow fpsvcd        self:netlink_kobject_uevent_socket create_socket_perms;
+allow fpsvcd        sysfs_wake_lock:file      rw_file_perms;
+# Access to /dev/uinput for virtual keys
+allow fpsvcd        uhid_device:chr_file      rw_file_perms;
 
 # Fingerprint Service (HAL)
 allow system_server data_silead_file:dir      create_dir_perms;
@@ -25,5 +28,4 @@ allow system_server fpsvcd_tmpfs:file         create_file_perms;
 allow system_server init_tmpfs:file           r_file_perms;
 allow system_server silead_fp_device:chr_file rw_file_perms;
 allow system_server tmpfs:dir                 rw_dir_perms;
-allow system_server persist_file:dir          search;
 
