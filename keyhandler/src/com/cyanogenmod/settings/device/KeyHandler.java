@@ -128,10 +128,6 @@ public class KeyHandler implements DeviceKeyHandler {
         public void handleMessage(Message msg) {
             KeyEvent event = (KeyEvent) msg.obj;
             switch (event.getScanCode()) {
-            case FLIP_CAMERA_SCANCODE:
-                if (event.getAction() == KeyEvent.ACTION_UP) {
-                    break;
-                }
             case GESTURE_CIRCLE_SCANCODE:
                 ensureKeyguardManager();
                 String action = null;
@@ -166,9 +162,10 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     public boolean handleKeyEvent(KeyEvent event) {
-        if (event.getAction() != KeyEvent.ACTION_UP
-                && event.getScanCode() != FLIP_CAMERA_SCANCODE) {
-            return false;
+        // Fingerprint goes here as well (FLIP_CAMERA_SCANCODE)
+        // Wake up and drop the event
+        if (event.getScanCode() == FLIP_CAMERA_SCANCODE) {
+            return true;
         }
         boolean isKeySupported = ArrayUtils.contains(sSupportedGestures, event.getScanCode());
         if (isKeySupported && !mEventHandler.hasMessages(GESTURE_REQUEST)) {
