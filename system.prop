@@ -34,6 +34,7 @@ ro.bluetooth.a4wp=true
 
 # Camera
 persist.camera.hal.debug.mask=268435456
+persist.camera.HAL3.enabled=0
 
 # Dexopt
 ro.sys.fw.dex2oat_thread_count=4
