@@ -116,7 +116,10 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
 # CM Hardware
-BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/cmhw
+BOARD_USES_CYANOGEN_HARDWARE := true
+BOARD_HARDWARE_CLASS += \
+    hardware/cyanogen \
+    $(DEVICE_PATH)/cmhw
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
@@ -157,6 +160,7 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
 # Lights
+BOARD_LIGHTS_VARIANT := qpnp
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Partitions
