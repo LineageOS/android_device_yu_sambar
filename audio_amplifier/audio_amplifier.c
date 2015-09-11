@@ -24,6 +24,7 @@
 #include <sys/types.h>
 
 #include <cutils/log.h>
+#include <cutils/str_parms.h>
 
 #include <hardware/audio_amplifier.h>
 #include <hardware/hardware.h>
@@ -49,6 +50,10 @@
 #define __user
 #include <sound/asound.h>
 
+#define DTS_PARAMETER_ENABLE "srs_cfg:trumedia_enable"
+#define AMP_EQ_HIGH_QUALITY 0
+#define AMP_EQ_FLAT 1
+
 typedef struct tfa9887_amplifier {
     amplifier_device_t amp;
     int mixer_fd;
@@ -62,6 +67,8 @@ typedef struct tfa9887_amplifier {
     int (*speaker_on)(int, int);
     int (*speaker_off)();
     int (*calibrate)();
+    bool on;
+    int mode;
 } tfa9887_amplifier_t;
 
 #define QUAT_MI2S_CLK_CTL "QUAT_MI2S Clock"
@@ -155,6 +162,28 @@ err_disable_quat:
     return NULL;
 }
 
+static int amp_set_parameters(struct amplifier_device *device,
+        struct str_parms *parms)
+{
+    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
+    int ret = 0, val = 0, err;
+    err = str_parms_get_int(parms, DTS_PARAMETER_ENABLE, &val);
+    if (err >= 0) {
+        pthread_mutex_lock(&tfa9887->mutex);
+        // With DTS on, we'll change to flat EQ and allow DTS to
+        // apply all of the processing.
+        tfa9887->mode = val ? AMP_EQ_FLAT : AMP_EQ_HIGH_QUALITY;
+        if (tfa9887->on) {
+            ALOGV("Setting mode to %d immediately", tfa9887->mode);
+            tfa9887->speaker_on(tfa9887->mode, 0);
+        } else {
+            ALOGV("Deferring mode change to %d", tfa9887->mode);
+        }
+        pthread_mutex_unlock(&tfa9887->mutex);
+    }
+    return 0;
+}
+
 static int amp_dev_close(hw_device_t *device)
 {
     tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
@@ -199,11 +228,15 @@ static void *amp_watch(void *param)
             if (ioctl(tfa9887->mixer_fd, SNDRV_CTL_IOCTL_ELEM_READ, &ev) < 0)
                 continue;
             ALOGI("Got %s event = %d!", QUAT_MI2S_CLK_CTL, ev.value.enumerated.item[0]);
+            pthread_mutex_lock(&tfa9887->mutex);
             if (ev.value.enumerated.item[0]) {
-                tfa9887->speaker_on(0, 0);
+                tfa9887->speaker_on(tfa9887->mode, 0);
+                tfa9887->on = true;
             } else {
                 tfa9887->speaker_off();
+                tfa9887->on = false;
             }
+            pthread_mutex_unlock(&tfa9887->mutex);
         }
     }
     return NULL;
@@ -297,6 +330,9 @@ static int amp_module_open(const hw_module_t *module, const char *name,
     tfa9887->amp.common.module = (hw_module_t *) module;
     tfa9887->amp.common.version = AMPLIFIER_DEVICE_API_VERSION_2_0;
     tfa9887->amp.common.close = amp_dev_close;
+    tfa9887->amp.set_parameters = amp_set_parameters;
+    tfa9887->on = false;
+    tfa9887->mode = AMP_EQ_FLAT;
 
     tfa9887->lib_ptr = dlopen("libtfa9887.so", RTLD_NOW);
     if (!tfa9887->lib_ptr) {

@@ -75,7 +75,8 @@ PRODUCT_PACKAGES += \
 
 # Audio amp configuration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/tfa9887.cnt:system/etc/tfa9887.cnt
+    $(LOCAL_PATH)/audio/tfa9887.cnt:system/etc/tfa9887.cnt \
+    $(LOCAL_PATH)/audio/tfa9887_Flat.cnt:system/etc/tfa9887_Flat.cnt
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
