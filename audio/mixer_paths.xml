@@ -398,13 +398,11 @@
     <path name="voice-call speaker">
         <ctl name="QUAT_MI2S_RX_Voice Mixer CSVoice" value="1" />
         <ctl name="Voice_Tx Mixer SLIM_0_TX_Voice" value="1" />
-        <ctl name="VOC_EXT_EC MUX" value="QUAT_MI2S_TX" />
     </path>
 
     <path name="voice2-call speaker">
         <ctl name="QUAT_MI2S_RX_Voice Mixer Voice2" value="1" />
         <ctl name="Voice2_Tx Mixer SLIM_0_TX_Voice2" value="1" />
-        <ctl name="VOC_EXT_EC MUX" value="QUAT_MI2S_TX" />
     </path>
 
     <path name="play-fm speaker">
