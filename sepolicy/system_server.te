@@ -5,3 +5,6 @@ allow system_server display_sysfs:file rw_file_perms;
 
 # time
 allow system_server time_daemon:unix_stream_socket connectto;
+
+# thermal-engine reporting
+allow system_server thermal-engine:unix_stream_socket connectto;
