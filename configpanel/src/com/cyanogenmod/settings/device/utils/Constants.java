@@ -141,7 +141,7 @@ public class Constants {
             new GestureCategory(Arrays.asList(
                 new GestureSysfs("LEFT"),
                 new GestureSysfs("DOWN"),
-                new GestureSysfs("RIGHT")), true));
+                new GestureSysfs("RIGHT")), false));
         sGestureMap.put(TOUCHSCREEN_FLASHLIGHT_GESTURE_KEY,
             new GestureCategory(Arrays.asList(new GestureSysfs("v")), true));
     }
