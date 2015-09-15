@@ -34,6 +34,7 @@
 			<sleep_16_for_pc>0</sleep_16_for_pc>
 			<iMaxEnrollNum>15</iMaxEnrollNum>
 			<iMaxTemplateNum>25</iMaxTemplateNum>
+			<iAutoLearning>2</iAutoLearning>
 		</SLAlg>		
 		<HardWare>
 			<sysparm_on>1</sysparm_on>

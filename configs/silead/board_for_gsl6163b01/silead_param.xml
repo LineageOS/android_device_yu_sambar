@@ -31,7 +31,7 @@
 			<register val="0xFF000004">0x00000304</register>
 			<register val="0xFF000010">0x00000601</register>
 			<register val="0xFF000014">0x00000030</register>
-			<register val="0xFF000020">0x00070701</register>
+			<register val="0xFF000020">0x00060601</register>
 			<register val="0xFF00002C">0x00000102</register>
 			<register val="0xFF000030">0x00000000</register>
 			<register val="0xFF000034">0x00000505</register>
@@ -136,7 +136,7 @@
 		    <register val="0xFF080000">0x04220201</register>
         </stop_mode>
         <start_frm_mode>
-		    <register val="0xff080024">0x20380000</register>
+		    <register val="0xff080024">0x20180000</register>
         </start_frm_mode>
 	</registers>
     <op_registers>
@@ -151,5 +151,6 @@
         </fine_tune_adc_regs>
 		<chiptest_mode_regs_r>0xC0</chiptest_mode_regs_r>
 		<chiptest_mode_regs_w>0X80</chiptest_mode_regs_w>
+		<check_int_mode_regs>0xff080030</check_int_mode_regs>
     </op_registers>
 </device>

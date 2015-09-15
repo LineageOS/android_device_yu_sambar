@@ -136,5 +136,6 @@
         </fine_tune_adc_regs>
 		<chiptest_mode_regs_r>0xC0</chiptest_mode_regs_r>
 		<chiptest_mode_regs_w>0X80</chiptest_mode_regs_w>
+		<check_int_mode_regs>0xff080030</check_int_mode_regs>
     </op_registers>
 </device>
