@@ -57,7 +57,7 @@ public class KeyHandler implements DeviceKeyHandler {
             "com.android.keyguard.action.DISMISS_KEYGUARD_SECURELY";
 
     // Supported scancodes
-    private static final int FLIP_CAMERA_SCANCODE = 249;
+    private static final int KEY_WAKEUP = 143;
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
     private static final int GESTURE_SWIPE_DOWN_SCANCODE = 199;
     private static final int GESTURE_V_SCANCODE = 252;
@@ -68,7 +68,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_WAKELOCK_DURATION = 3000;
 
     private static final int[] sSupportedGestures = new int[] {
-        FLIP_CAMERA_SCANCODE,
         GESTURE_CIRCLE_SCANCODE,
         GESTURE_SWIPE_DOWN_SCANCODE,
         GESTURE_V_SCANCODE,
@@ -162,9 +161,13 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     public boolean handleKeyEvent(KeyEvent event) {
-        // Fingerprint goes here as well (FLIP_CAMERA_SCANCODE)
-        // Wake up and drop the event
-        if (event.getScanCode() == FLIP_CAMERA_SCANCODE) {
+        // Fingerprint device sends KEY_WAKEUP, but the keylayout remaps
+        // that to KEYCODE_TV_INPUT_COMPONENT_1 so we can distinguish it
+        // from other sources of KEY_WAKEUP.  Ensure we only drop this
+        // case.
+        if (event.getScanCode() == KEY_WAKEUP &&
+            event.getKeyCode() == KeyEvent.KEYCODE_TV_INPUT_COMPONENT_1) {
+            Log.i(TAG, "dropping wakeup event");
             return true;
         }
         boolean isKeySupported = ArrayUtils.contains(sSupportedGestures, event.getScanCode());
