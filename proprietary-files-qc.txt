@@ -32,6 +32,7 @@ vendor/lib64/libbtnv.so
 # Camera
 bin/mm-qcamera-daemon
 vendor/lib/libjpegdhw.so
+vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libmmcamera2_c2d_module.so
