@@ -64,7 +64,7 @@ typedef struct tfa9887_amplifier {
     pthread_cond_t cond;
     pthread_t watch_thread;
     void *lib_ptr;
-    int (*speaker_on)(int, int);
+    int (*speaker_on)(int);
     int (*speaker_off)();
     int (*calibrate)();
     bool on;
@@ -175,7 +175,7 @@ static int amp_set_parameters(struct amplifier_device *device,
         tfa9887->mode = val ? AMP_EQ_FLAT : AMP_EQ_HIGH_QUALITY;
         if (tfa9887->on) {
             ALOGV("Setting mode to %d immediately", tfa9887->mode);
-            tfa9887->speaker_on(tfa9887->mode, 0);
+            tfa9887->speaker_on(tfa9887->mode);
         } else {
             ALOGV("Deferring mode change to %d", tfa9887->mode);
         }
@@ -230,7 +230,7 @@ static void *amp_watch(void *param)
             ALOGI("Got %s event = %d!", QUAT_MI2S_CLK_CTL, ev.value.enumerated.item[0]);
             pthread_mutex_lock(&tfa9887->mutex);
             if (ev.value.enumerated.item[0]) {
-                tfa9887->speaker_on(tfa9887->mode, 0);
+                tfa9887->speaker_on(tfa9887->mode);
                 tfa9887->on = true;
             } else {
                 tfa9887->speaker_off();
