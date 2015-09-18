@@ -91,7 +91,7 @@
     <string name="config_datause_iface">rmnet0</string>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">8</integer>
+    <integer name="config_screenBrightnessDim">5</integer>
 
     <!-- Minimum allowable screen brightness to use in a very dark room.
          This value sets the floor for the darkest possible auto-brightness
@@ -100,7 +100,7 @@
          some range of adjustment to dim the screen further than usual in very
          dark rooms. The contents of the screen must still be clearly visible
          in darkness (although they may not be visible in a bright room). -->
-    <integer name="config_screenBrightnessDark">5</integer>
+    <integer name="config_screenBrightnessDark">8</integer>
 
     <!-- Flag indicating whether we should enable the automatic brightness in Settings.
          config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
@@ -128,8 +128,10 @@
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
         <item>5</item>
-        <item>15</item>
+        <item>25</item>
+        <item>50</item>
         <item>100</item>
+        <item>200</item>
         <item>300</item>
         <item>500</item>
         <item>750</item>
@@ -144,14 +146,16 @@
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>15</item>
-        <item>20</item>
+        <item>12</item>
+        <item>16</item>
+        <item>23</item>
         <item>28</item>
-        <item>46</item>
-        <item>112</item>
-        <item>158</item>
+        <item>39</item>
+        <item>62</item>
+        <item>102</item>
+        <item>161</item>
         <item>214</item>
-        <item>255</item>
+        <item>231</item>
         <item>255</item>
         <item>255</item>
     </integer-array>
