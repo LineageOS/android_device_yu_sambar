@@ -1115,7 +1115,8 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
       mOutputCount(0),
       mInputCount(0),
       mAdvancedCaptureConfigured(false),
-      mHDRBracketingEnabled(false)
+      mHDRBracketingEnabled(false),
+      mbOISValue(false)
 {
     getLogLevel();
     ATRACE_CALL();
@@ -2301,8 +2302,14 @@ int QCamera2HardwareInterface::startPreview()
 int32_t QCamera2HardwareInterface::updatePostPreviewParameters(bool oisValue) {
     // Enable OIS only in Camera mode and 4k2k camcoder mode
     int32_t rc = NO_ERROR;
+    if (mCameraId != 0)
+        return NO_ERROR;
     ALOGE("%s: OisValue: %d", __func__, (int)oisValue);
-    rc = mParameters.updateOisValue(oisValue);
+    if (oisValue != mbOISValue)
+    {
+        mbOISValue = oisValue;
+        rc = mParameters.updateOisValue(oisValue);
+    }
     return NO_ERROR;
 }
 
@@ -4459,6 +4466,13 @@ int32_t QCamera2HardwareInterface::processAEInfo(cam_3a_params_t &ae_params)
     pthread_mutex_lock(&m_parm_lock);
     mParameters.updateAEInfo(ae_params);
     pthread_mutex_unlock(&m_parm_lock);
+    if (mParameters.isPDAFEnabled())
+    {
+        if (ae_params.exp_time * 1000.0 > 100)
+            updatePostPreviewParameters(true);
+        else if (ae_params.exp_time * 1000.0 < 80)
+            updatePostPreviewParameters(false);
+    }
     return NO_ERROR;
 }
 
