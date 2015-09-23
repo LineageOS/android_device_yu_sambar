@@ -173,6 +173,17 @@ vendor/lib/libmmcamera_ov8865_eeprom.so
 vendor/lib/libois_lc898122_axa.so
 vendor/lib/libSonyIMX230PdafLibrary.so
 
+# DPM
+bin/dpmd
+etc/dpm/nsrm/NsrmConfiguration.xml
+etc/permissions/dpmapi.xml
+-framework/com.qti.dpmframework.jar
+-framework/dpmapi.jar
+vendor/lib/libdpmctmgr.so
+vendor/lib/libdpmfdmgr.so
+vendor/lib/libdpmframework.so
+vendor/lib/libdpmnsrm.so
+
 # DRM
 bin/qseecomd
 lib/libdrmdecrypt.so
@@ -330,6 +341,7 @@ vendor/lib/libdsi_netctrl.so
 vendor/lib/libqdi.so
 vendor/lib/libqdp.so
 vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_client_helper.so
 -vendor/lib/libqmi_client_qmux.so
 vendor/lib/libqmi_common_so.so
 vendor/lib/libqmi_csi.so

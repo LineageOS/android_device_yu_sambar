@@ -132,6 +132,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     fingerprint.msm8994
 
+# DPM
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/dpm.conf:system/etc/dpm/dpm.conf
+
 # FM
 PRODUCT_PACKAGES += \
     FM2 \
