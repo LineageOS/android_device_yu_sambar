@@ -721,8 +721,8 @@ service per_proxy /system/bin/pm-proxy
 # Fingerprint service and associated oddities
 service fpsvcd /system/bin/fpsvcd
     class main
-    user system
-    group system
+    user root
+    group root
 
 on property:init.svc.per_mgr=running
     start per_proxy
