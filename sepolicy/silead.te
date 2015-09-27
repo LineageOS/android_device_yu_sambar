@@ -3,6 +3,7 @@ type fpsvcd, domain;
 type fpsvcd_exec, exec_type, file_type;
 
 init_daemon_domain(fpsvcd)
+wakelock_use(fpsvcd)
 
 allow fpsvcd        init_tmpfs:file           r_file_perms;
 allow fpsvcd        fpsvcd_tmpfs:file         create_file_perms;
@@ -15,7 +16,6 @@ allow fpsvcd        system_server:dir         r_dir_perms;
 allow fpsvcd        tmpfs:dir                 rw_dir_perms;
 allow fpsvcd        tmpfs:file                create_file_perms;
 allow fpsvcd        self:netlink_kobject_uevent_socket create_socket_perms;
-allow fpsvcd        sysfs_wake_lock:file      rw_file_perms;
 # Access to /dev/uinput for virtual keys
 allow fpsvcd        uhid_device:chr_file      rw_file_perms;
 
