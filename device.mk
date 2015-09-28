@@ -133,6 +133,10 @@ PRODUCT_PACKAGES += \
     fingerprint.msm8994
 
 # DPM
+PRODUCT_PACKAGES += \
+    dpmapi \
+    com.qti.dpmframework
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/dpm.conf:system/etc/dpm/dpm.conf
 
