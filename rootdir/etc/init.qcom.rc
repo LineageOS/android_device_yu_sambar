@@ -722,7 +722,7 @@ service per_proxy /system/bin/pm-proxy
 service fpsvcd /system/bin/fpsvcd
     class main
     user root
-    group root
+    group system net_bt_stack
 
 on property:init.svc.per_mgr=running
     start per_proxy
