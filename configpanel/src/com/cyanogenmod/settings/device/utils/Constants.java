@@ -136,14 +136,14 @@ public class Constants {
 
     static {
         sGestureMap.put(TOUCHSCREEN_CAMERA_GESTURE_KEY,
-            new GestureCategory(Arrays.asList(new GestureSysfs("o")), true));
+            new GestureCategory(Arrays.asList(new GestureSysfs("o")), false));
         sGestureMap.put(TOUCHSCREEN_MUSIC_GESTURE_KEY,
             new GestureCategory(Arrays.asList(
                 new GestureSysfs("LEFT"),
                 new GestureSysfs("DOWN"),
                 new GestureSysfs("RIGHT")), false));
         sGestureMap.put(TOUCHSCREEN_FLASHLIGHT_GESTURE_KEY,
-            new GestureCategory(Arrays.asList(new GestureSysfs("v")), true));
+            new GestureCategory(Arrays.asList(new GestureSysfs("v")), false));
     }
 
     public static boolean isPreferenceEnabled(Context context, String key, boolean defaultValue) {
