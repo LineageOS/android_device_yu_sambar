@@ -145,13 +145,17 @@ vendor/lib/libchromatix_ov8865_cpp_preview.so
 vendor/lib/libchromatix_ov8865_cpp_snapshot.so
 vendor/lib/libchromatix_ov8865_cpp_video.so
 vendor/lib/libchromatix_ov8865_default_video.so
+vendor/lib/libchromatix_ov8865_default_video_res0.so
 vendor/lib/libchromatix_ov8865_hfr_120.so
 vendor/lib/libchromatix_ov8865_hfr_60.so
 vendor/lib/libchromatix_ov8865_hfr_90.so
 vendor/lib/libchromatix_ov8865_liveshot.so
+vendor/lib/libchromatix_ov8865_liveshot_res0.so
 vendor/lib/libchromatix_ov8865_postproc.so
 vendor/lib/libchromatix_ov8865_preview.so
+vendor/lib/libchromatix_ov8865_preview_res0.so
 vendor/lib/libchromatix_ov8865_snapshot.so
+vendor/lib/libchromatix_ov8865_snapshot_res0.so
 
 # Camera firmware
 etc/firmware/cpp_firmware_v1_1_1.fw
