@@ -53,6 +53,7 @@
 #define DTS_PARAMETER_ENABLE "srs_cfg:trumedia_enable"
 #define AMP_EQ_HIGH_QUALITY 0
 #define AMP_EQ_FLAT 1
+#define AMP_EQ_VOICE 2
 
 typedef struct tfa9887_amplifier {
     amplifier_device_t amp;
@@ -69,6 +70,7 @@ typedef struct tfa9887_amplifier {
     int (*calibrate)();
     bool on;
     int mode;
+    bool in_voice_call;
 } tfa9887_amplifier_t;
 
 #define QUAT_MI2S_CLK_CTL "QUAT_MI2S Clock"
@@ -173,7 +175,7 @@ static int amp_set_parameters(struct amplifier_device *device,
         // With DTS on, we'll change to flat EQ and allow DTS to
         // apply all of the processing.
         tfa9887->mode = val ? AMP_EQ_FLAT : AMP_EQ_HIGH_QUALITY;
-        if (tfa9887->on) {
+        if (tfa9887->on && !tfa9887->in_voice_call) {
             ALOGV("Setting mode to %d immediately", tfa9887->mode);
             tfa9887->speaker_on(tfa9887->mode);
         } else {
@@ -219,6 +221,7 @@ static int amp_calibrate(tfa9887_amplifier_t *tfa9887)
 static void *amp_watch(void *param)
 {
     struct snd_ctl_event event;
+    int current_mode;
     tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) param;
 
     while(read(tfa9887->mixer_fd, &event, sizeof(struct snd_ctl_event)) > 0) {
@@ -230,7 +233,9 @@ static void *amp_watch(void *param)
             ALOGI("Got %s event = %d!", QUAT_MI2S_CLK_CTL, ev.value.enumerated.item[0]);
             pthread_mutex_lock(&tfa9887->mutex);
             if (ev.value.enumerated.item[0]) {
-                tfa9887->speaker_on(tfa9887->mode);
+                current_mode = tfa9887->in_voice_call ?
+                    AMP_EQ_VOICE : tfa9887->mode;
+                tfa9887->speaker_on(current_mode);
                 tfa9887->on = true;
             } else {
                 tfa9887->speaker_off();
@@ -310,6 +315,16 @@ fail:
     return -ENODEV;
 }
 
+int amp_set_mode(struct amplifier_device *device, audio_mode_t mode)
+{
+    tfa9887_amplifier_t *tfa9887 = (tfa9887_amplifier_t *) device;
+    pthread_mutex_lock(&tfa9887->mutex);
+    tfa9887->in_voice_call = mode == AUDIO_MODE_IN_CALL;
+    ALOGV("%s: in_voice_call = %d", __func__, tfa9887->in_voice_call);
+    pthread_mutex_unlock(&tfa9887->mutex);
+    return 0;
+}
+
 static int amp_module_open(const hw_module_t *module, const char *name,
         hw_device_t **device)
 {
@@ -330,6 +345,7 @@ static int amp_module_open(const hw_module_t *module, const char *name,
     tfa9887->amp.common.module = (hw_module_t *) module;
     tfa9887->amp.common.version = AMPLIFIER_DEVICE_API_VERSION_2_0;
     tfa9887->amp.common.close = amp_dev_close;
+    tfa9887->amp.set_mode = amp_set_mode;
     tfa9887->amp.set_parameters = amp_set_parameters;
     tfa9887->on = false;
     tfa9887->mode = AMP_EQ_FLAT;
