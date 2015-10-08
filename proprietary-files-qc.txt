@@ -112,6 +112,7 @@ vendor/lib/liboemcamera.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
+vendor/lib/libsensor1.so
 
 # Camera chromatix
 vendor/lib/libchromatix_imx230_common.so
