@@ -38,14 +38,16 @@ persist.camera.HAL3.enabled=0
 persist.camera.gyro.android=1
 
 # Connectivity Engine support (CNE)
-#persist.cne.feature=1
+persist.cne.feature=1
 
 # Data Power Manager (DPM)
 persist.dpm.feature=7
-persist.dpm.nsrm.bkg.evt=3955
 persist.env.fastdorm.enabled=true
 persist.sys.dpmd.nsrm=3
-# Debug logging for DPM can be enabled via:
+
+# Debug logging for DPM & CNE can be enabled via:
+# Push libdpmlog.so to system/vendor/lib|64
+#persist.dpm.nsrm.bkg.evt=3955
 #persist.dpm.loglevel=7825
 
 # Dexopt
