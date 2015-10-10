@@ -306,7 +306,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/silead/board_for_gsl6163b02/silead_param.xml:system/etc/silead/sysparms/board_for_gsl6163b02/silead_param.xml
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/perf-profile1.conf:system/vendor/etc/perf-profile0.conf \
+    $(LOCAL_PATH)/configs/perf-profile0.conf:system/vendor/etc/perf-profile0.conf \
     $(LOCAL_PATH)/configs/perf-profile1.conf:system/vendor/etc/perf-profile1.conf \
     $(LOCAL_PATH)/configs/perf-profile2.conf:system/vendor/etc/perf-profile2.conf \
     $(LOCAL_PATH)/configs/perf-profile3.conf:system/vendor/etc/perf-profile3.conf \
