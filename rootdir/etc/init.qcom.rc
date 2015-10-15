@@ -348,7 +348,8 @@ on boot
 
     write /sys/bus/i2c/devices/2-004a/update_fw "A4_15_2.2_AA.fw"
     write /sys/bus/i2c/devices/2-004a/update_cfg "A4_15_2.2_AA.raw"
-    write /sys/bus/i2c/devices/2-004a/plugin "pl enable 4"
+    write /sys/bus/i2c/devices/2-004a/plugin "wd enable 3"
+    write /sys/bus/i2c/devices/2-004a/plugin "pl enable 14"
     write /sys/bus/i2c/devices/2-004a/en_gesture 0
 
     # LEDS
