@@ -119,7 +119,7 @@ void *write_dummy_data(void *param)
     config.period_count = 2;
     config.format = PCM_FORMAT_S16_LE;
     config.start_threshold = config.period_size * config.period_count - 1;
-    config.stop_threshold = config.period_size * config.period_count;
+    config.stop_threshold = UINT_MAX;
     config.silence_threshold = 0;
     config.avail_min = 1;
 
