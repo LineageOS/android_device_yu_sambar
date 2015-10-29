@@ -18,7 +18,7 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
-
+#include <unistd.h>
 #define SENSOR_CAL_P		"/persist/P_sensor_data.bin"
 #define SENSOR_CAL_L		"/persist/L_sensor_data.bin"
 
