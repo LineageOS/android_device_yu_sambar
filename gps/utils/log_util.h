@@ -81,6 +81,8 @@ extern const char FROM_MODEM[];
 extern const char TO_AFW[];
 extern const char EXIT_TAG[];
 extern const char ENTRY_TAG[];
+extern const char EXIT_ERROR_TAG[];
+
 /*=============================================================================
  *
  *                        MODULE EXPORTED FUNCTIONS
@@ -157,22 +159,28 @@ else if (loc_logger.DEBUG_LEVEL == 0xff) { ALOGV("V/" __VA_ARGS__); }
         }                                                                     \
     } while(0)
 
-
 #define LOG_I(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGI, ID, WHAT, SPEC, VAL)
 #define LOG_V(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGV, ID, WHAT, SPEC, VAL)
+#define LOG_E(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGE, ID, WHAT, SPEC, VAL)
 
 #define ENTRY_LOG() LOG_V(ENTRY_TAG, __func__, %s, "")
 #define EXIT_LOG(SPEC, VAL) LOG_V(EXIT_TAG, __func__, SPEC, VAL)
+#define EXIT_LOG_WITH_ERROR(SPEC, VAL)                       \
+    if (VAL != 0) {                                          \
+        LOG_E(EXIT_ERROR_TAG, __func__, SPEC, VAL);          \
+    } else {                                                 \
+        LOG_V(EXIT_TAG, __func__, SPEC, VAL);                \
+    }
 
 
 // Used for logging callflow from Android Framework
-#define ENTRY_LOG_CALLFLOW() LOG_V(FROM_AFW, __func__, %s, "")
+#define ENTRY_LOG_CALLFLOW() LOG_I(FROM_AFW, __func__, %s, "")
 // Used for logging callflow to Modem
-#define EXIT_LOG_CALLFLOW(SPEC, VAL) LOG_V(TO_MODEM, __func__, SPEC, VAL)
+#define EXIT_LOG_CALLFLOW(SPEC, VAL) LOG_I(TO_MODEM, __func__, SPEC, VAL)
 // Used for logging callflow from Modem(TO_MODEM, __func__, %s, "")
-#define MODEM_LOG_CALLFLOW(SPEC, VAL) LOG_V(FROM_MODEM, __func__, SPEC, VAL)
+#define MODEM_LOG_CALLFLOW(SPEC, VAL) LOG_I(FROM_MODEM, __func__, SPEC, VAL)
 // Used for logging callflow to Android Framework
-#define CALLBACK_LOG_CALLFLOW(CB, SPEC, VAL) LOG_V(TO_AFW, CB, SPEC, VAL)
+#define CALLBACK_LOG_CALLFLOW(CB, SPEC, VAL) LOG_I(TO_AFW, CB, SPEC, VAL)
 
 #ifdef __cplusplus
 }
