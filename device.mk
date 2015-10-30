@@ -218,21 +218,21 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
-    libstagefrighthw \
-    qcmediaplayer
+    libstagefrighthw
+#    qcmediaplayer
 
-PRODUCT_BOOT_JARS += \
-    qcmediaplayer
+#PRODUCT_BOOT_JARS += \
+#    qcmediaplayer
 
 # Power HAL
 PRODUCT_PACKAGES += \
     power.msm8994
 
 # QC PROPRIETARY
-ifneq ($(QCPATH),)
+#ifneq ($(QCPATH),)
 # proprietary wifi display, if available
-PRODUCT_BOOT_JARS += WfdCommon
-endif
+#PRODUCT_BOOT_JARS += WfdCommon
+#endif
 
 # Ramdisk
 PRODUCT_PACKAGES += \
