@@ -701,10 +701,10 @@ service per_proxy /system/bin/pm-proxy
     disabled
 
 # Fingerprint service and associated oddities
-service fpsvcd /system/bin/fpsvcd
-    class main
-    user root
-    group system net_bt_stack
+#service fpsvcd /system/bin/fpsvcd
+#    class main
+#    user root
+#    group system net_bt_stack
 
 on property:init.svc.per_mgr=running
     start per_proxy
