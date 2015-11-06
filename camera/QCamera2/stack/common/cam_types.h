@@ -1216,6 +1216,10 @@ typedef struct {
     uint32_t exposure_mode;
     uint32_t scenetype;
     float brightness;
+    float est_snap_exp_time;
+    int32_t est_snap_iso_value;
+    uint32_t est_snap_luma;
+    uint32_t est_snap_target;
 } cam_3a_params_t;
 
 typedef struct {
@@ -1939,7 +1943,6 @@ typedef struct {
 
 #define CAM_QCOM_FEATURE_PP_PASS_1      CAM_QCOM_FEATURE_PP_SUPERSET
 #define CAM_QCOM_FEATURE_PP_PASS_2      CAM_QCOM_FEATURE_SCALE | CAM_QCOM_FEATURE_CROP;
-
 
 // Counter clock wise
 typedef enum {
