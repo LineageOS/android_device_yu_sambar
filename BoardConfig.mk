@@ -119,8 +119,7 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 # CM Hardware
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += \
-    hardware/cyanogen/cmhw \
-    $(DEVICE_PATH)/cmhw
+    hardware/cyanogen/cmhw
 
 # CNE and DPM
 TARGET_LDPRELOAD := libNimsWrap.so
