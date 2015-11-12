@@ -343,6 +343,7 @@ vendor/lib/libmm-qdcm.so
 
 # Qualcomm framework
 bin/irsc_util
+-lib64/libwpa_qmi_eap_proxy.so
 -vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
 -vendor/lib64/libdsutils.so
