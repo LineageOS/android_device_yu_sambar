@@ -120,6 +120,7 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += \
     hardware/cyanogen/cmhw
+TARGET_POWER_SET_FEATURE_LIB := libpower_set_feature
 
 # CNE and DPM
 TARGET_LDPRELOAD := libNimsWrap.so
