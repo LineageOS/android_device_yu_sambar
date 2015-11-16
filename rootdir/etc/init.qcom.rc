@@ -189,6 +189,8 @@ on early-boot
     write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
     write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
     write /sys/kernel/boot_adsp/boot 1
+    # increase fuel gauge SRAM update frequency
+    write /sys/module/qpnp_fg/parameters/sram_update_period_ms 1000
 
 on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
