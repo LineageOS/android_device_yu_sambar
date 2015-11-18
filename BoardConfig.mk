@@ -164,7 +164,6 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
 # Lights
-BOARD_LIGHTS_VARIANT := qpnp
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Partitions
