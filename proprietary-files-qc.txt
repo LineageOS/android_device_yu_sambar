@@ -219,6 +219,10 @@ vendor/lib64/libdrmtime.so
 vendor/lib64/librpmb.so
 vendor/lib64/libssd.so
 
+# Gatekeeper
+vendor/lib/hw/gatekeeper.msm8994.so
+vendor/lib64/hw/gatekeeper.msm8994.so
+
 # GPS
 etc/permissions/com.qualcomm.location.xml
 -lib/libloc_api_v02.so
