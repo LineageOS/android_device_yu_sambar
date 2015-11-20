@@ -17,6 +17,7 @@
 package com.cyanogenmod.settings.device;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
@@ -35,12 +36,18 @@ import com.cyanogenmod.settings.device.utils.Constants.GestureSysfs;
 
 public class TouchscreenGestureSettings extends PreferenceActivity
         implements OnPreferenceChangeListener {
+    private static final String KEY_HAPTIC_FEEDBACK = "touchscreen_gesture_haptic_feedback";
+
+    private SwitchPreference mHapticFeedback;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.touchscreen_panel);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mHapticFeedback = (SwitchPreference) findPreference(KEY_HAPTIC_FEEDBACK);
+        mHapticFeedback.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -51,11 +58,21 @@ public class TouchscreenGestureSettings extends PreferenceActivity
         if (!ScreenType.isTablet(this)) {
             getListView().setPadding(0, 0, 0, 0);
         }
+
+        mHapticFeedback.setChecked(
+                Settings.System.getInt(getContentResolver(), KEY_HAPTIC_FEEDBACK, 1) != 0);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        GestureCategory category = Constants.sGestureMap.get(preference.getKey());
+        final String key = preference.getKey();
+        if (KEY_HAPTIC_FEEDBACK.equals(key)) {
+            final boolean value = (Boolean) newValue;
+            Settings.System.putInt(getContentResolver(), KEY_HAPTIC_FEEDBACK, value ? 1 : 0);
+            return true;
+        }
+
+        GestureCategory category = Constants.sGestureMap.get(key);
         if (category != null) {
             Boolean value = (Boolean) newValue;
             setCategoryEnable(category, value);

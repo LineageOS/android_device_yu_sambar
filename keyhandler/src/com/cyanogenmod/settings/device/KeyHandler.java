@@ -40,6 +40,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -55,6 +56,9 @@ public class KeyHandler implements DeviceKeyHandler {
 
     private static final String TAG = KeyHandler.class.getSimpleName();
     private static final int GESTURE_REQUEST = 1;
+
+    private static final String KEY_GESTURE_HAPTIC_FEEDBACK =
+            "touchscreen_gesture_haptic_feedback";
 
     private static final String ACTION_DISMISS_KEYGUARD =
             "com.android.keyguard.action.DISMISS_KEYGUARD_SECURELY";
@@ -86,6 +90,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private String mRearCameraId;
     private boolean mTorchEnabled;
     private Sensor mProximitySensor;
+    private Vibrator mVibrator;
     WakeLock mProximityWakeLock;
     WakeLock mGestureWakeLock;
     private int mProximityTimeOut;
@@ -109,6 +114,11 @@ public class KeyHandler implements DeviceKeyHandler {
             mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
             mProximityWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                     "ProximityWakeLock");
+        }
+
+        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if (mVibrator == null || !mVibrator.hasVibrator()) {
+            mVibrator = null;
         }
     }
 
@@ -181,9 +191,11 @@ public class KeyHandler implements DeviceKeyHandler {
                 }
                 Intent intent = new Intent(action, null);
                 startActivitySafely(intent);
+                doHapticFeedback();
                 break;
             case GESTURE_SWIPE_DOWN_SCANCODE:
                 dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+                doHapticFeedback();
                 break;
             case GESTURE_V_SCANCODE:
                ensureCameraManager();
@@ -196,13 +208,16 @@ public class KeyHandler implements DeviceKeyHandler {
                         // Ignore
                         Log.e(TAG, "setTorchMode " + mTorchEnabled + " failed: " + e);
                     }
+                    doHapticFeedback();
                 }
                 break;
             case GESTURE_LTR_SCANCODE:
                 dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+                doHapticFeedback();
                 break;
             case GESTURE_GTR_SCANCODE:
                 dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_NEXT);
+                doHapticFeedback();
                 break;
             }
         }
@@ -295,6 +310,17 @@ public class KeyHandler implements DeviceKeyHandler {
             mContext.startActivityAsUser(intent, null, user);
         } catch (ActivityNotFoundException e) {
             // Ignore
+        }
+    }
+
+    private void doHapticFeedback() {
+        if (mVibrator == null) {
+            return;
+        }
+        boolean enabled = Settings.System.getInt(mContext.getContentResolver(),
+                KEY_GESTURE_HAPTIC_FEEDBACK, 1) != 0;
+        if (enabled) {
+            mVibrator.vibrate(50);
         }
     }
 }
