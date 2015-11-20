@@ -19,7 +19,6 @@
 
     <!-- Gesture shortcuts -->
     <string name="screen_gestures_panel_title">Gesture shortcuts</string>
-    <string name="screen_gestures_panel_summary">Use gestures while the screen is off</string>
 
     <string name="touchscreen_camera_gesture_title">Camera</string>
     <string name="touchscreen_camera_gesture_summary">Draw a circle to activate camera</string>
