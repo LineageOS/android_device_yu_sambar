@@ -2292,9 +2292,7 @@ int QCamera2HardwareInterface::startPreview()
         if (focusMode == CAM_FOCUS_MODE_CONTINOUS_PICTURE)
             mCameraHandle->ops->cancel_auto_focus(mCameraHandle->camera_handle);
     }
-    if (mParameters.getRecordingHintValue() == true)
-        updatePostPreviewParameters(true);
-    else if (mParameters.getPDAFValue() == true)
+    if (mParameters.getPDAFValue() == true)
         updatePostPreviewParameters(false);
     else
         updatePostPreviewParameters(true);
