@@ -109,6 +109,18 @@ $(WV_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WV_SYMLINKS)
 
+SENSOR_CONF := \
+    accel_cali.conf gyro_cali.conf
+
+SENSOR_CONF_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/lsm6ds3/,$(notdir $(SENSOR_CONF)))
+$(SENSOR_CONF_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Sensor calibration files: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /persist/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(SENSOR_CONF_SYMLINKS)
+
 # Create a link for the WCNSS config file, which ends up as a writable
 # version in /data/misc/wifi
 $(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/qca_cld; \
