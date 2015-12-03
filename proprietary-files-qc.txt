@@ -213,6 +213,7 @@ vendor/lib64/libdpmnsrm.so
 
 # DRM
 bin/qseecomd
+vendor/lib/libQSEEComAPI.so
 vendor/lib64/libQSEEComAPI.so
 vendor/lib64/libdrmfs.so
 vendor/lib64/libdrmtime.so
@@ -304,6 +305,10 @@ vendor/lib64/libscale.so
 # Graphics firmware
 etc/firmware/a420_pfp.fw
 etc/firmware/a420_pm4.fw
+
+# Keystore
+vendor/lib/hw/keystore.msm8994.so
+vendor/lib64/hw/keystore.msm8994.so
 
 # Media
 vendor/lib/libDivxDrm.so
