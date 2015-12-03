@@ -175,6 +175,7 @@ public class KeyHandler implements DeviceKeyHandler {
         public void handleMessage(Message msg) {
             switch (msg.arg1) {
             case GESTURE_CIRCLE_SCANCODE:
+                doHapticFeedback();
                 ensureKeyguardManager();
                 String action = null;
                 mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
@@ -188,15 +189,15 @@ public class KeyHandler implements DeviceKeyHandler {
                 }
                 Intent intent = new Intent(action, null);
                 startActivitySafely(intent);
-                doHapticFeedback();
                 break;
             case GESTURE_SWIPE_DOWN_SCANCODE:
-                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
                 doHapticFeedback();
+                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
                 break;
             case GESTURE_V_SCANCODE:
-               ensureCameraManager();
-               if (mRearCameraId != null) {
+                doHapticFeedback();
+                ensureCameraManager();
+                if (mRearCameraId != null) {
                     mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
                     try {
                         mCameraManager.setTorchMode(mRearCameraId, !mTorchEnabled);
@@ -205,16 +206,15 @@ public class KeyHandler implements DeviceKeyHandler {
                         // Ignore
                         Log.e(TAG, "setTorchMode " + mTorchEnabled + " failed: " + e);
                     }
-                    doHapticFeedback();
                 }
                 break;
             case GESTURE_LTR_SCANCODE:
-                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
                 doHapticFeedback();
+                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
                 break;
             case GESTURE_GTR_SCANCODE:
-                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_NEXT);
                 doHapticFeedback();
+                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_NEXT);
                 break;
             }
         }
