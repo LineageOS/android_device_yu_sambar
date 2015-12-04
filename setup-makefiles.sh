@@ -129,6 +129,9 @@ PRODUCT_PACKAGES += \\
 PRODUCT_PACKAGES += \\
     libwpa_qmi_eap_proxy
 
+PRODUCT_PACKAGES += \\
+    pp_calib_data_dual_0_sharp_cmd_mode_dsi_panel.xml
+
 \$(call inherit-product, vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk)
 EOF
 
@@ -473,6 +476,13 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_SUFFIX := \$(COMMON_JAVA_PACKAGE_SUFFIX)
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_CERTIFICATE := PRESIGNED
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE       := pp_calib_data_dual_0_sharp_cmd_mode_dsi_panel.xml
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := proprietary/etc/pp_calib_data_dual_0_sharp_cmd_mode_dsi_panel.xml
 include \$(BUILD_PREBUILT)
 
 \$(shell mkdir -p \$(PRODUCT_OUT)/system/vendor/lib/egl && pushd \$(PRODUCT_OUT)/system/vendor/lib > /dev/null && ln -s egl/libEGL_adreno.so libEGL_adreno.so && popd > /dev/null)
