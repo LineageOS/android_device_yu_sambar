@@ -233,6 +233,8 @@ on boot
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+
 #   Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
@@ -413,7 +415,14 @@ on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
 
 on property:vold.decrypt=trigger_restart_framework
+    start config_bt_addr
     start config_bluetooth
+
+service config_bt_addr /system/bin/btnvtool -O
+    class core
+    user bluetooth
+    group bluetooth radio
+    oneshot
 
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
