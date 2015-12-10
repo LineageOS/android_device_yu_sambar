@@ -5,7 +5,6 @@ vendor/lib/libfastcvopt.so
 vendor/lib64/libadsprpc.so
 
 # Audio
-vendor/lib/libFlacSwDec.so
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
@@ -14,7 +13,6 @@ vendor/lib/libaudcal.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
-vendor/lib64/libFlacSwDec.so
 vendor/lib64/libacdb-fts.so
 vendor/lib64/libacdbloader.so
 vendor/lib64/libacdbrtac.so
@@ -300,11 +298,14 @@ vendor/lib/hw/keystore.msm8994.so
 vendor/lib64/hw/keystore.msm8994.so
 
 # Media
+vendor/lib/libDivxDrm.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
+vendor/lib/libSHIMDivxDrm.so
 vendor/lib/libmm-color-convertor.so
+vendor/lib/libmmosal.so
 
 # Perf
 bin/energy-awareness
