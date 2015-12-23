@@ -124,6 +124,13 @@ PRODUCT_PACKAGES += \
     regdbdump \
     regulatory.bin
 
+# DataServices
+PRODUCT_PACKAGES += \
+    librmnetctl \
+    rmnetcli \
+    sockev \
+    datatop
+
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8994 \
