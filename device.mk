@@ -65,6 +65,7 @@ PRODUCT_PACKAGES += \
     libtfa9887 \
     libqcompostprocbundle \
     libqcomvisualizer \
+    libqcomvoiceprocessing \
     tinymix
 
 # Audio amp configuration
