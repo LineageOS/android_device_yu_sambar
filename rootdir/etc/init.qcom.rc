@@ -37,13 +37,6 @@ on early-init
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
     mkdir /bt_firmware 0771 system system
 
-    mkdir /mnt/silead 0770 system system
-    mkdir /mnt/silead/tmp 0770 system system
-    mount tmpfs tmpfs /mnt/silead/tmp nosuid
-    write /mnt/silead/tmp/stub.txt ready
-    chmod 660 /mnt/silead/tmp/stub.txt
-    chown system system /mnt/silead/tmp/stub.txt
-
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -526,7 +519,6 @@ service p2p_supplicant /system/bin/wpa_supplicant \
 #   group wifi inet keystore
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
-    disabled
     oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant \
@@ -699,10 +691,24 @@ service per_proxy /system/bin/pm-proxy
     disabled
 
 # Fingerprint service and associated oddities
-#service fpsvcd /system/bin/fpsvcd
-#    class main
-#    user root
-#    group system net_bt_stack
+on late-init
+    mkdir /mnt/silead 0770 system system
+    mkdir /mnt/silead/tmp 0770 system system
+    write /mnt/silead/tmp/stub.txt ready
+    chmod 660 /mnt/silead/tmp/stub.txt
+    chown system system /mnt/silead/tmp/stub.txt
+
+# fpsvcd hosts the silead libs
+service fpsvcd /system/bin/fpsvcd
+    class main
+    user root
+    group system net_bt_stack
+
+# fingerprintd hosts the fp HAL
+service fingerprintd /system/bin/fingerprintd
+    class main
+    user root
+    group system net_bt_stack
 
 on property:init.svc.per_mgr=running
     start per_proxy

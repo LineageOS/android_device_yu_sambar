@@ -135,8 +135,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=256m
 
-#PRODUCT_PACKAGES += \
-#    fingerprint.msm8994
+PRODUCT_PACKAGES += \
+    fingerprint.msm8994 \
+    fingerprintd
 
 # DPM
 PRODUCT_PACKAGES += \

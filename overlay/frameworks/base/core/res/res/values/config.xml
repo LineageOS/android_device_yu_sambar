@@ -391,4 +391,7 @@
     <bool name="config_supportDoubleTapWake">true</bool>
 
     <integer name="config_buttonBrightnessSettingDefault">0</integer>
+
+    <!-- Our fingerprint reader is not in trust zone, so we can use it only to unlock the device -->
+    <bool name="config_fingerprintRestrictedToSystemAndOwner">true</bool>
 </resources>
