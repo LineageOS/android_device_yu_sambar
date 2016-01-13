@@ -241,6 +241,7 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
+    init.qcom.early_boot.sh \
     init.crda.sh \
     init.qcom.bt.sh \
     init.qcom.coex.sh \
