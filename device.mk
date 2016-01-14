@@ -127,10 +127,7 @@ PRODUCT_PACKAGES += \
 
 # DataServices
 PRODUCT_PACKAGES += \
-    librmnetctl \
-    rmnetcli \
-    sockev \
-    datatop
+    librmnetctl
 
 # Display
 PRODUCT_PACKAGES += \
