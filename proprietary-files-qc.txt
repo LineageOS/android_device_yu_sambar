@@ -318,6 +318,10 @@ vendor/lib/libSHIMDivxDrm.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
 
+# Network
+vendor/lib/libconnctrl.so
+vendor/lib64/libconnctrl.so
+
 # Perf
 bin/energy-awareness
 bin/msm_irqbalance
