@@ -179,6 +179,10 @@ vendor/lib/libois_lc898122_axa.so
 # CNE
 -priv-app/CNEService/CNEService.apk
 bin/cnd
+etc/cne/SwimConfig.xml
+etc/cne/andsfCne.xml
+etc/permissions/cneapiclient.xml
+etc/permissions/com.quicinc.cne.xml
 vendor/lib/libNimsWrap.so
 vendor/lib/libcne.so
 vendor/lib/libcneapiclient.so
@@ -198,6 +202,9 @@ vendor/lib64/libxml.so
 
 # DPM
 bin/dpmd
+etc/dpm/dpm.conf
+etc/dpm/nsrm/NsrmConfiguration.xml
+etc/permissions/dpmapi.xml
 -framework/com.qti.dpmframework.jar
 -framework/dpmapi.jar
 vendor/lib/libdpmctmgr.so

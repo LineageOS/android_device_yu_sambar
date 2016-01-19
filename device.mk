@@ -112,12 +112,6 @@ PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     services-ext
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/cne/SwimConfig.xml:system/etc/cne/SwimConfig.xml \
-    $(LOCAL_PATH)/configs/cne/andsfCne.xml:system/etc/cne/andsfCne.xml \
-    $(LOCAL_PATH)/configs/cne/cneapiclient.xml:system/etc/permissions/cneapiclient.xml \
-    $(LOCAL_PATH)/configs/cne/com.quicinc.cne.xml:system/etc/permissions/com.quicinc.cne.xml
-
 # CRDA
 PRODUCT_PACKAGES += \
     crda \
@@ -148,11 +142,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     com.qti.dpmframework \
     dpmapi
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/dpm/dpm.conf:system/etc/dpm/dpm.conf \
-    $(LOCAL_PATH)/configs/dpm/NsrmConfiguration.xml:system/etc/dpm/nsrm/NsrmConfiguration.xml \
-    $(LOCAL_PATH)/configs/dpm/dpmapi.xml:system/etc/permissions/dpmapi.xml
 
 # FM
 PRODUCT_PACKAGES += \
