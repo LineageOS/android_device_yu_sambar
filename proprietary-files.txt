@@ -25,7 +25,6 @@ etc/firmware/A4_15_2.2_AA.raw
 # Fingerprint
 bin/fpsvcd
 bin/aosinfo
-bin/slfpauthd
 lib/hw/fingerprint.msm8994.so
 lib64/libaslxml.so
 lib64/libfactorylib.so
