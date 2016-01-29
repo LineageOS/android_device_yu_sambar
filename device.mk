@@ -129,8 +129,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm8994 \
     hwcomposer.msm8994 \
     libtinyxml \
-    memtrack.msm8994 \
-    libjni_livedisplay_qdcm
+    memtrack.msm8994
 
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=256m
