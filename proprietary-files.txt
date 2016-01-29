@@ -21,3 +21,19 @@ etc/firmware/venus.mdt
 # Touchscreen firmware
 etc/firmware/A4_15_2.2_AA.fw
 etc/firmware/A4_15_2.2_AA.raw
+
+# Fingerprint
+bin/fpsvcd
+bin/aosinfo
+bin/slfpauthd
+lib/hw/fingerprint.msm8994.so
+lib64/libaslxml.so
+lib64/libfactorylib.so
+lib64/libfpcal.so
+lib64/libfpsvcd_remoteapi.so
+lib64/libfpsvc.so
+lib64/libslbase.so
+lib64/libslcryption.so
+lib64/libslos.so
+lib64/libsysparm.so
+lib64/hw/fingerprint.msm8994.so
