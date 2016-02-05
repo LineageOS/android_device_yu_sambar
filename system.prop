@@ -64,7 +64,7 @@ persist.mdpcomp.4k2kSplit=true
 persist.mdpcomp_perfhint=50
 persist.metadata_dynfps.disable=true
 ro.opengles.version=196609
-ro.qualcomm.cabl=0
+ro.qualcomm.cabl=2
 ro.sf.lcd_density=560
 debug.enable.sglscale=1
 
