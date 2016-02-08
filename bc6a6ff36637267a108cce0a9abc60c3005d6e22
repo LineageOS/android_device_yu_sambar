@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffb9cba7_b3ec2af4",
+        "filename": "rootdir/etc/fstab.qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 13956
+      },
+      "writtenOn": "2016-02-08T23:48:34Z",
+      "side": 1,
+      "message": "footer ?!",
+      "revId": "bc6a6ff36637267a108cce0a9abc60c3005d6e22",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
