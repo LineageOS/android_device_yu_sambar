@@ -16,6 +16,24 @@
       "revId": "bc6a6ff36637267a108cce0a9abc60c3005d6e22",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffb9cba7_93c80675",
+        "filename": "rootdir/etc/fstab.qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2016-02-08T23:56:28Z",
+      "side": 1,
+      "message": "This is correct, see: https://source.android.com/devices/storage/config-example.html#android_6",
+      "parentUuid": "ffb9cba7_b3ec2af4",
+      "revId": "bc6a6ff36637267a108cce0a9abc60c3005d6e22",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
