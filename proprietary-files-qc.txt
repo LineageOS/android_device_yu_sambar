@@ -99,7 +99,6 @@ vendor/lib/libmmcamera_isp_wb46.so
 vendor/lib/libmmcamera_ppbase_module.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
-vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_vpu_module.so
 vendor/lib/libmmipl.so
 vendor/lib/libmmjpeg.so
