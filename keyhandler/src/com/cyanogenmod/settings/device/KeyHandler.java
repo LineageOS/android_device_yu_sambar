@@ -50,9 +50,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final String TAG = KeyHandler.class.getSimpleName();
     private static final int GESTURE_REQUEST = 1;
 
-    private static final String KEY_GESTURE_HAPTIC_FEEDBACK =
-            "touchscreen_gesture_haptic_feedback";
-
     private static final String ACTION_DISMISS_KEYGUARD =
             "com.android.keyguard.action.DISMISS_KEYGUARD_SECURELY";
 
@@ -294,10 +291,6 @@ public class KeyHandler implements DeviceKeyHandler {
         if (mVibrator == null) {
             return;
         }
-        boolean enabled = Settings.System.getInt(mContext.getContentResolver(),
-                KEY_GESTURE_HAPTIC_FEEDBACK, 1) != 0;
-        if (enabled) {
-            mVibrator.vibrate(50);
-        }
+        mVibrator.vibrate(50);
     }
 }

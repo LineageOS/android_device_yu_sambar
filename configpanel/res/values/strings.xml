@@ -29,9 +29,4 @@
     • Swipe down to play/pause\n
     • Swipe left for previous track\n
     • Swipe right for next track</string>
-
-    <!-- haptic feedback  -->
-    <string name="touchscreen_extras">Extras</string>
-    <string name="haptic_feedback">Haptic feedback</string>
-    <string name="haptic_feedback_summary">Vibrate when a gesture got detected</string>
 </resources>
