@@ -209,6 +209,12 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     }
 
+    @Override
+    public boolean handleKeyEvent(KeyEvent event) {
+        return handleKeyEvent(event, null);
+    }
+
+    @Override
     public boolean handleKeyEvent(KeyEvent event, DeviceHandlerCallback callback) {
         // Fingerprint device sends KEY_WAKEUP, but the keylayout remaps
         // that to KEYCODE_TV_INPUT_COMPONENT_1 so we can distinguish it
