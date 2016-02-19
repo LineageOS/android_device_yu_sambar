@@ -16,16 +16,16 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Bevægelsesindstillinger</string>
-  <string name="screen_gestures_panel_title">Bevægelsesgenveje</string>
-  <string name="screen_gestures_panel_summary">Brug bevægelser, når skærmen er slukket</string>
+  <string name="app_name">Postavke gesti</string>
+  <string name="screen_gestures_panel_title">Kratice gesti</string>
+  <string name="screen_gestures_panel_summary">Koristi pokrete dok je zaslon isključen</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>
-  <string name="touchscreen_camera_gesture_summary">Tegn en cirkel for at aktivere kamera</string>
-  <string name="touchscreen_music_gesture_title">Musik</string>
-  <string name="touchscreen_flashlight_gesture_title">Lommelygte</string>
-  <string name="touchscreen_flashlight_gesture_summary">Tegn et \'V\' for at tænde lommelygten</string>
-  <string name="touchscreen_music_gesture_summary">Anvend bevægelser til at kontrollere musikafspilning \n
-    • Stryg ned for at afspille/pause\n
-    • Stryg til venstre for forrige nummer\n
-    • Stryg til højre for næste nummer</string>
+  <string name="touchscreen_camera_gesture_summary">Nacrtaj krug za pokretanje kamere</string>
+  <string name="touchscreen_music_gesture_title">Glazba</string>
+  <string name="touchscreen_flashlight_gesture_title">Bljeskalica</string>
+  <string name="touchscreen_flashlight_gesture_summary">Nacrtaj \'V\' za pokretanje bljeskalice</string>
+  <string name="touchscreen_music_gesture_summary">Koristi geste za kontrolu glazbe \n
+    • Kliznite dolje za sviranje/pauzu\n
+    • Kliznite lijevo za prethodnu pjesmu\n
+    • Kliznite desno za sljedeću pjesmu</string>
 </resources>

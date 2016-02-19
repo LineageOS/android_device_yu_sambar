@@ -16,12 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Gestų nustatymai</string>
-  <string name="screen_gestures_panel_title">Gestų nuorodos</string>
-  <string name="screen_gestures_panel_summary">Naudoti gestus, kai ekranas yra išjugtas</string>
-  <string name="touchscreen_camera_gesture_title">Fotoaparatas</string>
-  <string name="touchscreen_camera_gesture_summary">Nupiešti apskritimą, kad įjungti fotoaparatą</string>
-  <string name="touchscreen_music_gesture_title">Muzika</string>
-  <string name="touchscreen_flashlight_gesture_title">Žibintuvėlis</string>
-  <string name="touchscreen_flashlight_gesture_summary">Nupiešti \"V\", kad įjungti žibintuvėlį</string>
+  <string name="touchscreen_music_gesture_summary">গান শোনা নিয়ন্ত্রণ করতে সংকেত ব্যবহার করুন \n
+• চালু করতে/থামাতে নিচে টানুন\n
+• পূরবর্তী গানে যেতে বাদিকে টানুন\n
+• পরবর্তী গানে যেতে ডানদিকে টানুন</string>
 </resources>

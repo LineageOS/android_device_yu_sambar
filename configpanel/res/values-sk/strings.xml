@@ -16,16 +16,16 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Nastavení gest</string>
-  <string name="screen_gestures_panel_title">Rychlá gesta</string>
-  <string name="screen_gestures_panel_summary">Povolit gesta při vypnuté obrazovce</string>
+  <string name="app_name">Nastavenia gest</string>
+  <string name="screen_gestures_panel_title">Skratky pomocou gest</string>
+  <string name="screen_gestures_panel_summary">Používať gestá pri vypnutej obrazovke</string>
   <string name="touchscreen_camera_gesture_title">Fotoaparát</string>
-  <string name="touchscreen_camera_gesture_summary">Načrtnutím kruhu bude spuštěn fotoaparát</string>
+  <string name="touchscreen_camera_gesture_summary">Spustiť fotoaparát nakreslením kruhu</string>
   <string name="touchscreen_music_gesture_title">Hudba</string>
-  <string name="touchscreen_flashlight_gesture_title">Svítilna</string>
-  <string name="touchscreen_flashlight_gesture_summary">Načrtnutím „V“ dojde k přepnutí stavu svítilny</string>
-  <string name="touchscreen_music_gesture_summary">Použít gesta pro ovládání přehrávání hudby\n
-    • přejetím dolů přehrávat/pozastavit\n
-    • přejetím doleva pro předchozí skladbu\n
-    • přejetím doprava pro další skladbu</string>
+  <string name="touchscreen_flashlight_gesture_title">Svietidlo</string>
+  <string name="touchscreen_flashlight_gesture_summary">Nakreslením \'V\' spustíte svietidlo</string>
+  <string name="touchscreen_music_gesture_summary">Použiť gestá na ovládanie prehrávania hudby \n
+    • Potiahnutie dolu na prehranie/pozastavenie\n
+    • Potiahnutie vľavo pre predchádzajúcu skladbu\n
+    • Potiahnutie vpravo pre ďalšiu skladbu</string>
 </resources>

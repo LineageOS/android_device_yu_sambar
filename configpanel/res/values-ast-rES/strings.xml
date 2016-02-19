@@ -16,16 +16,16 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Ajustes de gestos</string>
-  <string name="screen_gestures_panel_title">Atajos gestuales</string>
-  <string name="screen_gestures_panel_summary">Utilizar gestos mientras la pantalla este apagada</string>
+  <string name="app_name">Axustes de xestos</string>
+  <string name="screen_gestures_panel_title">Atayos xestuales</string>
+  <string name="screen_gestures_panel_summary">Usar xestos entrín tea apagada la pantalla</string>
   <string name="touchscreen_camera_gesture_title">Cámara</string>
-  <string name="touchscreen_camera_gesture_summary">Dibuja un círculo para activar la cámara</string>
+  <string name="touchscreen_camera_gesture_summary">Dibuxar un círculu p\'activar la cámara</string>
   <string name="touchscreen_music_gesture_title">Música</string>
-  <string name="touchscreen_flashlight_gesture_title">Linterna</string>
-  <string name="touchscreen_flashlight_gesture_summary">Dibuja una \'V\' para alternar la linterna</string>
-  <string name="touchscreen_music_gesture_summary">Utilizar gestos para controlar la reproducción de música \n
-    • Desliza hacia abajo para iniciar/pausar\n
-    • Desliza a la izquierda para la pista anterior\n
-    • Desliza a la derecha para la pista siguiente</string>
+  <string name="touchscreen_flashlight_gesture_title">Llinterna</string>
+  <string name="touchscreen_flashlight_gesture_summary">Dibuxa una V pa conmutar lla luz de la llinterna</string>
+  <string name="touchscreen_music_gesture_summary">Usar xestos pa remanar la reproducción de música \n
+    • Esliza hacia abaxo p\'aniciar/posar\n
+    • Esliza a esquierda pa la pista anterior\n
+    • Esliza a drecha pa la pista siguiente</string>
 </resources>
