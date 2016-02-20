@@ -15,11 +15,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Gesture Settings</string>
-
     <!-- Gesture shortcuts -->
-    <string name="screen_gestures_panel_title">Gesture shortcuts</string>
-
     <string name="touchscreen_camera_gesture_title">Camera</string>
     <string name="touchscreen_camera_gesture_summary">Draw a circle to activate camera</string>
     <string name="touchscreen_music_gesture_title">Music</string>
@@ -29,9 +25,4 @@
     • Swipe down to play/pause\n
     • Swipe left for previous track\n
     • Swipe right for next track</string>
-
-    <!-- haptic feedback  -->
-    <string name="touchscreen_extras">Extras</string>
-    <string name="haptic_feedback">Haptic feedback</string>
-    <string name="haptic_feedback_summary">Vibrate when a gesture got detected</string>
 </resources>
