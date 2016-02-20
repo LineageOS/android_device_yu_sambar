@@ -17,8 +17,6 @@
 package com.cyanogenmod.settings.device;
 
 import android.Manifest;
-import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -35,7 +33,6 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
-import android.os.UserHandle;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -50,9 +47,6 @@ public class KeyHandler implements DeviceKeyHandler {
 
     private static final String TAG = KeyHandler.class.getSimpleName();
     private static final int GESTURE_REQUEST = 1;
-
-    private static final String ACTION_DISMISS_KEYGUARD =
-            "com.android.keyguard.action.DISMISS_KEYGUARD_SECURELY";
 
     // Supported scancodes
     private static final int KEY_WAKEUP = 143;
@@ -218,7 +212,6 @@ public class KeyHandler implements DeviceKeyHandler {
             }
 
             Message msg = getMessageForKeyEvent(event.getScanCode());
-            ContentResolver resolver = mContext.getContentResolver();
             boolean defaultProximity = mContext.getResources().getBoolean(
                 org.cyanogenmod.platform.internal.R.bool.config_proximityCheckOnWakeEnabledByDefault);
             boolean proximityWakeCheckEnabled = CMSettings.System.getInt(mContext.getContentResolver(),
@@ -273,19 +266,6 @@ public class KeyHandler implements DeviceKeyHandler {
             helper.sendMediaButtonEvent(event, true);
         } else {
             Log.w(TAG, "Unable to send media key event");
-        }
-    }
-
-    private void startActivitySafely(Intent intent) {
-        intent.addFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_SINGLE_TOP
-                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        try {
-            UserHandle user = new UserHandle(UserHandle.USER_CURRENT);
-            mContext.startActivityAsUser(intent, null, user);
-        } catch (ActivityNotFoundException e) {
-            // Ignore
         }
     }
 
