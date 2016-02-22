@@ -16,15 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Gebaar instellings</string>
-  <string name="screen_gestures_panel_title">Gebaar kortpaaie</string>
-  <string name="touchscreen_camera_gesture_title">Kamera</string>
-  <string name="touchscreen_camera_gesture_summary">Trek \'n sirkel om kamera te aktiveer</string>
-  <string name="touchscreen_music_gesture_title">Musiek</string>
-  <string name="touchscreen_flashlight_gesture_title">Flitslig</string>
-  <string name="touchscreen_flashlight_gesture_summary">Teken \'n \'V\' om flits aan/af te skakel</string>
-  <string name="touchscreen_music_gesture_summary">Gebruik gebare om musiek te speel \n
-    • Vee af om te speel/pouse\n
-    • Vee links vir vorige snit\n
-    • Vee regs vir volgende snit</string>
+  <string name="app_name">手勢設定</string>
+  <string name="screen_gestures_panel_title">快捷手勢</string>
+  <string name="touchscreen_camera_gesture_title">相機</string>
+  <string name="touchscreen_camera_gesture_summary">畫一個圓圈以啟動相機</string>
+  <string name="touchscreen_flashlight_gesture_title">電筒</string>
+  <string name="touchscreen_flashlight_gesture_summary">畫一個「V」以切換電筒</string>
 </resources>

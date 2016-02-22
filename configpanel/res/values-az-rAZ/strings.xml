@@ -16,15 +16,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Hareket Ayarları</string>
-  <string name="screen_gestures_panel_title">Hareket kısayolları</string>
+  <string name="app_name">Jest Tənzimləmələri</string>
+  <string name="screen_gestures_panel_title">Jest qısayolları</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>
-  <string name="touchscreen_camera_gesture_summary">Kamerayı etkinleştirmek için yuvarlak çizin</string>
-  <string name="touchscreen_music_gesture_title">Müzik</string>
-  <string name="touchscreen_flashlight_gesture_title">Flaş ışığı</string>
-  <string name="touchscreen_flashlight_gesture_summary">Flaş ışığı durumunu değiştirmek için \'V\' çizin</string>
-  <string name="touchscreen_music_gesture_summary">Müziği kontrol etmek için hareketlerinizi kullanın\n
-    • Parçayı oynatmak/durdurmak için aşağı\n
-    • Önceki parçayı oynatmak için sola\n
-    • Sonraki parça için sağa kaydırın</string>
+  <string name="touchscreen_camera_gesture_summary">Kameranı aktivləşdirmək üçün dairə çəkin</string>
+  <string name="touchscreen_music_gesture_title">Musiqi</string>
+  <string name="touchscreen_flashlight_gesture_title">Fənər</string>
+  <string name="touchscreen_flashlight_gesture_summary">Fənəri açıb bağlamaq üçün \'V\' çәkin</string>
+  <string name="touchscreen_music_gesture_summary">Musiqiyə nəzarət etmək üçün jestlərdən istifadə edin\n
+    • Mahnını oynatmaq/dayandırmaq üçün aşağı\n
+    • Əvvəlki mahnıya keçmək üçün sola\n
+    • Sonrakı mahnıya keçmək üçün sağa sürüşdürün</string>
 </resources>
