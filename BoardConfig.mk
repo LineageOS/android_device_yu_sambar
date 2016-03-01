@@ -51,6 +51,7 @@ TARGET_CPU_VARIANT := cortex-a53
 endif
 
 TARGET_CPU_CORTEX_A53 := true
+ENABLE_CPUSETS := true
 
 # Kernel
 BOARD_DTBTOOL_ARGS := -2
