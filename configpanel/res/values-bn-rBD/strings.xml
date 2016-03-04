@@ -16,6 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_music_gesture_summary">গান শোনা নিয়ন্ত্রণ করতে সংকেত ব্যবহার করুন \n
 • চালু করতে/থামাতে নিচে টানুন\n
 • পূরবর্তী গানে যেতে বাদিকে টানুন\n

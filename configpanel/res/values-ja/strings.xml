@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">ジェスチャーの設定</string>
-  <string name="screen_gestures_panel_title">ジェスチャーショートカット</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">カメラ</string>
   <string name="touchscreen_camera_gesture_summary">円を描いてカメラを有効にする</string>
   <string name="touchscreen_music_gesture_title">音楽</string>
@@ -27,7 +26,4 @@
     • 下にスワイプして再生/一時停止する\n
     • 左にスワイプして前のトラックに戻る\n
     • 右にスワイプして次のトラックに進む</string>
-  <string name="touchscreen_extras">その他</string>
-  <string name="haptic_feedback">タッチ操作バイブ</string>
-  <string name="haptic_feedback_summary">ジェスチャーを検出したときに振動する</string>
 </resources>

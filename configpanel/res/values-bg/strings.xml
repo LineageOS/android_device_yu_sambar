@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Настройки на жестове</string>
-  <string name="screen_gestures_panel_title">Преки пътища с жестове</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">Камера</string>
   <string name="touchscreen_camera_gesture_summary">Начертайте кръг за да включите камерата</string>
   <string name="touchscreen_music_gesture_title">Музика</string>
@@ -27,7 +26,4 @@
 • Плъзнете надолу за възпроизвеждане / пауза \n 
 • Плъзнете наляво за предишната песен \n 
 • Плъзнете надясно за следващата песен</string>
-  <string name="touchscreen_extras">Екстри</string>
-  <string name="haptic_feedback">Вибрация при докосване</string>
-  <string name="haptic_feedback_summary">Вибрирай, когато се засече жест</string>
 </resources>

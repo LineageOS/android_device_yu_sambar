@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Nastavení gest</string>
-  <string name="screen_gestures_panel_title">Rychlá gesta</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">Fotoaparát</string>
   <string name="touchscreen_camera_gesture_summary">Načrtnutím kruhu bude spuštěn fotoaparát</string>
   <string name="touchscreen_music_gesture_title">Hudba</string>
@@ -27,7 +26,4 @@
     • přejetím dolů přehrávat/pozastavit\n
     • přejetím doleva pro předchozí skladbu\n
     • přejetím doprava pro další skladbu</string>
-  <string name="touchscreen_extras">Doplňky</string>
-  <string name="haptic_feedback">Hmatová odezva</string>
-  <string name="haptic_feedback_summary">Vibrovat pokud nebylo detekováno gesto</string>
 </resources>

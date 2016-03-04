@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">การตั้งค่าท่าทาง</string>
-  <string name="screen_gestures_panel_title">ทางลัดท่าทาง</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">กล้องถ่ายรูป</string>
   <string name="touchscreen_camera_gesture_summary">วาดวงกลมเพื่อเปิดกล้อง</string>
   <string name="touchscreen_music_gesture_title">เพลง</string>

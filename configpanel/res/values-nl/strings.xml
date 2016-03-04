@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Instellingen gebaren</string>
-  <string name="screen_gestures_panel_title">Gebarensnelkoppelingen</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">Camera</string>
   <string name="touchscreen_camera_gesture_summary">Cirkel tekenen om camera te openen</string>
   <string name="touchscreen_music_gesture_title">Muziek</string>
@@ -27,7 +26,4 @@
     • Veeg omlaag voor afspelen/pauzeren\n
     • Veeg naar links voor vorig nummer\n
     • Veeg naar rechts voor volgend nummer</string>
-  <string name="touchscreen_extras">Extra\'s</string>
-  <string name="haptic_feedback">Trillen</string>
-  <string name="haptic_feedback_summary">Trillen wanneer een gebaar wordt gedetecteerd</string>
 </resources>

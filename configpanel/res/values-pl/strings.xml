@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Ustawienia gestów</string>
-  <string name="screen_gestures_panel_title">Skróty gestów</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">Aparat</string>
   <string name="touchscreen_camera_gesture_summary">Narysuj koło, aby włączyć aparat</string>
   <string name="touchscreen_music_gesture_title">Muzyka</string>
@@ -27,7 +26,4 @@
     • Przesuń palcem w dół, żeby włączyć/zatrzymać\n
     • Przesuń palcem w lewo, żeby przełączyć na poprzedni utwór\n
     • Przesuń palcem w prawo, żeby włączyć kolejny utwór</string>
-  <string name="touchscreen_extras">Dodatki</string>
-  <string name="haptic_feedback">Wibracje</string>
-  <string name="haptic_feedback_summary">Zawibruj, gdy gest zostanie wykryty</string>
 </resources>

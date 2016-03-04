@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Configuració dels gestos</string>
-  <string name="screen_gestures_panel_title">Dreceres gestuals</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">Càmera</string>
   <string name="touchscreen_camera_gesture_summary">Dibuixa un cercle per activar la càmera</string>
   <string name="touchscreen_music_gesture_title">Música</string>
@@ -27,7 +26,4 @@
     • Llisca avall per reproducció/pausa\n
     • Llisca a l\'esquerra per anar a la pista anterior\n
     • Llisca a la dreta per anar a la pista següent</string>
-  <string name="touchscreen_extras">Extres</string>
-  <string name="haptic_feedback">Resposta hàptica</string>
-  <string name="haptic_feedback_summary">Vibra quan es detecti un gest</string>
 </resources>

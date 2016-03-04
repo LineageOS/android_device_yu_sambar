@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">手势设置</string>
-  <string name="screen_gestures_panel_title">快捷手势</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">相机</string>
   <string name="touchscreen_camera_gesture_summary">画一个圆圈以启动相机</string>
   <string name="touchscreen_music_gesture_title">音乐</string>
@@ -27,7 +26,4 @@
     • 两个手指垂直滑动来播放或暂停\n
     • 向左划切换到上一首\n
     • 向右划切换到下一首</string>
-  <string name="touchscreen_extras">附加功能</string>
-  <string name="haptic_feedback">触觉反馈</string>
-  <string name="haptic_feedback_summary">检测到手势时振动</string>
 </resources>

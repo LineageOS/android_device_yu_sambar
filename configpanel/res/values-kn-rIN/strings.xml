@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">ಸನ್ನೆ ಸೆಟ್ಟಿಂಗ್ಸ್</string>
-  <string name="screen_gestures_panel_title">ಸನ್ನೆ ಕಿರುಮಾರ್ಗಗಳು</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">ಕ್ಯಾಮೆರಾ</string>
   <string name="touchscreen_camera_gesture_summary">ಕ್ಯಾಮೆರಾ ಸಕ್ರಿಯಗೊಳಿಸಲು ಒಂದು ವೃತ್ತವನ್ನು ಬರೆಯಿರಿ</string>
   <string name="touchscreen_music_gesture_title">ಮ್ಯೂಸಿಕ್</string>

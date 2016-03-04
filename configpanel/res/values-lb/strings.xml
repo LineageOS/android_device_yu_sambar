@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Gesten-Astellungen</string>
-  <string name="screen_gestures_panel_title">Steierung mat Gesten</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">Fotoapparat</string>
   <string name="touchscreen_camera_gesture_summary">Zeechen e Kreess fir de Fotoapparat z\'aktivéieren</string>
   <string name="touchscreen_music_gesture_title">Musek</string>

@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">הגדרות מחווה</string>
-  <string name="screen_gestures_panel_title">קיצורי מחוות</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">מצלמה</string>
   <string name="touchscreen_camera_gesture_summary">צייר מעגל להפעלת המצלמה</string>
   <string name="touchscreen_music_gesture_title">מוזיקה</string>

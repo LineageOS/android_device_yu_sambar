@@ -16,8 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">手勢設定</string>
-  <string name="screen_gestures_panel_title">快捷手勢</string>
+  <!-- Gesture shortcuts -->
   <string name="touchscreen_camera_gesture_title">相機</string>
   <string name="touchscreen_camera_gesture_summary">畫一個圓圈以啟動相機</string>
   <string name="touchscreen_flashlight_gesture_title">電筒</string>
