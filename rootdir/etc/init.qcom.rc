@@ -229,14 +229,10 @@ on boot
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
 
-    setprop wifi.interface wlan0
-
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
     mkdir /persist/bluetooth 0770 bluetooth bluetooth
-
-    setprop ro.telephony.call_ring.multiple false
 
     #Set SUID bit for usbhub
     chmod 4755 /system/bin/usbhub
@@ -759,3 +755,4 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
+	
