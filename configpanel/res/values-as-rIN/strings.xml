@@ -17,4 +17,10 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Gesture shortcuts -->
+  <string name="touchscreen_camera_gesture_title">কেমেৰা</string>
+  <string name="touchscreen_camera_gesture_summary">কেমেৰা সক্ৰিয় কৰিবলৈ এটা বৃত্ত আঁকক</string>
+  <string name="touchscreen_music_gesture_title">মিউজিক</string>
+  <string name="touchscreen_flashlight_gesture_title">ফ্লেশলাইট</string>
+  <string name="touchscreen_flashlight_gesture_summary">ফ্লেশলাইট টগল কৰিবলৈ এটা \'V\' আঁকক</string>
+  <string name="touchscreen_music_gesture_summary">সংগীত প্লেবেক নিয়ন্ত্ৰণ কৰিবলৈ ভঙ্গিমা ব্যৱহাৰ কৰক \n • প্লে/বিৰাম কৰিবলৈ তলফাললৈ ছোৱাইপ কৰক\n • পূৰ্বৱৰ্তী ট্ৰেকৰ বাবে বাওঁফাললৈ ছোৱাইপ কৰক\n • পৰৱৰ্তী ট্ৰেকৰ বাবে সোঁফাললৈ ছোৱাইপ কৰক</string>
 </resources>

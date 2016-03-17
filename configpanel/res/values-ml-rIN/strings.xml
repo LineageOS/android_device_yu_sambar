@@ -17,4 +17,10 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Gesture shortcuts -->
+  <string name="touchscreen_camera_gesture_title">ക്യാമറ</string>
+  <string name="touchscreen_camera_gesture_summary">ക്യാമറ തുറക്കാൻ വൃത്തം വരക്കുക</string>
+  <string name="touchscreen_music_gesture_title">സംഗീതം</string>
+  <string name="touchscreen_flashlight_gesture_title">മിന്നൽ പ്രകാശം</string>
+  <string name="touchscreen_flashlight_gesture_summary">മിന്നൽ പ്രകാശം ടോഗ്ഗെൾ ചെയ്യുവാൻ V എന്ന് എഴുതുക</string>
+  <string name="touchscreen_music_gesture_summary">സംഗീതം നിയന്ത്രിക്കാൻ  ആംഗ്യമുപയോഗിക്കുക \n . പാടുവാൻ / നിർത്തുവാൻ താഴേക്ക്‌ നിരക്കുക\n . മുൻപിലത്തെ പാട്ടിനായി ഇടത്തോട്ട് നിരക്കുക\n . അടുത്ത പാട്ടിനായി വലത്തോട്ട് നിരക്കുക</string>
 </resources>
