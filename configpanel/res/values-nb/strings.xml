@@ -22,4 +22,5 @@
   <string name="touchscreen_music_gesture_title">Musikk</string>
   <string name="touchscreen_flashlight_gesture_title">Lommelykt</string>
   <string name="touchscreen_flashlight_gesture_summary">Tegn en \"V\" for å aktivere lommelykten</string>
+  <string name="touchscreen_music_gesture_summary">Bruk bevegelser for å kontrollere musikkavspilling \n • sveip ned for å spille/pause\n • sveip venstre for forrige spor\n • Sveip høyre for neste</string>
 </resources>
