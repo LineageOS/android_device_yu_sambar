@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Ele-asetukset</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Ele-komennot</string>
   <string name="screen_gestures_panel_summary">Käytä eleitä näytön ollessa pois päältä</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>

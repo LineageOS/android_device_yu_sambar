@@ -17,11 +17,16 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Pengaturan Gerakan</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Pintasan Gerakan</string>
   <string name="screen_gestures_panel_summary">Gunakan gerakan saat layar mati</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>
   <string name="touchscreen_camera_gesture_summary">Gambar lingkaran untuk meluncurkan Kamera</string>
   <string name="touchscreen_music_gesture_title">Musik</string>
-  <string name="touchscreen_flashlight_gesture_title">Lampu senter</string>
-  <string name="touchscreen_flashlight_gesture_summary">Gambar \'V\' untuk menyalakan senter</string>
+  <string name="touchscreen_flashlight_gesture_title">Senter</string>
+  <string name="touchscreen_flashlight_gesture_summary">Gambar \'V\' untuk hidup/matikan senter</string>
+  <string name="touchscreen_music_gesture_summary">Gunakan gerakan untuk mengontrol pemutaran musik \n
+    • Usap ke bawah untuk memulai/menjeda\n
+    • Usap ke kiri untuk trek sebelumnya\n
+    • Usap ke kanan untuk trek selanjutnya</string>
 </resources>

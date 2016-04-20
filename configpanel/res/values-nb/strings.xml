@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Bevegelsesinnstillinger</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Bevegelsessnarveier</string>
   <string name="screen_gestures_panel_summary">Bruk bevegelser mens skjermen er av</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>
@@ -24,4 +25,5 @@
   <string name="touchscreen_music_gesture_title">Musikk</string>
   <string name="touchscreen_flashlight_gesture_title">Lommelykt</string>
   <string name="touchscreen_flashlight_gesture_summary">Tegn en \"V\" for å aktivere lommelykten</string>
+  <string name="touchscreen_music_gesture_summary">Bruk bevegelser for å kontrollere musikkavspilling \n • sveip ned for å spille/pause\n • sveip venstre for forrige spor\n • Sveip høyre for neste</string>
 </resources>

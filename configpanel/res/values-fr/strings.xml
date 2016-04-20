@@ -16,7 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Paramètres de geste</string>
+  <string name="app_name">Paramètres des gestes</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Raccourcis gestuels</string>
   <string name="screen_gestures_panel_summary">Utiliser des gestes quand l\'écran est éteint</string>
   <string name="touchscreen_camera_gesture_title">Appareil photo</string>
@@ -25,7 +26,7 @@
   <string name="touchscreen_flashlight_gesture_title">Lampe de poche</string>
   <string name="touchscreen_flashlight_gesture_summary">Dessiner un « V » pour activer ou désactiver la lampe de poche</string>
   <string name="touchscreen_music_gesture_summary">Utiliser des gestes pour contrôler la lecture de la musique \n
-Balayer vers le bas pour Lire ou Pause\n
-Balayer vers la gauche pour la piste précédente\n
-Balayer vers la droite pour la piste suivante</string>
+    •Balayer vers le bas pour Lire ou Pause\n
+    •Balayer vers la gauche pour la piste précédente\n
+    •Balayer vers la droite pour la piste suivante</string>
 </resources>

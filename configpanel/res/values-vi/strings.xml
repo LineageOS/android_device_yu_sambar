@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Cài đặt Cử chỉ</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Lối tắt cử chỉ</string>
   <string name="screen_gestures_panel_summary">Sử dụng cử chỉ trong khi màn hình tắt</string>
   <string name="touchscreen_camera_gesture_title">Máy ảnh</string>

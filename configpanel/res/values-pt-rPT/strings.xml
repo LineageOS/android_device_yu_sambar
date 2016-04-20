@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Definições de gestos</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Atalhos gestuais</string>
   <string name="screen_gestures_panel_summary">Utilizar gestos enquanto o ecrã estiver desligado</string>
   <string name="touchscreen_camera_gesture_title">Câmara</string>
@@ -24,7 +25,7 @@
   <string name="touchscreen_music_gesture_title">Música</string>
   <string name="touchscreen_flashlight_gesture_title">Lanterna</string>
   <string name="touchscreen_flashlight_gesture_summary">Desenhar um \'V\' para alterar o estado da lanterna</string>
-  <string name="touchscreen_music_gesture_summary">Use gestos para controlar a reprodução da música \n
+  <string name="touchscreen_music_gesture_summary">Utilize gestos para controlar a reprodução da música \n
     • Deslize para baixo para tocar/pausar\n
     • Deslize para a esquerda para faixa anterior\n
     • Deslize para a direita para faixa seguinte</string>

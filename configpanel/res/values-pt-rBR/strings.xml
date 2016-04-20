@@ -16,14 +16,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Configurações de gestos</string>
-  <string name="screen_gestures_panel_title">Atalhos do gesto</string>
-  <string name="screen_gestures_panel_summary">Usar gestos enquanto a tela estiver desligada</string>
+  <string name="app_name">Configurações de gesto</string>
+  <!-- Gesture shortcuts -->
+  <string name="screen_gestures_panel_title">Atalhos de gesto</string>
+  <string name="screen_gestures_panel_summary">Use gestos quando a tela estiver desligada</string>
   <string name="touchscreen_camera_gesture_title">Câmera</string>
   <string name="touchscreen_camera_gesture_summary">Desenhe um círculo para ativar a câmera</string>
   <string name="touchscreen_music_gesture_title">Música</string>
   <string name="touchscreen_flashlight_gesture_title">Lanterna</string>
-  <string name="touchscreen_flashlight_gesture_summary">Desenhe um \'V\' para ligar/desligar a lanterna</string>
+  <string name="touchscreen_flashlight_gesture_summary">Desenhe um \'V\' para acionar a lanterna</string>
   <string name="touchscreen_music_gesture_summary">Use gestos para controlar a reprodução de música\n
     • Deslize para baixo para tocar/pausar\n
     • Deslize para a esquerda para faixa anterior\n

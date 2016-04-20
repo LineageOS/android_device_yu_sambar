@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">การตั้งค่าท่าทาง</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">ทางลัดท่าทาง</string>
   <string name="screen_gestures_panel_summary">ใช้งานท่าทางเมื่อหน้าจอปิด</string>
   <string name="touchscreen_camera_gesture_title">กล้องถ่ายรูป</string>

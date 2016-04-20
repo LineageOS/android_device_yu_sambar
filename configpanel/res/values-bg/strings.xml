@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Настройки на жестове</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Преки пътища с жестове</string>
   <string name="screen_gestures_panel_summary">Използвайте жестове когато екрана е изключен</string>
   <string name="touchscreen_camera_gesture_title">Камера</string>

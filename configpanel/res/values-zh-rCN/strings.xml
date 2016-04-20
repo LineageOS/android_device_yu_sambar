@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">手势设置</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">快捷手势</string>
   <string name="screen_gestures_panel_summary">在屏幕关闭时使用手势</string>
   <string name="touchscreen_camera_gesture_title">相机</string>

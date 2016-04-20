@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Jest Tənzimləmələri</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Jest qısayolları</string>
   <string name="screen_gestures_panel_summary">Ekran bağlı olanda jestlərdən istifadə edin</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>

@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Nastavitve potez</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">Bližnjice potez</string>
   <string name="screen_gestures_panel_summary">Uporabi poteze, ko je zaslon izklopljen</string>
   <string name="touchscreen_camera_gesture_title">Fotoaparat</string>

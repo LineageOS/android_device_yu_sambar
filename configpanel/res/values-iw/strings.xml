@@ -17,6 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">הגדרות מחווה</string>
+  <!-- Gesture shortcuts -->
   <string name="screen_gestures_panel_title">קיצורי מחוות</string>
   <string name="screen_gestures_panel_summary">השתמש במחוות כאשר המסך כבוי</string>
   <string name="touchscreen_camera_gesture_title">מצלמה</string>
@@ -24,8 +25,8 @@
   <string name="touchscreen_music_gesture_title">מוזיקה</string>
   <string name="touchscreen_flashlight_gesture_title">פנס</string>
   <string name="touchscreen_flashlight_gesture_summary">צייר V להפעלת/כיבוי הפנס</string>
-  <string name="touchscreen_music_gesture_summary">השתמש במחוות כדי לשליטה בהשמעת מוזיקה\n
-    • החלקה למטה לניגון\השהייה\n
+  <string name="touchscreen_music_gesture_summary">השתמש במחוות כדי לשלוט בהשמעת המוזיקה\n
+    • החלקה למטה להפעלה\השהייה\n
     • החלקה שמאלה לחזרה לרצועה הקודמת\n
     • החלקה ימינה למעבר לרצועה הבאה</string>
 </resources>
