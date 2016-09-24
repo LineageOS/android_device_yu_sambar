@@ -94,11 +94,15 @@ PRODUCT_PACKAGES += \
     com.dsi.ant.antradio_library \
     libantradio
 
+# Browser
+PRODUCT_PACKAGES += \
+    Gello
 
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8994 \
-    libmm-qcamera
+    libmm-qcamera \
+    Snap
 
 # Charger
 PRODUCT_PACKAGES += \
