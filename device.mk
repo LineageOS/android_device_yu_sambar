@@ -96,15 +96,15 @@ PRODUCT_PACKAGES += \
     com.dsi.ant.antradio_library \
     libantradio
 
+# Browser
+PRODUCT_PACKAGES += \
+    Gello
 
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8994 \
-    libmm-qcamera
-
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
+    libmm-qcamera \
+    Snap
 
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
@@ -134,7 +134,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8994 \
     libtinyxml \
     memtrack.msm8994 \
-    libjni_livedisplay_qdcm
+    libjni_livedisplay
 
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=256m
