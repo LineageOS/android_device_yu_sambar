@@ -17,9 +17,4 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Gesture shortcuts -->
-  <string name="touchscreen_camera_gesture_title">Fotilo</string>
-  <string name="touchscreen_camera_gesture_summary">Desegnu cirklon por aktivigi fotilon</string>
-  <string name="touchscreen_music_gesture_title">Muziko</string>
-  <string name="touchscreen_flashlight_gesture_title">Poŝlampo</string>
-  <string name="touchscreen_flashlight_gesture_summary">Desegnu \'V\' por baskuli poŝlampon</string>
 </resources>
