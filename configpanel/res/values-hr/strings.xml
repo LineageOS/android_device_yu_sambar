@@ -21,7 +21,7 @@
   <string name="screen_gestures_panel_title">Prečaci gesta</string>
   <string name="screen_gestures_panel_summary">Koristi geste dok je zaslon isključen</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>
-  <string name="touchscreen_camera_gesture_summary">Nacrtaj krug za pokretanje kamere</string>
+  <string name="touchscreen_camera_gesture_summary">Nacrtajte krug za pokretanje fotoaparata.</string>
   <string name="touchscreen_music_gesture_title">Glazba</string>
   <string name="touchscreen_flashlight_gesture_title">Bljeskalica</string>
   <string name="touchscreen_flashlight_gesture_summary">Nacrtaj \'V\' za pokretanje bljeskalice</string>

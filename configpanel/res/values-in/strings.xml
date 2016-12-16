@@ -21,7 +21,7 @@
   <string name="screen_gestures_panel_title">Pintasan Gerakan</string>
   <string name="screen_gestures_panel_summary">Gunakan gerakan saat layar mati</string>
   <string name="touchscreen_camera_gesture_title">Kamera</string>
-  <string name="touchscreen_camera_gesture_summary">Gambar lingkaran untuk meluncurkan Kamera</string>
+  <string name="touchscreen_camera_gesture_summary">Gambar lingkaran untuk meluncurkan kamera</string>
   <string name="touchscreen_music_gesture_title">Musik</string>
   <string name="touchscreen_flashlight_gesture_title">Senter</string>
   <string name="touchscreen_flashlight_gesture_summary">Gambar \'V\' untuk hidup/matikan senter</string>

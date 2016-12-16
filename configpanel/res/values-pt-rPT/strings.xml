@@ -27,6 +27,6 @@
   <string name="touchscreen_flashlight_gesture_summary">Desenhar um \'V\' para alterar o estado da lanterna</string>
   <string name="touchscreen_music_gesture_summary">Utilize gestos para controlar a reprodução da música \n
     • Deslize para baixo para tocar/pausar\n
-    • Deslize para a esquerda para faixa anterior\n
-    • Deslize para a direita para faixa seguinte</string>
+    • Deslize para a esquerda para voltar para a faixa anterior\n
+    • Deslize para a direita para avançar para a faixa seguinte</string>
 </resources>
