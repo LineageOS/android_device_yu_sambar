@@ -5,6 +5,9 @@ LOCAL_PATH:=$(call my-dir)
 include $(LOCAL_PATH)/../../../common.mk
 include $(CLEAR_VARS)
 
+# Disable clang
+LOCAL_CLANG := false
+
 LOCAL_CFLAGS:= \
         -DAMSS_VERSION=$(AMSS_VERSION) \
         $(mmcamera_debug_defines) \
@@ -16,6 +19,10 @@ LOCAL_CFLAGS += -DUSE_ION
 endif
 
 LOCAL_CFLAGS += -D_ANDROID_
+
+LOCAL_CLANG_CFLAGS += \
+        -Wno-error=enum-conversion
+LOCAL_CLANG := false
 
 LOCAL_SRC_FILES:= \
         src/mm_qcamera_main_menu.c \
@@ -110,6 +117,7 @@ else
         LOCAL_CFLAGS += -DNUM_RECORDING_BUFFERS=5
 endif
 LOCAL_CFLAGS += -Wall -Wextra -Werror
+LOCAL_CLANG := false
 
 LOCAL_SHARED_LIBRARIES:= \
          libcutils libdl libmmcamera_interface
@@ -136,6 +144,10 @@ LOCAL_CFLAGS += -DUSE_ION
 endif
 
 LOCAL_CFLAGS += -D_ANDROID_
+
+LOCAL_CLANG_CFLAGS += \
+        -Wno-error=enum-conversion
+LOCAL_CLANG := false
 
 LOCAL_SRC_FILES:= \
         src/mm_qcamera_main_menu.c \
@@ -218,6 +230,7 @@ else
         LOCAL_CFLAGS += -DNUM_RECORDING_BUFFERS=5
 endif
 LOCAL_CFLAGS += -Wall -Wextra -Werror
+LOCAL_CLANG := false
 
 LOCAL_SHARED_LIBRARIES:= \
          libcutils libdl libmmcamera_interface
