@@ -14,10 +14,10 @@
 
 $(call inherit-product, device/yu/sambar/full_sambar.mk)
 
-# Inherit some common CM stuff.
+# Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_sambar
+PRODUCT_NAME := lineage_sambar
 BOARD_VENDOR := yu
 TARGET_VENDOR := yu
 PRODUCT_DEVICE := sambar
