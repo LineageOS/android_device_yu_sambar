@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_92a9fa7d",
+        "filename": "overlay/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2017-01-20T05:07:03Z",
+      "side": 0,
+      "message": "Split the LED overlay stuff into a separate patch",
+      "revId": "83acdccebc4a670dad5f4229dad43787ac74f368",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_b2acfe8d",
+        "filename": "overlay/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2017-01-20T05:07:03Z",
+      "side": 0,
+      "message": "This is most likely still needed; the CM 13.0 fw/b patch has to be ported to CM 14.1",
+      "revId": "83acdccebc4a670dad5f4229dad43787ac74f368",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
