@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_fe4a4d26",
+        "filename": "camera/QCamera2/HAL/QCamera2HWI.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2017-01-21T14:20:33Z",
+      "side": 0,
+      "message": "All the changes similar to these go under a separate commit.",
+      "parentUuid": "",
+      "revId": "ed012c0dfb948fe59743ebb47529ba6d0c2b4153",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_de47891c",
+        "filename": "configs/media_profiles.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2017-01-21T14:20:33Z",
+      "side": 0,
+      "message": "Cherry pick the CAF commit",
+      "revId": "ed012c0dfb948fe59743ebb47529ba6d0c2b4153",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
