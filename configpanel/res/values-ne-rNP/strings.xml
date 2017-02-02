@@ -17,4 +17,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Gesture shortcuts -->
+  <string name="touchscreen_camera_gesture_title">क्यामरा</string>
+  <string name="touchscreen_camera_gesture_summary">क्यामरा खोल्न \"O\" बनाउनुहोस्</string>
+  <string name="touchscreen_music_gesture_title">संगीत</string>
+  <string name="touchscreen_flashlight_gesture_title">टर्च लाईट</string>
+  <string name="touchscreen_flashlight_gesture_summary">टर्च लाईट खोल्न \"V\" बनाउनुहोस्</string>
+  <string name="touchscreen_music_gesture_summary">संगीत बजाउन गर्ने ईशारा हरु \n
+सुरु र अन्त्य गर्न तल घसार्नुस्\n
+अघिल्लो बजाउन देब्रे तिर घसार्नुस्\n
+अर्को बजाउन दाईने तिर घसार्नुस्</string>
 </resources>
