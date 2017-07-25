@@ -193,8 +193,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     keystore.msm8994
 
+# Lights
 PRODUCT_PACKAGES += \
     lights.msm8994
+
+# LiveDisplay
+PRODUCT_PACKAGES += \
+    libjni_livedisplay
 
 # Media
 PRODUCT_COPY_FILES += \
